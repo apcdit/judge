@@ -49,7 +49,7 @@
                     <td>自由辩论<br><input id="ziyou_pos_4"  type="number" value = 0  class="form-control group" style="width:50px;" max=25 min=0></td>                
                 </tr>
                 <tr><td colspan="5">团体配合和合作精神 <input id="tuanti_pos" type="number" value = 0  class="form-control group" max=30 min=0></td></tr>
-                
+                <tr><td colspan="5"><span>正方: </span><span id="marks_pos" >0</span><br></td></tr>
 
             </table>
 
@@ -93,7 +93,7 @@
                     <td>自由辩论<br><input id="ziyou_neg_4" type="number" value = 0  class="form-control group" style="width:50px;" max=25 min=0></td>                
                 </tr>
                 <tr><td colspan="5">团体配合和合作精神 <span></span><input type="number" id="tuanti_neg" value = 0 class="form-control group"  max=30 min=0></td></tr>
-                
+                <tr><td colspan="5"><span>反方: </span><span id="marks_neg" >0</span><br></td></tr>
 
             </table>
             <button id="submit" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">提交</button>
@@ -110,8 +110,8 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <span>正方: </span><span id="marks_pos"></span><br>
-                    <span>反方: </span><span id="marks_neg"></span>
+                    <span>正方: </span><span id="marks_pos_1"></span><br>
+                    <span>反方: </span><span id="marks_neg_1"></span>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
@@ -128,8 +128,7 @@
 
 <script>
     $(document).ready(function(){
-        $('#submit').click(function(e){
-            e.preventDefault();
+        $("input[type='number']").change( function() {
             var total_neg = parseInt($('#lilun_neg').val())+parseInt($('#zhixun_neg_1').val())+parseInt($('#yuyan_neg_1').val())+parseInt($('#ziyou_neg_1').val())+
             parseInt($('#bolun_neg').val())+parseInt($('#gongbian_neg').val())+parseInt($('#yuyan_neg_2').val())+parseInt($('#ziyou_neg_2').val())+
             parseInt($('#zhixun_neg_3').val())+parseInt($('#xiaojie_neg').val())+parseInt($('#yuyan_neg_3').val())+parseInt($('#ziyou_neg_3').val())+
@@ -143,6 +142,22 @@
             parseInt($('#chenci_pos').val())+parseInt($('#yuyan_pos_4').val())+parseInt($('#ziyou_pos_4').val())+parseInt($('#tuanti_pos').val());
             $("#marks_pos").html("");
             $('#marks_pos').html(total_pos);
+        });
+        $('#submit').click(function(e){
+            e.preventDefault();
+            var total_neg_1 = parseInt($('#lilun_neg').val())+parseInt($('#zhixun_neg_1').val())+parseInt($('#yuyan_neg_1').val())+parseInt($('#ziyou_neg_1').val())+
+            parseInt($('#bolun_neg').val())+parseInt($('#gongbian_neg').val())+parseInt($('#yuyan_neg_2').val())+parseInt($('#ziyou_neg_2').val())+
+            parseInt($('#zhixun_neg_3').val())+parseInt($('#xiaojie_neg').val())+parseInt($('#yuyan_neg_3').val())+parseInt($('#ziyou_neg_3').val())+
+            parseInt($('#chenci_neg').val())+parseInt($('#yuyan_neg_4').val())+parseInt($('#ziyou_neg_4').val())+parseInt($('#tuanti_neg').val());
+            $("#marks_neg_1").html("");
+            $('#marks_neg_1').html(total_neg_1);
+
+            var total_pos_1 = parseInt($('#lilun_pos').val())+parseInt($('#zhixun_pos_1').val())+parseInt($('#yuyan_pos_1').val())+parseInt($('#ziyou_pos_1').val())+
+            parseInt($('#bolun_pos').val())+parseInt($('#gongbian_pos').val())+parseInt($('#yuyan_pos_2').val())+parseInt($('#ziyou_pos_2').val())+
+            parseInt($('#zhixun_pos_2').val())+parseInt($('#xiaojie_pos').val())+parseInt($('#yuyan_pos_3').val())+parseInt($('#ziyou_pos_3').val())+
+            parseInt($('#chenci_pos').val())+parseInt($('#yuyan_pos_4').val())+parseInt($('#ziyou_pos_4').val())+parseInt($('#tuanti_pos').val());
+            $("#marks_pos_1").html("");
+            $('#marks_pos_1').html(total_pos_1);
         });
     })
     
