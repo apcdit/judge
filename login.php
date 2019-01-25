@@ -2,6 +2,8 @@
     session_start();
     include('header.php');
     include('inc/connect.php');
+
+    
 ?>
 
 <body>
@@ -18,22 +20,24 @@
                         <!-- login form -->
                         <br>
                         <div>
-                            <form id="my-form" name="my-form" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                            <form id="my-form" name="my-form" method="POST" action="php/login_process.php">
                                 <div class="form-group row">
                                     <h3 for="judge">评审姓名</h3>
                                     <select name="judge" id="judge" class="form-control group">
                                     <option value="">- 选择姓名 -</option>
                                     <?php 
                                     // Fetch Judge
-                                    $sql_judges = "SELECT * FROM judges";
-                                    $judges_data = mysqli_query($con,$sql_department);
-                                    while($row = mysqli_fetch_assoc($department_data) ){
-                                        $departid = $row['id'];
-                                        $depart_name = $row['depart_name'];
-                                        
-                                        // Option
-                                        echo "<option value='".$departid."' >".$depart_name."</option>";
-                                    }
+                                     $sql = $conn->prepare("SELECT * FROM judges");
+                                     $products = array();
+                                     $count = 0;
+                                     if($sql->execute()){
+                                        while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+                                            $judges[] = $row;
+                                            echo "<option value='".$judges[$count]['id']."' >".$judges[$count]['name']."</option>";
+                                            $count++;
+                                        }
+                                     }
+                                     $judges = null;                                    
                                     ?>
                                     </select>
                                 </div>
@@ -47,7 +51,7 @@
                                 <br>
 
                                     <div>
-                                        <button class="btn btn-primary btn-block btn-login">登录</button>
+                                        <button class="btn btn-primary btn-block btn-login" type="submit">登录</button>
                                     </div>
                                 </div>
                             </form>
@@ -93,20 +97,27 @@
         $('#judge').change(fetchTitle);
     })
 
-    function fetchTitle(){
+    function fetchTitle(e){
+        e.preventDefault();
+        var id = $('#judge').val();
         $.ajax({
             type     : 'GET',
             url      : 'php/fetchTitle.php',
+            data     : {
+                id : id,
+            },
             dataType : 'JSON',
             success  : function(data) {            
                 var output = '<option value="">- 选择辩题 -</option>';
-                
+
                 $.each(data, function(i,s){
-                    var newOption = s;
-                    output += '<option value="' + newOption + '">' + newOption + '</option>';
+                    var title = s['title'];
+                    var competition_id = s['competition_id'];
+
+                    output += '<option value="' + competition_id + '">' + competition_id + '. ' + title + '</option>';
                 });
 
-                $('#judge').empty().append(output);
+                $('#title').empty().append(output);
             },
             error: function(){
                 console.log("Ajax failed");

@@ -1,13 +1,32 @@
-<?php include('header.php'); ?>
+<?php include('header.php'); 
+
+session_start();
+
+if(!isset($_SESSION['userID'])){
+    header("Location: login.php");
+}
+
+$titleID = $_SESSION['titleID'];
+$title = $_SESSION['title'];
+$userID = $_SESSION['userID'];
+
+function generateMarks($max){
+    for($i = 0; $i <= $max; $i++){
+        echo '<option value="'.$i.'">'.$i.'</option>';
+    }
+}
+
+?>
 
 <html>
 
     <body>
         <br>
         <div class="container">
-            <strong><h1>打分表格</h1></strong>
-            <h3>题目</h3>
-
+            <strong><h1 class="text-center">打分表格</h1></strong>
+            <hr>
+            <strong><h2 class="text-center">题目: <?php echo $title ?></h2></strong>
+            <a href="php/logout_process.php">LOGOUT</a>
             <form action="">
             <table class="table">
                 <thead>
@@ -21,40 +40,113 @@
                 </thead>
                 <tr>
                     <td>一辩</td>
-                    <td>立论<input id="lilun_pos"  type="number" value = 0 class="form-control group" style="width:50px;" max=30 min=0></td>
-                    <td>质询<input id="zhixun_pos_1" type="number" value = 0 class="form-control group" style="width:50px;"max=20 min=0></td>
-                    <td>语言风度<input id="yuyan_pos_1" type="number" value = 0 class="form-control group" style="width:50px;" max=10 min=0></td>
-                    <td>自由辩论<input id="ziyou_pos_1" type="number" value = 0 class="form-control group"  style="width:50px;" max=25 min=0></td>                
+                    <td>立论
+                    <br>
+                        <select name="lilun_pos" id="lilun_pos">
+                            <?php generateMarks(30) ?>
+                        </select>
+                    </td>
+                    <td>质询
+                    <br>
+                        <select name="zhixun_pos_1" id="zhixun_pos_1">
+                            <?php generateMarks(20) ?>
+                        </select>
+                    </td>
+                    
+                    <td>语言风度
+                    <br>
+                        <select name="yuyan_pos_1" id="yuyan_pos_1">
+                            <?php generateMarks(10) ?>
+                        </select>
+                    </td>
+                    
+                    <td>自由辩论
+                    <br>
+                        <select name="ziyou_pos_1" id="ziyou_pos_1">
+                            <?php generateMarks(25) ?>
+                        </select>
+                    </td>                
                 </tr>
                
                 <tr>
                     <td>二辩</td>
-                    <td>驳论<br><input id="bolun_pos" type="number" value = 0 class="form-control group"  style="width:50px;" max=30 min=0></td>
-                    <td>攻辩<br><input id="gongbian_pos" type="number" value = 0 class="form-control group"  style="width:50px;" max=30 min=0></td>
-                    <td>语言风度<br><input id="yuyan_pos_2" type="number" value = 0 class="form-control group"  style="width:50px;" max=10 min=0></td>
-                    <td>自由辩论<br><input id="ziyou_pos_2" type="number" value = 0 class="form-control group"  style="width:50px;" max=25 min=0></td>                
+                    <td>驳论
+                        <br>
+                        <select name="bolun_pos" id="bolun_pos">
+                            <?php generateMarks(30) ?>
+                        </select>
+                    </td>
+                    <td>攻辩
+                    <br>
+                        <select name="gongbian_pos" id="gongbian_pos">
+                            <?php generateMarks(30) ?>
+                        </select>
+                    </td>
+                    <td>语言风度<br>
+                        <select name="yuyan_pos_2" id="yuyan_pos_2">
+                            <?php generateMarks(10) ?>
+                        </select>
+                    </td>
+                    <td>自由辩论<br>
+                        <select name="ziyou_pos_2" id="ziyou_pos_2">
+                            <?php generateMarks(25) ?>
+                        </select>
+                    </td>                
                 </tr>
                 <tr>
                     <td>三辩</td>
-                    <td>质询<br><input id="zhixun_pos_2" type="number" value = 0  class="form-control group"  style="width:50px;" max=30 min=0></td>
-                    <td>小结<br><input id="xiaojie_pos" type="number" value = 0  class="form-control group" style="width:50px;" max=30 min=0></td>
-                    <td>语言风度<br><input id="yuyan_pos_3" type="number" value = 0  class="form-control group" style="width:50px;" max=10 min=0></td>
-                    <td>自由辩论<br><input  id="ziyou_pos_3" type="number" value = 0 class="form-control group"  style="width:50px;" max=25 min=0></td>                
+                    <td>质询<br>
+                        <select name="zhixun_pos_2" id="zhixun_pos_2">
+                            <?php generateMarks(30) ?>
+                        </select>
+                    </td>
+                    <td>小结<br>
+                        <select name="xiaojie_pos" id="xiaojie_pos">
+                            <?php generateMarks(30) ?>
+                        </select>
+                    </td>
+                    <td>语言风度<br>
+                        <select name="yuyan_pos_3" id="yuyan_pos_3">
+                            <?php generateMarks(10) ?>
+                        </select>
+                    </td>
+                    <td>自由辩论<br>
+                        <select name="ziyou_pos_3" id="ziyou_pos_3">
+                            <?php generateMarks(25) ?>
+                        </select>
+                    </td>                
                 </tr>
                 <tr>
                     <td>四辩</td>
-                    <td>陈词<br><input id="chenci_pos" type="number" value = 0 class="form-control group"  style="width:50px;" max=30 min=0></td>
+                    <td>陈词<br>
+                        <select name="chenci_pos" id="chenci_pos">
+                            <?php generateMarks(30) ?>
+                        </select>
+                    </td>
                     <td></td>
-                    <td>语言风度<br><input id="yuyan_pos_4" type="number" value = 0  class="form-control group" style="width:50px;" max=10 min=0></td>
-                    <td>自由辩论<br><input id="ziyou_pos_4"  type="number" value = 0  class="form-control group" style="width:50px;" max=25 min=0></td>                
+                    <td>语言风度<br>
+                        <select name="yuyan_pos_4" id="yuyan_pos_4">
+                            <?php generateMarks(10) ?>
+                        </select>
+                    </td>
+                    <td>自由辩论<br>
+                        <select name="ziyou_pos_4" id="ziyou_pos_4">
+                            <?php generateMarks(25) ?>
+                        </select>
+                    </td>                
                 </tr>
-                <tr><td colspan="5">团体配合和合作精神 <input id="tuanti_pos" type="number" value = 0  class="form-control group" max=30 min=0></td></tr>
-                <tr><td colspan="5"><span>正方: </span><span id="marks_pos" >0</span><br></td></tr>
+                <tr><td colspan="5">团体配合和合作精神 
+                        <select name="tuanti_pos" id="tuanti_pos">
+                            <?php generateMarks(30) ?>
+                        </select>
+                </td></tr>
+                <!-- <tr><td colspan="5"><span>正方: </span><span id="marks_pos" >0</span><br></td></tr> -->
 
             </table>
 
+            <br>
 
-            <table class="table"   >
+            <table class="table">
                 <thead>
                     <tr>
                         <th>反方</th>
@@ -65,36 +157,107 @@
                     </tr>
                 </thead>
                 <tr>
-                    <td>一辩</td>
-                    <td>立论<br><input id="lilun_neg" type="number" value = 0 class="form-control group" style="width:50px;" max=30 min=0></td>
-                    <td>质询<br><input id="zhixun_neg_1" type="number" value = 0  class="form-control group" style="width:50px;" max=20 min=0></td>
-                    <td>语言风度<br><input id="yuyan_neg_1" type="number" value = 0  class="form-control group" style="width:50px;" max=10 min=0></td>
-                    <td>自由辩论<br><input id="ziyou_neg_1" type="number" value = 0 class="form-control group"  style="width:50px;" max=25 min=0></td>                
+                <td>一辩</td>
+                    <td>立论
+                    <br>
+                        <select name="lilun_neg" id="lilun_neg">
+                            <?php generateMarks(30) ?>
+                        </select>
+                    </td>
+                    <td>质询
+                    <br>
+                        <select name="zhixun_neg_1" id="zhixun_neg_1">
+                            <?php generateMarks(20) ?>
+                        </select>
+                    </td>
+                    
+                    <td>语言风度
+                    <br>
+                        <select name="yuyan_neg_1" id="yuyan_neg_1">
+                            <?php generateMarks(10) ?>
+                        </select>
+                    </td>
+                    
+                    <td>自由辩论
+                    <br>
+                        <select name="ziyou_neg_1" id="ziyou_neg_1">
+                            <?php generateMarks(25) ?>
+                        </select>
+                    </td>  
                 </tr>
                 <tr>
-                    <td>二辩</td>
-                    <td>驳论<br><input id="bolun_neg" type="number" value = 0 class="form-control group"  style="width:50px;" max=30 min=0></td>
-                    <td>攻辩<br><input id="gongbian_neg" type="number" value = 0 class="form-control group"  style="width:50px;" max=30 min=0></td>
-                    <td>语言风度<br><input id="yuyan_neg_2" type="number" value = 0  class="form-control group" style="width:50px;" max=10 min=0></td>
-                    <td>自由辩论<br><input id="ziyou_neg_2" type="number" value = 0  class="form-control group" style="width:50px;" max=25 min=0></td>                
+                <td>二辩</td>
+                    <td>驳论
+                        <br>
+                        <select name="bolun_neg" id="bolun_neg">
+                            <?php generateMarks(30) ?>
+                        </select>
+                    </td>
+                    <td>攻辩
+                    <br>
+                        <select name="gongbian_neg" id="gongbian_neg">
+                            <?php generateMarks(30) ?>
+                        </select>
+                    </td>
+                    <td>语言风度<br>
+                        <select name="yuyan_neg_2" id="yuyan_neg_2">
+                            <?php generateMarks(10) ?>
+                        </select>
+                    </td>
+                    <td>自由辩论<br>
+                        <select name="ziyou_neg_2" id="ziyou_neg_2">
+                            <?php generateMarks(25) ?>
+                        </select>
+                    </td>
                 </tr>
                 <tr>
-                    <td>三辩</td>
-                    <td>质询<br><input id="zhixun_neg_3" type="number" value = 0 class="form-control group"  style="width:50px;" max=30 min=0></td>
-                    <td>小结<br><input id="xiaojie_neg" type="number" value = 0  class="form-control group" style="width:50px;" max=30 min=0></td>
-                    <td>语言风度<br><input id="yuyan_neg_3" type="number" value = 0  class="form-control group" style="width:50px;" max=10 min=0></td>
-                    <td>自由辩论<br><input id="ziyou_neg_3" type="number" value = 0  class="form-control group" style="width:50px;" max=25 min=0></td>                
+                <td>三辩</td>
+                    <td>质询<br>
+                        <select name="zhixun_neg_2" id="zhixun_neg_3">
+                            <?php generateMarks(30) ?>
+                        </select>
+                    </td>
+                    <td>小结<br>
+                        <select name="xiaojie_neg" id="xiaojie_neg">
+                            <?php generateMarks(30) ?>
+                        </select>
+                    </td>
+                    <td>语言风度<br>
+                        <select name="yuyan_neg_3" id="yuyan_neg_3">
+                            <?php generateMarks(10) ?>
+                        </select>
+                    </td>
+                    <td>自由辩论<br>
+                        <select name="ziyou_neg_3" id="ziyou_neg_3">
+                            <?php generateMarks(25) ?>
+                        </select>
+                    </td>  
                 </tr>
                 <tr>
-                    <td>四辩</td>
-                    <td>陈词<br><input id="chenci_neg" type="number" value = 0  class="form-control group" style="width:50px;" max=30 min=0></td>
+                <td>四辩</td>
+                    <td>陈词<br>
+                        <select name="chenci_neg" id="chenci_neg">
+                            <?php generateMarks(30) ?>
+                        </select>
+                    </td>
                     <td></td>
-                    <td>语言风度<br><input id="yuyan_neg_4" type="number" value = 0  class="form-control group" style="width:50px;" max=10 min=0></td>
-                    <td>自由辩论<br><input id="ziyou_neg_4" type="number" value = 0  class="form-control group" style="width:50px;" max=25 min=0></td>                
+                    <td>语言风度<br>
+                        <select name="yuyan_neg_4" id="yuyan_neg_4">
+                            <?php generateMarks(10) ?>
+                        </select>
+                    </td>
+                    <td>自由辩论<br>
+                        <select name="ziyou_neg_4" id="ziyou_neg_4">
+                            <?php generateMarks(25) ?>
+                        </select>
+                    </td>   
                 </tr>
-                <tr><td colspan="5">团体配合和合作精神 <span></span><input type="number" id="tuanti_neg" value = 0 class="form-control group"  max=30 min=0></td></tr>
-                <tr><td colspan="5"><span>反方: </span><span id="marks_neg" >0</span><br></td></tr>
-
+                <tr><td colspan="5">团体配合和合作精神 
+                        <select name="tuanti_neg" id="tuanti_neg">
+                            <?php generateMarks(30) ?>
+                        </select>
+                </td></tr>
+                <!-- <tr><td colspan="5"><span>反方: </span><span id="marks_neg" >0</span><br></td></tr> -->
             </table>
             <button id="submit" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">提交</button>
             </form>
@@ -128,21 +291,22 @@
 
 <script>
     $(document).ready(function(){
-        $("input[type='number']").change( function() {
-            var total_neg = parseInt($('#lilun_neg').val())+parseInt($('#zhixun_neg_1').val())+parseInt($('#yuyan_neg_1').val())+parseInt($('#ziyou_neg_1').val())+
-            parseInt($('#bolun_neg').val())+parseInt($('#gongbian_neg').val())+parseInt($('#yuyan_neg_2').val())+parseInt($('#ziyou_neg_2').val())+
-            parseInt($('#zhixun_neg_3').val())+parseInt($('#xiaojie_neg').val())+parseInt($('#yuyan_neg_3').val())+parseInt($('#ziyou_neg_3').val())+
-            parseInt($('#chenci_neg').val())+parseInt($('#yuyan_neg_4').val())+parseInt($('#ziyou_neg_4').val())+parseInt($('#tuanti_neg').val());
-            $("#marks_neg").html("");
-            $('#marks_neg').html(total_neg);
+        // $("input[type='number']").change( function() {
+        //     var total_neg = parseInt($('#lilun_neg').val())+parseInt($('#zhixun_neg_1').val())+parseInt($('#yuyan_neg_1').val())+parseInt($('#ziyou_neg_1').val())+
+        //     parseInt($('#bolun_neg').val())+parseInt($('#gongbian_neg').val())+parseInt($('#yuyan_neg_2').val())+parseInt($('#ziyou_neg_2').val())+
+        //     parseInt($('#zhixun_neg_3').val())+parseInt($('#xiaojie_neg').val())+parseInt($('#yuyan_neg_3').val())+parseInt($('#ziyou_neg_3').val())+
+        //     parseInt($('#chenci_neg').val())+parseInt($('#yuyan_neg_4').val())+parseInt($('#ziyou_neg_4').val())+parseInt($('#tuanti_neg').val());
+        //     $("#marks_neg").html("");
+        //     $('#marks_neg').html(total_neg);
 
-            var total_pos = parseInt($('#lilun_pos').val())+parseInt($('#zhixun_pos_1').val())+parseInt($('#yuyan_pos_1').val())+parseInt($('#ziyou_pos_1').val())+
-            parseInt($('#bolun_pos').val())+parseInt($('#gongbian_pos').val())+parseInt($('#yuyan_pos_2').val())+parseInt($('#ziyou_pos_2').val())+
-            parseInt($('#zhixun_pos_2').val())+parseInt($('#xiaojie_pos').val())+parseInt($('#yuyan_pos_3').val())+parseInt($('#ziyou_pos_3').val())+
-            parseInt($('#chenci_pos').val())+parseInt($('#yuyan_pos_4').val())+parseInt($('#ziyou_pos_4').val())+parseInt($('#tuanti_pos').val());
-            $("#marks_pos").html("");
-            $('#marks_pos').html(total_pos);
-        });
+        //     var total_pos = parseInt($('#lilun_pos').val())+parseInt($('#zhixun_pos_1').val())+parseInt($('#yuyan_pos_1').val())+parseInt($('#ziyou_pos_1').val())+
+        //     parseInt($('#bolun_pos').val())+parseInt($('#gongbian_pos').val())+parseInt($('#yuyan_pos_2').val())+parseInt($('#ziyou_pos_2').val())+
+        //     parseInt($('#zhixun_pos_2').val())+parseInt($('#xiaojie_pos').val())+parseInt($('#yuyan_pos_3').val())+parseInt($('#ziyou_pos_3').val())+
+        //     parseInt($('#chenci_pos').val())+parseInt($('#yuyan_pos_4').val())+parseInt($('#ziyou_pos_4').val())+parseInt($('#tuanti_pos').val());
+        //     $("#marks_pos").html("");
+        //     $('#marks_pos').html(total_pos);
+        // });
+
         $('#submit').click(function(e){
             e.preventDefault();
             var total_neg_1 = parseInt($('#lilun_neg').val())+parseInt($('#zhixun_neg_1').val())+parseInt($('#yuyan_neg_1').val())+parseInt($('#ziyou_neg_1').val())+
