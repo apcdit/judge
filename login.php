@@ -95,6 +95,15 @@
 
     $(document).ready(function(){
         $('#judge').change(fetchTitle);
+        $('.btn-login').click(function(){
+            var pw = prompt("请输入大会密码");
+            if(pw == "" || pw == null){
+                return false;
+            }else if(pw != "apcdit123"){
+                alert("密码错误！");
+                return false;
+            }
+        })
     })
 
     function fetchTitle(e){
