@@ -38,6 +38,7 @@ function generateMarks($max){
                         <th></th>
                     </tr>
                 </thead>
+                <tbody>
                 <tr>
                     <td>一辩</td>
                     <td>立论
@@ -140,6 +141,8 @@ function generateMarks($max){
                             <?php generateMarks(30) ?>
                         </select>
                 </td></tr>
+                </tbody>
+                
                 <!-- <tr><td colspan="5"><span>正方: </span><span id="marks_pos" >0</span><br></td></tr> -->
 
             </table>
@@ -156,6 +159,7 @@ function generateMarks($max){
                         <th></th>
                     </tr>
                 </thead>
+                <tbody>
                 <tr>
                 <td>一辩</td>
                     <td>立论
@@ -257,10 +261,14 @@ function generateMarks($max){
                             <?php generateMarks(30) ?>
                         </select>
                 </td></tr>
+                </tbody>
+            
+                
                 <!-- <tr><td colspan="5"><span>反方: </span><span id="marks_neg" >0</span><br></td></tr> -->
             </table>
-            <button id="submit" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">提交</button>
+            <button id="submit" type="button" class="btn btn-submit btn-block" data-toggle="modal" data-target="#exampleModal" style="margin-bottom:50px;">总结分数</button>
             </form>
+            </div>
 
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -326,3 +334,20 @@ function generateMarks($max){
     })
     
 </script>
+
+<style>
+    table, th, td, tr, thead {
+        border: 1px solid black;
+    }
+    td{
+        text-align:center;
+    }
+    button.btn-submit{
+        background: darkred;
+        color: white;
+        border: solid 1px transparent;
+        border-radius: 4px;
+        font-size: 1.5rem;
+        text-decoration: none;
+    }
+</style>

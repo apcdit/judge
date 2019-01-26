@@ -3,7 +3,9 @@
     include('header.php');
     include('inc/connect.php');
 
-    
+    if(isset($_SESSION['userID'])){
+        header("Location: index.php");
+    }
 ?>
 
 <body>
