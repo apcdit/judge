@@ -2,7 +2,7 @@
 
 session_start();
 
-if(isset($_SESSION['userID'])){
+if(!isset($_SESSION['userID'])){
     header("Location: login.php");
 }
 
@@ -28,40 +28,41 @@ function generateMarks($max){
             <strong><h2 class="text-center">题目: <?php echo $title ?></h2></strong>
             <a href="php/logout_process.php">LOGOUT</a>
             <form action="">
-            <table class="table">
+            <div class="card">
+            <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>正方</th>
                         <th></th>
                         <th></th>
                         <th></th>
+                        <th style="text-align:left;font-size:2rem;">正方</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
                 <tr>
-                    <td>一辩</td>
-                    <td>立论
+                    <td class="participant-id">一辩</td>
+                    <td class="mark-title">立论
                     <br>
                         <select name="lilun_pos" id="lilun_pos">
                             <?php generateMarks(30) ?>
                         </select>
                     </td>
-                    <td>质询
+                    <td class="mark-title">质询
                     <br>
                         <select name="zhixun_pos_1" id="zhixun_pos_1">
                             <?php generateMarks(20) ?>
                         </select>
                     </td>
                     
-                    <td>语言风度
+                    <td class="mark-title">语言风度
                     <br>
                         <select name="yuyan_pos_1" id="yuyan_pos_1">
                             <?php generateMarks(10) ?>
                         </select>
                     </td>
                     
-                    <td>自由辩论
+                    <td class="mark-title">自由辩论
                     <br>
                         <select name="ziyou_pos_1" id="ziyou_pos_1">
                             <?php generateMarks(25) ?>
@@ -70,67 +71,67 @@ function generateMarks($max){
                 </tr>
                
                 <tr>
-                    <td>二辩</td>
-                    <td>驳论
+                    <td class="participant-id">二辩</td>
+                    <td class="mark-title">驳论
                         <br>
                         <select name="bolun_pos" id="bolun_pos">
                             <?php generateMarks(30) ?>
                         </select>
                     </td>
-                    <td>攻辩
+                    <td class="mark-title">攻辩
                     <br>
                         <select name="gongbian_pos" id="gongbian_pos">
                             <?php generateMarks(30) ?>
                         </select>
                     </td>
-                    <td>语言风度<br>
+                    <td class="mark-title">语言风度<br>
                         <select name="yuyan_pos_2" id="yuyan_pos_2">
                             <?php generateMarks(10) ?>
                         </select>
                     </td>
-                    <td>自由辩论<br>
+                    <td class="mark-title">自由辩论<br>
                         <select name="ziyou_pos_2" id="ziyou_pos_2">
                             <?php generateMarks(25) ?>
                         </select>
                     </td>                
                 </tr>
                 <tr>
-                    <td>三辩</td>
-                    <td>质询<br>
+                    <td class="participant-id">三辩</td>
+                    <td class="mark-title">质询<br>
                         <select name="zhixun_pos_2" id="zhixun_pos_2">
                             <?php generateMarks(30) ?>
                         </select>
                     </td>
-                    <td>小结<br>
+                    <td class="mark-title">小结<br>
                         <select name="xiaojie_pos" id="xiaojie_pos">
                             <?php generateMarks(30) ?>
                         </select>
                     </td>
-                    <td>语言风度<br>
+                    <td class="mark-title">语言风度<br>
                         <select name="yuyan_pos_3" id="yuyan_pos_3">
                             <?php generateMarks(10) ?>
                         </select>
                     </td>
-                    <td>自由辩论<br>
+                    <td class="mark-title">自由辩论<br>
                         <select name="ziyou_pos_3" id="ziyou_pos_3">
                             <?php generateMarks(25) ?>
                         </select>
                     </td>                
                 </tr>
                 <tr>
-                    <td>四辩</td>
-                    <td>陈词<br>
+                    <td class="participant-id">四辩</td>
+                    <td class="mark-title">陈词<br>
                         <select name="chenci_pos" id="chenci_pos">
                             <?php generateMarks(30) ?>
                         </select>
                     </td>
                     <td></td>
-                    <td>语言风度<br>
+                    <td class="mark-title">语言风度<br>
                         <select name="yuyan_pos_4" id="yuyan_pos_4">
                             <?php generateMarks(10) ?>
                         </select>
                     </td>
-                    <td>自由辩论<br>
+                    <td class="mark-title">自由辩论<br>
                         <select name="ziyou_pos_4" id="ziyou_pos_4">
                             <?php generateMarks(25) ?>
                         </select>
@@ -146,43 +147,43 @@ function generateMarks($max){
                 <!-- <tr><td colspan="5"><span>正方: </span><span id="marks_pos" >0</span><br></td></tr> -->
 
             </table>
-
+            </div>
             <br>
-
-            <table class="table">
+            <div class="card">
+            <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>反方</th>
                         <th></th>
                         <th></th>
                         <th></th>
+                        <th style="text-align:left;font-size:2rem;">反方</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
                 <tr>
-                <td>一辩</td>
-                    <td>立论
+                <td class="participant-id">一辩</td>
+                    <td class="mark-title">立论
                     <br>
                         <select name="lilun_neg" id="lilun_neg">
                             <?php generateMarks(30) ?>
                         </select>
                     </td>
-                    <td>质询
+                    <td class="mark-title">质询
                     <br>
                         <select name="zhixun_neg_1" id="zhixun_neg_1">
                             <?php generateMarks(20) ?>
                         </select>
                     </td>
                     
-                    <td>语言风度
+                    <td class="mark-title">语言风度
                     <br>
                         <select name="yuyan_neg_1" id="yuyan_neg_1">
                             <?php generateMarks(10) ?>
                         </select>
                     </td>
                     
-                    <td>自由辩论
+                    <td class="mark-title">自由辩论
                     <br>
                         <select name="ziyou_neg_1" id="ziyou_neg_1">
                             <?php generateMarks(25) ?>
@@ -190,67 +191,67 @@ function generateMarks($max){
                     </td>  
                 </tr>
                 <tr>
-                <td>二辩</td>
-                    <td>驳论
+                <td class="participant-id">二辩</td>
+                    <td class="mark-title">驳论
                         <br>
                         <select name="bolun_neg" id="bolun_neg">
                             <?php generateMarks(30) ?>
                         </select>
                     </td>
-                    <td>攻辩
+                    <td class="mark-title">攻辩
                     <br>
                         <select name="gongbian_neg" id="gongbian_neg">
                             <?php generateMarks(30) ?>
                         </select>
                     </td>
-                    <td>语言风度<br>
+                    <td class="mark-title">语言风度<br>
                         <select name="yuyan_neg_2" id="yuyan_neg_2">
                             <?php generateMarks(10) ?>
                         </select>
                     </td>
-                    <td>自由辩论<br>
+                    <td class="mark-title">自由辩论<br>
                         <select name="ziyou_neg_2" id="ziyou_neg_2">
                             <?php generateMarks(25) ?>
                         </select>
                     </td>
                 </tr>
                 <tr>
-                <td>三辩</td>
-                    <td>质询<br>
+                <td class="participant-id">三辩</td>
+                    <td class="mark-title">质询<br>
                         <select name="zhixun_neg_2" id="zhixun_neg_3">
                             <?php generateMarks(30) ?>
                         </select>
                     </td>
-                    <td>小结<br>
+                    <td class="mark-title">小结<br>
                         <select name="xiaojie_neg" id="xiaojie_neg">
                             <?php generateMarks(30) ?>
                         </select>
                     </td>
-                    <td>语言风度<br>
+                    <td class="mark-title">语言风度<br>
                         <select name="yuyan_neg_3" id="yuyan_neg_3">
                             <?php generateMarks(10) ?>
                         </select>
                     </td>
-                    <td>自由辩论<br>
+                    <td class="mark-title">自由辩论<br>
                         <select name="ziyou_neg_3" id="ziyou_neg_3">
                             <?php generateMarks(25) ?>
                         </select>
                     </td>  
                 </tr>
                 <tr>
-                <td>四辩</td>
-                    <td>陈词<br>
+                <td class="participant-id">四辩</td>
+                    <td class="mark-title">陈词<br>
                         <select name="chenci_neg" id="chenci_neg">
                             <?php generateMarks(30) ?>
                         </select>
                     </td>
                     <td></td>
-                    <td>语言风度<br>
+                    <td class="mark-title">语言风度<br>
                         <select name="yuyan_neg_4" id="yuyan_neg_4">
                             <?php generateMarks(10) ?>
                         </select>
                     </td>
-                    <td>自由辩论<br>
+                    <td class="mark-title">自由辩论<br>
                         <select name="ziyou_neg_4" id="ziyou_neg_4">
                             <?php generateMarks(25) ?>
                         </select>
@@ -266,6 +267,8 @@ function generateMarks($max){
                 
                 <!-- <tr><td colspan="5"><span>反方: </span><span id="marks_neg" >0</span><br></td></tr> -->
             </table>
+            </div>
+            <br>
             <button id="submit" type="button" class="btn btn-submit btn-block" data-toggle="modal" data-target="#exampleModal" style="margin-bottom:50px;">总结分数</button>
             </form>
             </div>
@@ -337,7 +340,9 @@ function generateMarks($max){
 
 <style>
     table, th, td, tr, thead {
-        border: 1px solid black;
+        border: 1px solid transparent;
+        font-size: 1.4rem;
+        font-family: bold;
     }
     td{
         text-align:center;
@@ -349,5 +354,21 @@ function generateMarks($max){
         border-radius: 4px;
         font-size: 1.5rem;
         text-decoration: none;
+    }
+    .mark-title select{
+        margin-top: 13px;
+        margin-bottom: 10px;
+    }
+    .mark-title{
+        
+    }
+    .container{
+        max-width: 95vw;
+    }
+    .card{
+        border-radius: 15px;
+    }
+    .participant-id{
+        font-size: 1.5rem;
     }
 </style>
