@@ -2,7 +2,7 @@
 
 session_start();
 
-if(isset($_SESSION['userID'])){
+if(!isset($_SESSION['userID'])){
     header("Location: login.php");
 }
 
@@ -27,7 +27,7 @@ function generateMarks($max){
             <hr>
             <strong><h2 class="text-center">题目: <?php echo $title ?></h2></strong>
             <a href="php/logout_process.php">LOGOUT</a>
-            <form action="">
+            <form id="my_form" action="php/insertMarkHandler.php" method="POST">
             <table class="table">
                 <thead>
                     <tr>
@@ -61,11 +61,12 @@ function generateMarks($max){
                         </select>
                     </td>
                     
-                    <td>自由辩论
-                    <br>
+                    <td>自由辩论<br><span>
+                    
                         <select name="ziyou_pos_1" id="ziyou_pos_1">
                             <?php generateMarks(25) ?>
                         </select>
+                        </span>
                     </td>                
                 </tr>
                
@@ -266,7 +267,7 @@ function generateMarks($max){
                 
                 <!-- <tr><td colspan="5"><span>反方: </span><span id="marks_neg" >0</span><br></td></tr> -->
             </table>
-            <button id="submit" type="button" class="btn btn-submit btn-block" data-toggle="modal" data-target="#exampleModal" style="margin-bottom:50px;">总结分数</button>
+            <button id="submit" type="submit" class="btn btn-submit btn-block" data-toggle="modal" data-target="#exampleModal" style="margin-bottom:50px;">总结分数</button>
             </form>
             </div>
 
@@ -286,7 +287,7 @@ function generateMarks($max){
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary">提交</button>
+                    <button type="button" class="btn btn-primary" id="submit_final">提交</button>
                 </div>
                 </div>
             </div>
@@ -316,7 +317,7 @@ function generateMarks($max){
         // });
 
         $('#submit').click(function(e){
-            e.preventDefault();
+            
             var total_neg_1 = parseInt($('#lilun_neg').val())+parseInt($('#zhixun_neg_1').val())+parseInt($('#yuyan_neg_1').val())+parseInt($('#ziyou_neg_1').val())+
             parseInt($('#bolun_neg').val())+parseInt($('#gongbian_neg').val())+parseInt($('#yuyan_neg_2').val())+parseInt($('#ziyou_neg_2').val())+
             parseInt($('#zhixun_neg_3').val())+parseInt($('#xiaojie_neg').val())+parseInt($('#yuyan_neg_3').val())+parseInt($('#ziyou_neg_3').val())+
@@ -330,6 +331,12 @@ function generateMarks($max){
             parseInt($('#chenci_pos').val())+parseInt($('#yuyan_pos_4').val())+parseInt($('#ziyou_pos_4').val())+parseInt($('#tuanti_pos').val());
             $("#marks_pos_1").html("");
             $('#marks_pos_1').html(total_pos_1);
+            $('#my_form').submit();
+        });
+        $('#submit_final').click(function(){
+            
+            console.log("asd");
+            $('#my_form').submit();
         });
     })
     
