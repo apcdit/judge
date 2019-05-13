@@ -1,6 +1,6 @@
 <?php
     include('../inc/connect.php');
-    include('../inc/config.php');
+    
     $id = $_GET['id'];
 
     $stmt = $conn->prepare("SELECT * FROM titles WHERE (judge_id_1=? OR judge_id_2=? OR judge_id_3=? OR judge_id_4=? 

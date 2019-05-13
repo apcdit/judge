@@ -27,7 +27,8 @@ function generateMarks($max){
             <hr>
             <strong><h2 class="text-center">题目: <?php echo $title ?></h2></strong>
             <a href="php/logout_process.php">LOGOUT</a>
-            <form action="">
+            
+            <form  id="my_form" action="php/insertMarkHandler.php" method="POST">
             <div class="card">
             <table class="table table-striped">
                 <thead>
@@ -62,11 +63,12 @@ function generateMarks($max){
                         </select>
                     </td>
                     
-                    <td class="mark-title">自由辩论
-                    <br>
+                    <td>自由辩论<br><span>
+                    
                         <select name="ziyou_pos_1" id="ziyou_pos_1">
                             <?php generateMarks(25) ?>
                         </select>
+                        </span>
                     </td>                
                 </tr>
                
@@ -267,33 +269,32 @@ function generateMarks($max){
                 
                 <!-- <tr><td colspan="5"><span>反方: </span><span id="marks_neg" >0</span><br></td></tr> -->
             </table>
-            </div>
-            <br>
             <button id="submit" type="button" class="btn btn-submit btn-block" data-toggle="modal" data-target="#exampleModal" style="margin-bottom:50px;">总结分数</button>
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">总结</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <span>正方: </span><span id="marks_pos_1"></span><br>
+                                <span>反方: </span><span id="marks_neg_1"></span>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                                <button type="submit" class="btn btn-primary" id="submit_final">提交</button>
+                            </div>
+                        </div>
+                </div>
+            </div>
             </form>
             </div>
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">总结</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <span>正方: </span><span id="marks_pos_1"></span><br>
-                    <span>反方: </span><span id="marks_neg_1"></span>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary">提交</button>
-                </div>
-                </div>
-            </div>
-            </div>
+            
 
         </div>
     </body>
@@ -318,8 +319,8 @@ function generateMarks($max){
         //     $('#marks_pos').html(total_pos);
         // });
 
-        $('#submit').click(function(e){
-            e.preventDefault();
+        $('#submit').click(function(){
+        
             var total_neg_1 = parseInt($('#lilun_neg').val())+parseInt($('#zhixun_neg_1').val())+parseInt($('#yuyan_neg_1').val())+parseInt($('#ziyou_neg_1').val())+
             parseInt($('#bolun_neg').val())+parseInt($('#gongbian_neg').val())+parseInt($('#yuyan_neg_2').val())+parseInt($('#ziyou_neg_2').val())+
             parseInt($('#zhixun_neg_3').val())+parseInt($('#xiaojie_neg').val())+parseInt($('#yuyan_neg_3').val())+parseInt($('#ziyou_neg_3').val())+
@@ -333,6 +334,13 @@ function generateMarks($max){
             parseInt($('#chenci_pos').val())+parseInt($('#yuyan_pos_4').val())+parseInt($('#ziyou_pos_4').val())+parseInt($('#tuanti_pos').val());
             $("#marks_pos_1").html("");
             $('#marks_pos_1').html(total_pos_1);
+            
+        });
+        $('#submit_final').click(function(){
+           
+            $('#my_form').submit(); 
+            console.log("asd");
+            
         });
     })
     
