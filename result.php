@@ -15,10 +15,10 @@
 
 <body>
     <div class="container">
-        <h1>查询成绩</h1>
-        <div class="form-group row">
+        <div class="form-group">
+            <h1>查询成绩</h1>
             <h3 for="title">题目</h3>
-            <select name="title" id="title" class="form-control group">
+            <select name="title" id="competition_id" class="form-control group">
             <?php 
                 // Fetch Judge
                     $sql = $conn->prepare("SELECT * FROM titles");
@@ -40,6 +40,7 @@
         
         <button id="submit" class="btn btn-primary">查询成绩</button>
     </div>
+    <div id="result" style="margin-top:100px;"></div>
 </body>
 
 </html>
@@ -50,8 +51,51 @@
     })
     
     function fetchResult(){
-        $competition_id = $("")
+        var competition_id = $("#competition_id").val();
+        $.ajax({
+            url: "php/result.php",
+            type: "GET",
+            data: {
+                competition_id: competition_id
+            },
+            dataType: "JSON",
+            success: function(response){
+                processResult(response);
+            }
+        });
     }
 
+    function processResult(data){
+        var arrayResults = data;
+        arrayPos = arrayResults.filter(function(value){
+            return value['side'] == 1;
+        })
+        arrayNeg = arrayResults.filter(function(value){
+            return value['side'] == 0;
+        })
+        var impression_pos = 0;
+        var mark_pos = 0;
+        var zongjie_pos = 0;
+
+        var impression_neg = 0;
+        var mark_neg = 0;
+        var zongjie_neg = 0;
+        
+        $.each(arrayPos, function(index,value){
+            impression_pos += parseInt(value['impression_ticket']);
+            mark_pos += parseInt(value['mark_ticket']);
+            zongjie_pos += parseInt(value['zongjie_ticket']);
+        })
+
+        $.each(arrayNeg, function(index,value){
+            impression_neg += parseInt(value['impression_ticket']);
+            mark_neg += parseInt(value['mark_ticket']);
+            zongjie_neg += parseInt(value['zongjie_ticket']);
+        })
+
+        var content = "<div class='container'>abc</div>";
+
+       $("#result").html(content);
+    }
    
 </script>
