@@ -1,11 +1,10 @@
 <?php include('header.php'); 
 
+    session_start();
 
-session_start();
-
-if(!isset($_SESSION['userID'])){
-    header("Location: login.php");
-}
+    if(isset($_SESSION['userID'])){
+        header("Location: login.php");
+    }
 ?>
 
 
