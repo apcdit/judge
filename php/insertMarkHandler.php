@@ -21,7 +21,7 @@ $ziyou_pos_2 = $_REQUEST["ziyou_pos_2"];
 $zhixun_pos_2 = $_REQUEST["zhixun_pos_2"];
 $xiaojie_pos = $_REQUEST["xiaojie_pos"];
 $yuyan_pos_3 = $_REQUEST["yuyan_pos_3"];
-$ziyou_pos_3 = $_REQUEST["lilun_pos"];
+$ziyou_pos_3 = $_REQUEST["ziyou_pos_3"];
 $chenci_pos = $_REQUEST["chenci_pos"];
 $yuyan_pos_4 = $_REQUEST["yuyan_pos_4"];
 $ziyou_pos_4 = $_REQUEST["ziyou_pos_4"];
@@ -42,12 +42,12 @@ $ziyou_neg_2 = $_REQUEST["ziyou_neg_2"];
 $zhixun_neg_2 = $_REQUEST["zhixun_neg_2"];
 $xiaojie_neg = $_REQUEST["xiaojie_neg"];
 $yuyan_neg_3 = $_REQUEST["yuyan_neg_3"];
-$ziyou_neg_3 = $_REQUEST["lilun_neg"];
+$ziyou_neg_3 = $_REQUEST["ziyou_neg_3"];
 $chenci_neg = $_REQUEST["chenci_neg"];
 $yuyan_neg_4 = $_REQUEST["yuyan_neg_4"];
 $ziyou_neg_4 = $_REQUEST["ziyou_neg_4"];
 $tuanti_neg = $_REQUEST["tuanti_neg"];
-$marks_neg_1 = $lilun_pos+ $zhixun_pos_1+$yuyan_neg_1+$ziyou_neg_1+$bolun_neg+$gongbian_neg
+$marks_neg_1 = $lilun_neg+ $zhixun_neg_1+$yuyan_neg_1+$ziyou_neg_1+$bolun_neg+$gongbian_neg
 +$yuyan_neg_2+$ziyou_neg_2+$zhixun_neg_2+$xiaojie_neg+$yuyan_neg_3+$ziyou_neg_3+$chenci_neg
 +$yuyan_neg_4+$ziyou_neg_4+$tuanti_neg;
 

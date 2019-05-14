@@ -40,13 +40,16 @@
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
+        <form action="php/impressionMarkHandler.php" method="POST">
         <div class="modal-body">
             <span>正方 </span><br>
+            <input name='side' value='1' style="display:none;">
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-primary">提交</button>
+            <button type="submit" class="btn btn-primary">提交</button>
         </div>
+        </form>
         </div>
     </div>
     </div>
@@ -54,18 +57,25 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header">
+        
             <h5 class="modal-title" id="exampleModalLabel">印象票</h5>
+            
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
+        
         </div>
-        <div class="modal-body">
-            <span>反方 </span><br>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-primary">提交</button>
-        </div>
+        <form action="php/impressionMarkHandler.php" method="POST">
+            <div class="modal-body">
+                <span>反方 </span><br>
+                <input name='side' value='0' style="display:none;">
+            </div>
+        
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <button type="submit" class="btn btn-primary">提交</button>
+            </div>
+        </form>
         </div>
     </div>
     </div>
@@ -100,30 +110,3 @@ body{
 }
 </style>
 
-<?php 
-function updateImpressionMark($side, $competition_id){
-    
-    try {
-               
-        $sql = "UPDATE Competition SET impression_ticket=1 
-                WHERE 
-                    competion_id=$competition_id 
-                    and
-                    side=$side";
-    
-        // Prepare statement
-        $stmt = $conn->prepare($sql);
-    
-        // execute the query
-        $stmt->execute();
-    
-        // echo a message to say the UPDATE succeeded
-        echo $stmt->rowCount() . " records UPDATED successfully";
-        }
-    catch(PDOException $e)
-        {
-        echo $sql . "<br>" . $e->getMessage();
-        }
-
-}
-?>

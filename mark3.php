@@ -1,16 +1,15 @@
 <?php include('header.php'); 
 
+    session_start();
 
-session_start();
-
-if(!isset($_SESSION['userID'])){
-    header("Location: login.php");
-}
+    if(!isset($_SESSION['userID'])){
+        header("Location: login.php");
+    }
 ?>
 
 
 <html>
-<head><title>印象分</title>
+<head><title>总结票</title>
 <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -25,7 +24,7 @@ if(!isset($_SESSION['userID'])){
         </div>
         <div class="row justify-content-center" style="align-items: center;height:90%">
             <div class="col-md-4 box" data-toggle="modal" data-target="#exampleModal">正方</div>
-            <div class="col-md-4 box" data-toggle="modal" data-target="#exampleModal">反方</div>
+            <div class="col-md-4 box" data-toggle="modal" data-target="#exampleModal2">反方</div>
             
         </div>
         </div>
@@ -41,13 +40,42 @@ if(!isset($_SESSION['userID'])){
             <span aria-hidden="true">&times;</span>
             </button>
         </div>
+        <form action="php/zongjieMarkHandler.php" method="POST">
         <div class="modal-body">
             <span>正方 </span><br>
+            <input name='side' value='1' style="display:none;">
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-primary">提交</button>
+            <button type="submit" class="btn btn-primary">提交</button>
         </div>
+        </form>
+        </div>
+    </div>
+    </div>
+    <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+        
+            <h5 class="modal-title" id="exampleModalLabel">印象票</h5>
+            
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        
+        </div>
+        <form action="php/zongjieMarkHandler.php" method="POST">
+            <div class="modal-body">
+                <span>反方 </span><br>
+                <input name='side' value='0' style="display:none;">
+            </div>
+        
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <button type="submit" class="btn btn-primary">提交</button>
+            </div>
+        </form>
         </div>
     </div>
     </div>
@@ -81,3 +109,4 @@ body{
    
 }
 </style>
+
