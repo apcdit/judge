@@ -5,6 +5,31 @@
     if(!isset($_SESSION['userID'])){
         header("Location: login.php");
     }
+    include('/inc/connect.php');
+    if(!isset($_SESSION['userID'])){
+        header("Location: login.php");
+    }
+
+ 
+    
+    try {
+        
+        $stmt = $conn->prepare("SELECT zongjie_ticket FROM Competition WHERE competition_id123='".$_SESSION['titleID']."' AND judge_id='".$_SESSION['userID']."'"); 
+        $stmt->execute();
+        
+        
+        
+        // set the resulting array to associative
+        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        // var_dump($stmt->fetchAll());
+        $data=$stmt->fetchAll();
+        // print_r($data);
+        // echo $data[1]['impression_ticket'];
+        // echo $data[0]['impression_ticket']; 
+        }
+    catch(PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
 ?>
 
 
@@ -21,10 +46,11 @@
         <div class="content " style="height:100%">
         <div class="header" style="display:block;height:10%">
             <h1>总结票</h1>
+            <h3 id="winner"></h3>
         </div>
         <div class="row justify-content-center" style="align-items: center;height:90%">
-            <div class="col-md-4 box" data-toggle="modal" data-target="#exampleModal">正方</div>
-            <div class="col-md-4 box" data-toggle="modal" data-target="#exampleModal2">反方</div>
+            <div class="col-md-4 box" data-toggle="modal" data-target="#exampleModal" id="affirmative">正方</div>
+            <div class="col-md-4 box" data-toggle="modal" data-target="#exampleModal2" id="negative">反方</div>
             
         </div>
         </div>
@@ -84,9 +110,27 @@
 
 </html>
 <script>
-function submit(){
-    alert("Confirm");
-}
+    var affirmative=<?php echo $data[1]['zongjie_ticket'];?>;
+    var negative=<?php echo $data[0]['zongjie_ticket'];?>;
+    if(affirmative==1)
+    {
+        document.getElementById("affirmative").style.backgroundColor = "darkred";
+        document.getElementById("affirmative").style.color = "white";
+        document.getElementById("affirmative").style.pointerEvents = "none";
+        document.getElementById("negative").style.pointerEvents = "none";
+        document.getElementById("winner").innerHTML = "正方胜";
+        
+    }
+    if(negative==1)
+    {
+        document.getElementById("negative").style.background = "darkred";
+        document.getElementById("negative").style.color = "white";
+        document.getElementById("affirmative").style.pointerEvents = "none";
+        document.getElementById("negative").style.pointerEvents = "none";
+        document.getElementById("winner").innerHTML = "反方胜";
+    }
+    
+    
 </script>
 
 <style>
