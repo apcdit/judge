@@ -6,7 +6,7 @@
     if($stmt->execute()){
         echo json_encode($stmt->fetchAll());
     }else{
-        echo json_encode(['']);
+        echo json_encode();
     }
     
 ?>

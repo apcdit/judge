@@ -40,7 +40,6 @@
             <hr/>
             <a href="dashboard.php"><i class="fas fa-tachometer-alt" style="padding-right:10px;"></i>Dashboard</a>
             <a href="#"><i class="fas fa-poll" style="padding-right:10px;"></i>Result</a>
-            <a href="#">Competition</a>
             <a href="teams.php"><i class="fas fa-users" style="padding-right:10px;"></i>Teams</a>
             <a href="#"><i class="fas fa-gavel" style="padding-right:10px;"></i>Judges</a>
         </div>
@@ -49,7 +48,35 @@
         <div class="main">
             <div class="box" style="width:100%"><h4>Teams</h4></div>
             <div class="box" style="width:100%; margin-top: -15px;">
-                
+               <?php 
+                    require('inc/connect.php');
+
+                    $stmt = $conn->prepare("SELECT name_cn, uni FROM participants WHERE 1=1");
+                    $stmt->execute();
+                    $participants = $stmt->fetchAll();
+
+                    $unis = array();
+                    
+                    //2D array with uni_name as key and participant as value
+                    foreach($participants as $participant){
+                        if(!in_array($participant['uni'],$unis)){
+                            array_push($unis, $participant['uni']);
+                            $unis[$participant['uni']] = array();
+                        }
+                        array_push($unis[$participant['uni']], $participant['name_cn']);
+                    }
+                    $count = 0;
+                    foreach($unis as $uni => $persons){
+                        if($count%2 != 0){
+                            echo '<h3>'.$uni.'</h3><ul>';
+                            foreach($persons as $person){
+                                echo '<li>'.$person.'</li>';
+                            }
+                            echo '</ul>';
+                        }
+                        $count++;
+                    }
+                ?>
             </div>
         </div>
     </body>

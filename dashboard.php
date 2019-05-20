@@ -1,4 +1,4 @@
-<?php include('header.php'); ?>
+<?php include('header.php');?>
 
 <html>
     <head>
@@ -39,13 +39,18 @@
                 type: "GET",
                 dataType: "JSON", 
                 success: function(result){
-                    $.each(result, (index,element) => {
+ 
+                    if(result.length !== 0){
+                        $.each(result, (index,element) => {
                         let competition_id = element['competition_id'];
                         let title = element['title'];
-                        output += `<li>${competition_id}: ${title}</li>`
-                    });
-                    output += '</ul>'
-                    $("#ongoing").empty().append(output);
+                            output += `<li>${competition_id}: ${title}</li>`
+                        });
+                        output += '</ul>'
+                    }else{
+                        output = "<hr>No ongoing debates.";
+                    }
+                    $("#ongoing").empty().append(output);                    
                 }
             })
         }
@@ -60,7 +65,6 @@
             <hr/>
             <a href="dashboard.php"><i class="fas fa-tachometer-alt" style="padding-right:10px;"></i>Dashboard</a>
             <a href="#"><i class="fas fa-poll" style="padding-right:10px;"></i>Result</a>
-            <a href="#">Competition</a>
             <a href="teams.php"><i class="fas fa-users" style="padding-right:10px;"></i>Teams</a>
             <a href="#"><i class="fas fa-gavel" style="padding-right:10px;"></i>Judges</a>
         </div>
@@ -68,14 +72,55 @@
         <!-- Page content -->
         <div class="main">
             <div class="box" style="width:100%"><h4>Dashboard</h4></div>
-            <div class="box" style="width:48.5%; margin-top: -15px;">
+            <div class="row">
+            <div class="box" style="width:43.5%; margin-top: -15px; margin-left:15px;">
+                <div class="container">
                 <h4>Currently Ongoing Debate</h4>
-                <i class="fas fa-sync-alt btn-ongoing" style="text-align:right;"></i>
+                <button class="fas fa-sync-alt btn-ongoing" style="color:lightgrey"></button>
+                </div>
                 <div id="ongoing">
                 </div>
             </div>
-            <div class="box" style="width:48.5%">
-                
+            <div class="box" style="width:26.75%; margin-top: -15px;">
+                <h4>Activate Debate</h4>
+                <hr>
+                <form method="POST" action="php/updateOngoing.php">
+                    <?php
+                        require('inc/connect.php');
+                        $sql = $conn->prepare("SELECT competition_id, title, available FROM titles WHERE available=0");
+                        $sql->execute();
+                        $titles = $sql->fetchAll();
+                        if($titles != []){
+                            foreach($titles as $title){
+                                echo '<input type="checkbox" name="competitionID[]" value='.$title['competition_id'].'> '.$title['competition_id'].'. '.$title['title'].'</input><br>';
+                            }
+                            echo '<br><input type="submit" class="btn btn-success" name="submit" value="Activate">';
+                        }else{
+                            echo 'No more debate entries in database.';
+                        }
+                    ?>
+                </form>
+            </div>
+            <div class="box" style="width:26.75%; margin-top: -15px;">
+                <h4>Deactivate Debate</h4>
+                <hr>
+                <form method="POST" action="php/updateOngoing.php">
+                    <?php
+                        require('inc/connect.php');
+                        $sql = $conn->prepare("SELECT competition_id, title, available FROM titles WHERE available=1");
+                        $sql->execute();
+                        $titles = $sql->fetchAll();
+                        if($titles == []){
+                            echo 'No ongoing debates.';
+                        }else{
+                            foreach($titles as $title){
+                                echo '<input type="checkbox" name="competitionID[]" value='.$title['competition_id'].'> '.$title['competition_id'].'. '.$title['title'].'</input><br>';
+                            }
+                            echo '<br><input type="submit" class="btn btn-danger" name="submit" value="Deactivate">';
+                        }     
+                    ?>
+                </form>
+            </div>
             </div>
         </div>
     </body>
