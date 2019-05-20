@@ -10,7 +10,7 @@
     
     try {
         
-        $stmt = $conn->prepare("SELECT impression_ticket FROM Competition WHERE competition_id123='".$_SESSION['titleID']."' AND judge_id='".$_SESSION['userID']."'"); 
+        $stmt = $conn->prepare("SELECT impression_ticket FROM Competition WHERE competition_id='".$_SESSION['titleID']."' AND judge_id='".$_SESSION['userID']."'"); 
         $stmt->execute();
         
         
