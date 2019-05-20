@@ -1,7 +1,7 @@
 <?php include('header.php'); 
 
     session_start();
-    include('/inc/connect.php');
+    include('inc/connect.php');
     if(!isset($_SESSION['userID'])){
         header("Location: login.php");
     }
@@ -9,15 +9,14 @@
  
     
     try {
-        
-        $stmt = $conn->prepare("SELECT impression_ticket FROM Competition WHERE competition_id123='".$_SESSION['titleID']."' AND judge_id='".$_SESSION['userID']."'"); 
-        $stmt->execute();
-        
+        $stmt = $conn->prepare("SELECT impression_ticket FROM Competition WHERE competition_id=? AND judge_id=?"); 
+        $stmt->execute([$_SESSION['titleID'], $_SESSION['userID']]);
         
         
-        // set the resulting array to associative
+        
+        // // set the resulting array to associative
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        //  var_dump($stmt->fetchAll());
+        // //  var_dump($stmt->fetchAll());
         $data=$stmt->fetchAll();
         // print_r($data);
         // echo $data[1]['impression_ticket'];
@@ -46,8 +45,8 @@
             <h3 id="winner"></h3>
         </div>
         <div class="row justify-content-center" style="align-items: center;height:90%">
-            <div class="col-md-4 box" data-toggle="modal" data-target="#exampleModal" id="affirmative">正方</div>
-            <div class="col-md-4 box" data-toggle="modal" data-target="#exampleModal2" id="negative">反方</div>
+            <button class="col-md-4 box" data-toggle="modal" data-target="#exampleModal" id="affirmative">正方</button>
+            <button class="col-md-4 box" data-toggle="modal" data-target="#exampleModal2" id="negative">反方</button>
             
         </div>
         </div>
