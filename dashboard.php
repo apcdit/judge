@@ -7,6 +7,16 @@
     </head>
     
     <script>
+        function deleteAllCookies() {
+            var cookies = document.cookie.split(";");
+
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i];
+                var eqPos = cookie.indexOf("=");
+                var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+            }
+        }
         const checkUser = () => {
             var allcookies = document.cookie.split(";");
             
@@ -27,6 +37,7 @@
 
             alert("Wrong Credentials!!");
             window.location.href = "http://www.apchinesedebate.com/";
+            deleteAllCookies();
             return false;
         }
 
@@ -120,6 +131,49 @@
                         }     
                     ?>
                 </form>
+            </div>
+            <div class="box" style="width:45%; margin-left: 20px;">
+                <h4>Add Debate Titles</h4>
+                <hr>
+                <form action="php/updateTitles.php" method="POST">
+                    <table>
+                    <tbody>
+                    <tr>
+                        <th>Competition ID: <th>
+                        <td><input type="text" name="competitionID"><td>
+                    </tr>
+                    <tr>
+                        <th>Title:<th>
+                        <td><input type="text" name="title"></td>
+                    </tr>
+                    <tr>
+                    <th>Judges:</th><tr><td>
+                        <?php 
+                            $stmt = $conn->prepare("SELECT * FROM judges");
+                            $stmt->execute();
+                            $judges = $stmt->fetchAll();
+
+                            foreach($judges as $judge){
+                                echo '<input type="checkbox" name="judgesID[]" value='.$judge['id'].'> '.$judge['name'].'  </input>';
+                            }
+
+                        ?>
+                        </td></tr>
+                    </tr>
+                    </tbody>
+                    </table>
+                    <br>
+                    <input type="submit" value="Add" name="Submit" class="btn btn-success">
+                </form>
+            </div>
+            <div class="box" style="width:50%; margin-left: 20px;">
+                <h4>Remove Debate Titles</h4>
+                <hr>
+                <form action="php/updateTitles.php" method="POST">
+                    
+                    <input type="submit" value="Remove" name="Submit" class="btn btn-danger">
+                </form>
+            
             </div>
             </div>
         </div>
