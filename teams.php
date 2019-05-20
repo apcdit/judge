@@ -29,28 +29,8 @@
             window.location.href = "http://www.apchinesedebate.com/";
             return false;
         }
-
-        //load ongoing debate
-        const loadOngoing = () => {
-            var date = new Date();
-            var output = `<I>Last Refresh: ${date}</I><hr><ul>`;
-            $.ajax({
-                url: "php/fetchOngoing.php",
-                type: "GET",
-                dataType: "JSON", 
-                success: function(result){
-                    $.each(result, (index,element) => {
-                        let competition_id = element['competition_id'];
-                        let title = element['title'];
-                        output += `<li>${competition_id}: ${title}</li>`
-                    });
-                    output += '</ul>'
-                    $("#ongoing").empty().append(output);
-                }
-            })
-        }
         checkUser();
-        loadOngoing();
+       
     </script>
 
     <body>
@@ -67,14 +47,8 @@
 
         <!-- Page content -->
         <div class="main">
-            <div class="box" style="width:100%"><h4>Dashboard</h4></div>
-            <div class="box" style="width:48.5%; margin-top: -15px;">
-                <h4>Currently Ongoing Debate</h4>
-                <i class="fas fa-sync-alt btn-ongoing" style="text-align:right;"></i>
-                <div id="ongoing">
-                </div>
-            </div>
-            <div class="box" style="width:48.5%">
+            <div class="box" style="width:100%"><h4>Teams</h4></div>
+            <div class="box" style="width:100%; margin-top: -15px;">
                 
             </div>
         </div>

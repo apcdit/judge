@@ -9,9 +9,12 @@
  
     
     try {
-        
         $stmt = $conn->prepare("SELECT zongjie_ticket FROM Competition WHERE competition_id=? AND judge_id=?"); 
         $stmt->execute([$_SESSION['titleID'],$_SESSION['userID']]);
+
+
+
+
         
         
         

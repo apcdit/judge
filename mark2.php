@@ -11,8 +11,7 @@
     try {
         $stmt = $conn->prepare("SELECT impression_ticket FROM Competition WHERE competition_id=? AND judge_id=?"); 
         $stmt->execute([$_SESSION['titleID'], $_SESSION['userID']]);
-        
-        
+              
         
         // // set the resulting array to associative
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
