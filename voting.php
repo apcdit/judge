@@ -2,7 +2,7 @@
 include('header.php'); 
 
 session_start();
-include('/inc/connect.php');
+include('inc/connect.php');
 if(!isset($_SESSION['userID'])){
     header("Location: login.php");
 }?>
