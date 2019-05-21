@@ -1,4 +1,4 @@
-<?php include('header.php'); ?>
+<?php include('header.php');?>
 
 <html>
     <head>
@@ -7,16 +7,37 @@
     </head>
     
     <script>
+        function deleteAllCookies() {
+            var cookies = document.cookie.split(";");
+
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i];
+                var eqPos = cookie.indexOf("=");
+                var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+                document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+            }
+        }
         const checkUser = () => {
-            var name = prompt("Enter your username: ");
-            var password = prompt("Enter your password: ");
+            var allcookies = document.cookie.split(";");
+            
+            if(allcookies[0] == undefined || allcookies[1] == undefined){
+                var name = prompt("Enter your username: ");
+                var password = prompt("Enter your password: ");
+            }else{
+                var name = allcookies[0].split("=")[1];
+                var password = allcookies[1].split("=")[1];
+            }
+            
 
             if(name == "tjl" && password == "123"){
+                document.cookie = "name=tjl";
+                document.cookie = "password=123";
                 return true;
             }
 
             alert("Wrong Credentials!!");
             window.location.href = "http://www.apchinesedebate.com/";
+            deleteAllCookies();
             return false;
         }
 
@@ -29,13 +50,18 @@
                 type: "GET",
                 dataType: "JSON", 
                 success: function(result){
-                    $.each(result, (index,element) => {
+ 
+                    if(result.length !== 0){
+                        $.each(result, (index,element) => {
                         let competition_id = element['competition_id'];
                         let title = element['title'];
-                        output += `<li>${competition_id}: ${title}</li>`
-                    });
-                    output += '</ul>'
-                    $("#ongoing").empty().append(output);
+                            output += `<li>${competition_id}: ${title}</li>`
+                        });
+                        output += '</ul>'
+                    }else{
+                        output = "<hr>No ongoing debates.";
+                    }
+                    $("#ongoing").empty().append(output);                    
                 }
             })
         }
@@ -50,22 +76,117 @@
             <hr/>
             <a href="dashboard.php"><i class="fas fa-tachometer-alt" style="padding-right:10px;"></i>Dashboard</a>
             <a href="#"><i class="fas fa-poll" style="padding-right:10px;"></i>Result</a>
-            <a href="#">Competition</a>
-            <a href="#"><i class="fas fa-users" style="padding-right:10px;"></i>Teams</a>
+            <a href="teams.php"><i class="fas fa-users" style="padding-right:10px;"></i>Teams</a>
             <a href="#"><i class="fas fa-gavel" style="padding-right:10px;"></i>Judges</a>
         </div>
 
         <!-- Page content -->
         <div class="main">
             <div class="box" style="width:100%"><h4>Dashboard</h4></div>
-            <div class="box" style="width:48.5%; margin-top: -15px;">
+            <div class="row">
+            <div class="box" style="width:43.5%; margin-top: -15px; margin-left:15px;">
+                <div class="container">
                 <h4>Currently Ongoing Debate</h4>
-                <i class="fas fa-sync-alt btn-ongoing" style="text-align:right;"></i>
+                <button class="fas fa-sync-alt btn-ongoing" style="color:lightgrey"></button>
+                </div>
                 <div id="ongoing">
                 </div>
             </div>
-            <div class="box" style="width:48.5%">
-                
+            <div class="box" style="width:26.75%; margin-top: -15px;">
+                <h4>Activate Debate</h4>
+                <hr>
+                <form method="POST" action="php/updateOngoing.php">
+                    <?php
+                        require('inc/connect.php');
+                        $sql = $conn->prepare("SELECT competition_id, title, available FROM titles WHERE available=0");
+                        $sql->execute();
+                        $titles = $sql->fetchAll();
+                        if($titles != []){
+                            foreach($titles as $title){
+                                echo '<input type="checkbox" name="competitionID[]" value='.$title['competition_id'].'> '.$title['competition_id'].'. '.$title['title'].'</input><br>';
+                            }
+                            echo '<br><input type="submit" class="btn btn-success" name="submit" value="Activate">';
+                        }else{
+                            echo 'No more debate entries in database.';
+                        }
+                    ?>
+                </form>
+            </div>
+            <div class="box" style="width:26.75%; margin-top: -15px;">
+                <h4>Deactivate Debate</h4>
+                <hr>
+                <form method="POST" action="php/updateOngoing.php">
+                    <?php
+                        require('inc/connect.php');
+                        $sql = $conn->prepare("SELECT competition_id, title, available FROM titles WHERE available=1");
+                        $sql->execute();
+                        $titles = $sql->fetchAll();
+                        if($titles == []){
+                            echo 'No ongoing debates.';
+                        }else{
+                            foreach($titles as $title){
+                                echo '<input type="checkbox" name="competitionID[]" value='.$title['competition_id'].'> '.$title['competition_id'].'. '.$title['title'].'</input><br>';
+                            }
+                            echo '<br><input type="submit" class="btn btn-danger" name="submit" value="Deactivate">';
+                        }     
+                    ?>
+                </form>
+            </div>
+            <div class="box" style="width:45%; margin-left: 20px;">
+                <h4>Add Debate Titles</h4>
+                <hr>
+                <form action="php/updateTitles.php" method="POST">
+                    <table>
+                    <tbody>
+                    <tr>
+                        <th>Competition ID: <th>
+                        <td><input type="text" name="competitionID"><td>
+                    </tr>
+                    <tr>
+                        <th>Title:<th>
+                        <td><input type="text" name="title"></td>
+                    </tr>
+                    <tr>
+                    <th>Judges:</th><tr><td>
+                        <?php 
+                            $stmt = $conn->prepare("SELECT * FROM judges");
+                            $stmt->execute();
+                            $judges = $stmt->fetchAll();
+
+                            foreach($judges as $judge){
+                                echo '<input type="checkbox" name="judgesID[]" value='.$judge['id'].'> '.$judge['name'].'  </input>';
+                            }
+
+                        ?>
+                        </td></tr>
+                    </tr>
+                    </tbody>
+                    </table>
+                    <br>
+                    <input type="submit" value="Add" name="Submit" class="btn btn-success">
+                </form>
+            </div>
+            <div class="box" style="width:50%; margin-left: 20px;">
+                <h4>Remove Debate Titles</h4>
+                <hr>
+                <form action="php/updateTitles.php" method="POST">
+                    <?php
+                        $sql = $conn->prepare("SELECT competition_id, title FROM titles");
+                        $sql->execute();
+                        $titles = $sql->fetchAll();
+                        if($titles != []){
+                            foreach($titles as $title){
+                                echo '<input type="checkbox" name="competitionID[]" value='.$title['competition_id'].'> '.$title['competition_id'].'. '.$title['title'].'</input><br>';
+                            }
+                        }else{
+                            echo 'No more debate entries in database.';
+                        }
+                    ?>
+                    <br>
+                    <input type="submit" value="Remove" name="Submit" class="btn btn-danger">
+                </form>
+            
+            </div>
             </div>
         </div>
     </body>
@@ -100,26 +221,26 @@
     }
     /* The sidebar menu */
     .sidenav {
-    height: 100%; /* Full-height: remove this if you want "auto" height */
-    width: 200px; /* Set the width of the sidebar */
-    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-    z-index: 1; /* Stay on top */
-    top: 0; /* Stay at the top */
-    left: 0;
-    background-color: #292a2b; /* Black */
-    overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 20px;
-    box-shadow: 2px 2px 1px lightgrey;
+        height: 100%; /* Full-height: remove this if you want "auto" height */
+        width: 200px; /* Set the width of the sidebar */
+        position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+        z-index: 1; /* Stay on top */
+        top: 0; /* Stay at the top */
+        left: 0;
+        background-color: #292a2b; /* Black */
+        overflow-x: hidden; /* Disable horizontal scroll */
+        padding-top: 20px;
+        box-shadow: 2px 2px 1px lightgrey;
     }
 
     /* The navigation menu links */
     .sidenav a {
-    padding: 6px 8px 6px 16px;
-    text-decoration: none;
-    font-size: 15px;
-    color: white;
-    display: block;
-    margin-bottom: 15px;
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 15px;
+        color: white;
+        display: block;
+        margin-bottom: 15px;
     }
 
     .sidenav p{
@@ -131,8 +252,8 @@
 
     /* When you mouse over the navigation links, change their color */
     .sidenav a:hover {
-    color: #f1f1f1;
-    background-color: darkred;
+        color: #f1f1f1;
+        background-color: darkred;
     }
 
     /* Style page content */

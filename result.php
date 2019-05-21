@@ -64,7 +64,7 @@
             }
         });
     }
-
+    
     function processResult(data){
         var arrayResults = data;
         arrayPos = arrayResults.filter(function(value){
