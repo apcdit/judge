@@ -11,7 +11,7 @@ if(!isset($_SESSION['userID'])){
 <form method="POST" action="php/bestparticipantHandler.php">
         <h3>最佳辩手1</h3>
         <select name="participant1" id="participant1" class="form-control group">
-        <option value="">- 选择姓名 -</option>
+            <option value="">- 选择姓名 -</option>
                 <?php
                 $sql = $conn->prepare("SELECT name_cn,uni FROM participants WHERE round1='".$_SESSION['titleID']."'  or round1_2='".$_SESSION['titleID']."'");
 
@@ -30,7 +30,7 @@ if(!isset($_SESSION['userID'])){
 <select name="participant2" id="participant2" class="form-control group">
 <option value="">- 选择姓名 -</option>
 <?php
-$sql = $conn->prepare("SELECT name_cn,uni FROM participants WHERE round1='A1' ");
+$sql = $conn->prepare("SELECT name_cn,uni FROM participants WHERE round1='".$_SESSION['titleID']."'  or round1_2='".$_SESSION['titleID']."'");
 
 $products = array();
 $count = 0;
@@ -47,7 +47,7 @@ while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
 <select name="participant3" id="participant3" class="form-control group">
 <option value="">- 选择姓名 -</option>
 <?php
-$sql = $conn->prepare("SELECT name_cn,uni FROM participants WHERE round1='A1' ");
+$sql = $conn->prepare("SELECT name_cn,uni FROM participants WHERE round1='".$_SESSION['titleID']."'  or round1_2='".$_SESSION['titleID']."'");
 
 $products = array();
 $count = 0;

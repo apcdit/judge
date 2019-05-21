@@ -102,7 +102,7 @@ catch(PDOException $e)
         // use exec() because no results are returned
         $conn->exec($sql);
         // echo "New record created successfully";
-        header('Location:/mark2.php');
+        header('Location:../mark2.php');
         }
     catch(PDOException $e)
         {
