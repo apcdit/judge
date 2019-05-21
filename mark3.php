@@ -39,7 +39,9 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
 </head>
 <body>
-
+<?php 
+        include('navigation.php');
+?>
 <div class="container" >
     <div class="wrapper" >
         <div class="content " style="height:100%">

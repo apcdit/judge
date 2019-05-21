@@ -1,6 +1,9 @@
 <?php
 include('header.php'); 
 
+include('navigation.php');
+
+
 session_start();
 
 if(!isset($_SESSION['userID'])){

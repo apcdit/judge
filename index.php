@@ -19,7 +19,9 @@ function generateMarks($max){
 ?>
 
 <html>
-
+    <?php 
+        include('navigation.php');
+    ?>
     <body>
         <br>
         <div class="container">
