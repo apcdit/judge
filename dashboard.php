@@ -170,7 +170,19 @@
                 <h4>Remove Debate Titles</h4>
                 <hr>
                 <form action="php/updateTitles.php" method="POST">
-                    
+                    <?php
+                        $sql = $conn->prepare("SELECT competition_id, title FROM titles");
+                        $sql->execute();
+                        $titles = $sql->fetchAll();
+                        if($titles != []){
+                            foreach($titles as $title){
+                                echo '<input type="checkbox" name="competitionID[]" value='.$title['competition_id'].'> '.$title['competition_id'].'. '.$title['title'].'</input><br>';
+                            }
+                        }else{
+                            echo 'No more debate entries in database.';
+                        }
+                    ?>
+                    <br>
                     <input type="submit" value="Remove" name="Submit" class="btn btn-danger">
                 </form>
             
