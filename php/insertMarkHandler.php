@@ -73,7 +73,7 @@ else if($marks_pos_1==$marks_neg_1)
 }
 try {
     
-    $sql = "INSERT INTO Competition (competition_id,side, judge_id,lilun,zhixun_1,
+    $sql = "INSERT INTO competition (competition_id,side, judge_id,lilun,zhixun_1,
     yuyan_1,ziyou_1,bolun,gongbian,yuyan_2,ziyou_2,zhixun_3,xiaojie,yuyan_3,
     ziyou_3,chenci,yuyan_4,ziyou_4,tuanti ,total_mark,mark_ticket)
     VALUES ('$competition_id', $side_pos,$judge_id,$lilun_pos,
@@ -92,7 +92,7 @@ catch(PDOException $e)
 
     try {
     
-        $sql = "INSERT INTO Competition (competition_id,side, judge_id,lilun,zhixun_1,
+        $sql = "INSERT INTO competition (competition_id,side, judge_id,lilun,zhixun_1,
         yuyan_1,ziyou_1,bolun,gongbian,yuyan_2,ziyou_2,zhixun_3,xiaojie,yuyan_3
         ,	ziyou_3,chenci,yuyan_4,ziyou_4,	tuanti,total_mark,mark_ticket)
         VALUES ('$competition_id',$side_neg , $judge_id  ,$lilun_neg,$zhixun_neg_1,$yuyan_neg_1,$ziyou_neg_1,
