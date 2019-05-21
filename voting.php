@@ -20,7 +20,7 @@ try {
     }
 catch(PDOException $e)
     {
-    echo $s . "<br>" . $e->getMessage();
+    echo $stmt . "<br>" . $e->getMessage();
     }
 
 ?>

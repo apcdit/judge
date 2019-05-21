@@ -1,7 +1,7 @@
 <?php include('header.php'); 
 
 session_start();
-
+include('inc/connect.php');
 if(!isset($_SESSION['userID'])){
     header("Location: login.php");
 }
@@ -9,23 +9,85 @@ if(!isset($_SESSION['userID'])){
 $titleID = $_SESSION['titleID'];
 $title = $_SESSION['title'];
 $userID = $_SESSION['userID'];
-
+$competition_id1 = $_SESSION['titleID'];
 function generateMarks($max){
     for($i = 0; $i <= $max; $i++){
         echo '<option value="'.$i.'">'.$i.'</option>';
     }
 }
 
+try {
+    
+    $stmt = $conn->prepare("SELECT * FROM `competition` WHERE judge_id='$userID' and competition_id='$competition_id1' and side=1");
+    // use exec() because no results are returned
+    $products = array();
+    if($stmt->execute()){
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        $score[] = $row;
+        
+        
+        //  echo($score[0]['total_mark']);
+        }
+    }
+catch(PDOException $e)
+    {
+    echo $stmt . "<br>" . $e->getMessage();
+    }
 ?>
 
 <html>
     <?php 
         include('navigation.php');
+        if($score[0]['total_mark']!=0){
+        echo "<div class='container'    >";
+        echo "<h3 style='text-align:center'>".$title."</h3>" ;
+        echo "<table class='table table-striped'> <thead><tr><th></th><th></th><th></th><th>正方</th><th></th></tr></thead><tbody>";
+        echo "<tr><td>一辩</td> <td>立论<br> ".$score[0]['lilun']."</td><td>  质询 <br>".$score[0]['zhixun_1']."</td><td>   语言风度<br>".$score[0]['yuyan_1']."</td><td>    自由辩论<br>".$score[0]['ziyou_1']."</tr>";
+        echo "<tr><td>二辩</td> <td>驳论<br> ".$score[0]['bolun']."</td><td>  攻辩 <br>".$score[0]['gongbian']."</td><td>   语言风度<br>".$score[0]['yuyan_2']."</td><td>    自由辩论<br>".$score[0]['ziyou_2']."</tr>";
+        echo "<tr><td>三辩</td> <td>质询<br> ".$score[0]['zhixun_3']."</td><td>  小结 <br>".$score[0]['xiaojie']."</td><td>   语言风度<br>".$score[0]['yuyan_3']."</td><td>    自由辩论<br>".$score[0]['ziyou_3']."</tr>";
+        echo "<tr><td>四辩</td> <td>陈词<br> ".$score[0]['chenci']."</td><td>  "."</td><td>   语言风度<br>".$score[0]['yuyan_4']."</td><td>    自由辩论<br>".$score[0]['ziyou_4']."</tr>";
+        echo "<tr><td colspan='5'>团体配合和合作精神  ".$score[0]['tuanti']."</td></tr>";
+        echo "<tr><td colspan='5'>总分  ".$score[0]['total_mark']."</td></tr>";
+        echo "</tbody></table>";
+        try {
+    
+            $stmt = $conn->prepare("SELECT * FROM `competition` WHERE judge_id='$userID' and competition_id='$competition_id1' and side=0");
+            // use exec() because no results are returned
+            $products = array();
+            if($stmt->execute()){
+                $row1 = $stmt->fetch(PDO::FETCH_ASSOC);
+                $score1[] = $row1;
+                
+                
+                //  echo($score[0]['total_mark']);
+                }
+            }
+        catch(PDOException $e)
+            {
+            echo $stmt . "<br>" . $e->getMessage();
+            }
+        echo "<table class='table table-striped'> <thead><tr><th></th><th></th><th></th><th>反方</th><th></th></tr></thead><tbody>";
+        echo "<tr><td>一辩</td> <td>立论<br> ".$score1[0]['lilun']."</td><td>  质询 <br>".$score1[0]['zhixun_1']."</td><td>   语言风度<br>".$score1[0]['yuyan_1']."</td><td>    自由辩论<br>".$score1[0]['ziyou_1']."</tr>";
+        echo "<tr><td>二辩</td> <td>驳论<br> ".$score1[0]['bolun']."</td><td>  攻辩 <br>".$score1[0]['gongbian']."</td><td>   语言风度<br>".$score1[0]['yuyan_2']."</td><td>    自由辩论<br>".$score1[0]['ziyou_2']."</tr>";
+        echo "<tr><td>三辩</td> <td>质询<br> ".$score1[0]['zhixun_3']."</td><td>  小结 <br>".$score1[0]['xiaojie']."</td><td>   语言风度<br>".$score1[0]['yuyan_3']."</td><td>    自由辩论<br>".$score1[0]['ziyou_3']."</tr>";
+        echo "<tr><td>四辩</td> <td>陈词<br> ".$score1[0]['chenci']."</td><td>  "."</td><td>   语言风度<br>".$score1[0]['yuyan_4']."</td><td>    自由辩论<br>".$score1[0]['ziyou_4']."</tr>";
+        echo "<tr><td colspan='5'>团体配合和合作精神  ".$score1[0]['tuanti']."</td></tr>";
+        echo "<tr><td colspan='5'>总分  ".$score1[0]['total_mark']."</td></tr>";
+        echo "</tbody></table>";
+        echo "</div>";
+        }
     ?>
     <body>
         <br>
-        <div class="container">
-            <strong><h1 class="text-center">打分表格</h1></strong>
+        <div class="container"
+        <?php   
+            if($score[0]['total_mark']!=0){
+                echo "style='display:none'";
+            }
+            
+            ?>
+        >
+        <strong><h1 class="text-center">打分表格</h1></strong>
             <hr>
             <strong><h2 class="text-center">题目: <?php echo $title ?></h2></strong>
             <a href="php/logout_process.php">LOGOUT</a>
