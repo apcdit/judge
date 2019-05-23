@@ -14,11 +14,10 @@ include('/inc/connect.php');
 if(!isset($_SESSION['userID'])){
     header("Location: login.php");
 }
-$titleID = $_SESSION['titleID'];
-$title = $_SESSION['title'];
+
 $userID = $_SESSION['userID'];
 $competition_id1 = $_SESSION['titleID'];
-
+echo "hi";
 try {
     
     $sql = $conn->prepare("SELECT bestParticipant1,bestParticipant2,bestParticipant3 FROM `competition` WHERE competition_id='$competition_id1' and side=0");
@@ -34,7 +33,7 @@ try {
                     $count++;
                 }
                 }
-                //var_dump($products);
+                var_dump($products);
                 
                 $vals = array_count_values($products);// calculate the number of occurerance 
                 
