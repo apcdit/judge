@@ -3,6 +3,7 @@
 <html>
     <head>
         <title>Dashboard Page</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     </head>
     
@@ -75,7 +76,7 @@
             <p>亚太大专辩论赛</p>
             <hr/>
             <a href="dashboard.php"><i class="fas fa-tachometer-alt" style="padding-right:10px;"></i>Dashboard</a>
-            <a href="#"><i class="fas fa-poll" style="padding-right:10px;"></i>Result</a>
+            <a href="result.php"><i class="fas fa-poll" style="padding-right:10px;"></i>Result</a>
             <a href="teams.php"><i class="fas fa-users" style="padding-right:10px;"></i>Teams</a>
             <a href="#"><i class="fas fa-gavel" style="padding-right:10px;"></i>Judges</a>
         </div>
@@ -84,7 +85,7 @@
         <div class="main">
             <div class="box" style="width:100%"><h4>Dashboard</h4></div>
             <div class="row">
-            <div class="box" style="width:43.5%; margin-top: -15px; margin-left:15px;">
+            <div class="box" id="ongoingDebate">
                 <div class="container">
                 <h4>Currently Ongoing Debate</h4>
                 <button class="fas fa-sync-alt btn-ongoing" style="color:lightgrey"></button>
@@ -92,7 +93,7 @@
                 <div id="ongoing">
                 </div>
             </div>
-            <div class="box" style="width:26.75%; margin-top: -15px;">
+            <div class="box" id="activateDebate">
                 <h4>Activate Debate</h4>
                 <hr>
                 <form method="POST" action="php/updateOngoing.php">
@@ -112,7 +113,7 @@
                     ?>
                 </form>
             </div>
-            <div class="box" style="width:26.75%; margin-top: -15px;">
+            <div class="box" id="deactivateDebate">
                 <h4>Deactivate Debate</h4>
                 <hr>
                 <form method="POST" action="php/updateOngoing.php">
@@ -132,41 +133,40 @@
                     ?>
                 </form>
             </div>
-            <div class="box" style="width:45%; margin-left: 20px;">
+            <div class="box" id="addDebate">
                 <h4>Add Debate Titles</h4>
                 <hr>
                 <form action="php/updateTitles.php" method="POST">
                     <table>
-                    <tbody>
-                    <tr>
-                        <th>Competition ID: <th>
-                        <td><input type="text" name="competitionID"><td>
-                    </tr>
-                    <tr>
-                        <th>Title:<th>
-                        <td><input type="text" name="title"></td>
-                    </tr>
-                    <tr>
-                    <th>Judges:</th><tr><td>
+                        <tbody>
+                            <tr>
+                                <th>Competition ID: <th>
+                                <td><input type="text" name="competitionID"><td>
+                            </tr>
+                            <tr>
+                                <th>Title:<th>
+                                <td><input type="text" name="title"></td>
+                            </tr>        
+                        </tbody>
+                    </table>
+                    <h6><strong>Judges:</strong></h6>
+                    <div>
                         <?php 
                             $stmt = $conn->prepare("SELECT * FROM judges");
                             $stmt->execute();
                             $judges = $stmt->fetchAll();
 
                             foreach($judges as $judge){
-                                echo '<input type="checkbox" name="judgesID[]" value='.$judge['id'].'> '.$judge['name'].'  </input>';
+                                echo '<input type="checkbox" style="margin:10px;" name="judgesID[]" value='.$judge['id'].'> '.$judge['name'].'  </input>';
                             }
 
                         ?>
-                        </td></tr>
-                    </tr>
-                    </tbody>
-                    </table>
+                    </div>
                     <br>
                     <input type="submit" value="Add" name="Submit" class="btn btn-success">
                 </form>
             </div>
-            <div class="box" style="width:50%; margin-left: 20px;">
+            <div class="box" id="removeDebate">
                 <h4>Remove Debate Titles</h4>
                 <hr>
                 <form action="php/updateTitles.php" method="POST">
@@ -193,7 +193,24 @@
 </html>
 
 <style>
-
+    #removeDebate{
+        width:50%;
+        margin-left:20px;
+    }
+    #addDebate{
+        width:45%; 
+        margin-left: 20px;
+    }
+    #deactivateDebate{
+        width:26.75%; 
+        margin-top: -15px;
+    }
+    #activateDebate{
+        width:26.75%; margin-top: -15px;
+    }
+    #ongoingDebate{
+        width:43.5%; margin-top: -15px; margin-left:15px;
+    }
     .box{
         border: 1px;
         padding: 10px;
@@ -268,13 +285,40 @@
     .sidenav a {font-size: 18px;}
     }
 
+    @media (max-width: 768px) {
+    .sidenav {
+        display: none;
+    }
+    .main{
+        margin-left: 0px;
+    }
+    #removeDebate{
+        width:95%;
+        margin: 0 auto;
+    }
+    #addDebate{
+        width:95%; 
+        margin: 0 auto;
+    }
+    #deactivateDebate{
+        margin: 0 auto;
+        width:95%; 
+    }
+    #activateDebate{
+        margin: 0 auto;
+        width:95%; 
+    }
+    #ongoingDebate{
+        margin: 0 auto;
+        width:95%; 
+    }
+}
+
     i:hover{
         color:red;
     }
 
-    body{
-        background-color: #f7f7f7;
-    }
+    
 </style>
 
 <script>

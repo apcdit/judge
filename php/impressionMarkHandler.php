@@ -3,9 +3,10 @@
  session_start();
 include('../inc/connect.php');
 
-if(!isset($side)){header("Location:/mark2.php");}
+
 
 $side= $_REQUEST["side"];
+if(!isset($side)){header("Location:../mark2.php");}
 $userID= $_SESSION['userID'] ;
 $competition_id1 = $_SESSION['titleID'];
 

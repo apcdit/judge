@@ -50,7 +50,7 @@
             <p>亚太大专辩论赛</p>
             <hr/>
             <a href="dashboard.php"><i class="fas fa-tachometer-alt" style="padding-right:10px;"></i>Dashboard</a>
-            <a href="#"><i class="fas fa-poll" style="padding-right:10px;"></i>Result</a>
+            <a href="result.php"><i class="fas fa-poll" style="padding-right:10px;"></i>Result</a>
             <a href="teams.php"><i class="fas fa-users" style="padding-right:10px;"></i>Teams</a>
             <a href="#"><i class="fas fa-gavel" style="padding-right:10px;"></i>Judges</a>
         </div>
@@ -79,11 +79,11 @@
                     $count = 0;
                     foreach($unis as $uni => $persons){
                         if($count%2 != 0){
-                            echo '<h3>'.$uni.'</h3><ul>';
+                            echo '<div class="teams"><h3 class="title">'.$uni.'</h3><ol>';
                             foreach($persons as $person){
                                 echo '<li>'.$person.'</li>';
                             }
-                            echo '</ul>';
+                            echo '</ol></div>';
                         }
                         $count++;
                     }
@@ -163,6 +163,9 @@
     padding: 0px 10px;
     }
 
+    li{
+        list-style:none;
+    }
     /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
     @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
@@ -173,9 +176,31 @@
         color:red;
     }
 
-    body{
-        background-color: #f7f7f7;
+
+    .teams{
+        display: inline-block;
+        margin: 15px;
+        padding: 10px;
+        width: 20%;
+        height: auto;
+        vertical-align: text-top;
+        text-align: center;
     }
+
+    .teams .title{
+        text-align:center;
+    }
+    @media (max-width: 768px) {
+    .sidenav {
+        display: none;
+    }
+    .main{
+        margin-left: 0px;
+    }
+    .teams{
+        width: 100%;
+    }
+}
 </style>
 
 <script>

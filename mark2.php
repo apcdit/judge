@@ -9,7 +9,7 @@
  
     
     try {
-        $stmt = $conn->prepare("SELECT impression_ticket FROM Competition WHERE competition_id=? AND judge_id=?"); 
+        $stmt = $conn->prepare("SELECT impression_ticket FROM competition WHERE competition_id=? AND judge_id=?"); 
         $stmt->execute([$_SESSION['titleID'], $_SESSION['userID']]);
               
         
@@ -35,8 +35,11 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
 </head>
 <body>
-
+<?php 
+        include('navigation.php');
+?>
 <div class="container" >
+
     <div class="wrapper" >
         <div class="content " style="height:100%">
         <div class="header" style="display:block;height:10%">
