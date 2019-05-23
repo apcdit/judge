@@ -10,39 +10,39 @@ session_start();
 if(!isset($_SESSION['userID'])){
     header("Location: login.php");
 }
-include('/inc/connect.php');
+include('inc/connect.php');
 if(!isset($_SESSION['userID'])){
     header("Location: login.php");
 }
-
+$titleID = $_SESSION['titleID'];
+$title = $_SESSION['title'];
 $userID = $_SESSION['userID'];
 $competition_id1 = $_SESSION['titleID'];
-echo "hi";
+
 try {
     
-    $sql = $conn->prepare("SELECT bestParticipant1,bestParticipant2,bestParticipant3 FROM `competition` WHERE competition_id='$competition_id1' and side=0");
+    $stmt = $conn->prepare("SELECT bestParticipant1,bestParticipant2,bestParticipant3 FROM `competition` WHERE competition_id='$competition_id1' and side=0");
     // use exec() because no results are returned
     
     $products = array();
                 $count = 0;
-                if($sql->execute()){
-                while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+                if($stmt->execute()){
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     $participant[] = $row;
                     // echo $participant[$count]['bestParticipant1']." ".$participant[$count]['bestParticipant2']."  ".$participant[$count]['bestParticipant3']."</br>";
                     array_push($products, $participant[$count]['bestParticipant1'],$participant[$count]['bestParticipant2'],$participant[$count]['bestParticipant3']);
                     $count++;
-                    var_dump($row) ;
                 }
                 }
-                var_dump($products);
-                echo "hihi";
+                //var_dump($products);
+                
                 $vals = array_count_values($products);// calculate the number of occurerance 
                 
                 //var_dump($vals);
                 $keys = array_keys($vals); // get the key
-                 var_dump($vals);
+                // var_dump($vals);
                 
-            
+                $bestParticipant='';
                 echo "<div style='text-align:center;width:300px;margin:50px auto;'>";
                  for($i=0;$i<count($vals);$i++)
                  {
