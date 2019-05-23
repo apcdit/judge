@@ -41,13 +41,23 @@ catch(PDOException $e)
         if($score[0]['total_mark']!=0){
         echo "<div class='container'    >";
         echo "<h3 style='text-align:center'>辩题: ".$title."</h3>" ;
-        echo "<table class='table table-striped'> <thead><tr><th></th><th></th><th></th><th>正方</th><th></th></tr></thead><tbody>";
-        echo "<tr><td>一辩</td> <td>立论<br> ".$score[0]['lilun']."</td><td>  质询 <br>".$score[0]['zhixun_1']."</td><td>   语言风度<br>".$score[0]['yuyan_1']."</td><td>    自由辩论<br>".$score[0]['ziyou_1']."</tr>";
-        echo "<tr><td>二辩</td> <td>驳论<br> ".$score[0]['bolun']."</td><td>  攻辩 <br>".$score[0]['gongbian']."</td><td>   语言风度<br>".$score[0]['yuyan_2']."</td><td>    自由辩论<br>".$score[0]['ziyou_2']."</tr>";
-        echo "<tr><td>三辩</td> <td>质询<br> ".$score[0]['zhixun_3']."</td><td>  小结 <br>".$score[0]['xiaojie']."</td><td>   语言风度<br>".$score[0]['yuyan_3']."</td><td>    自由辩论<br>".$score[0]['ziyou_3']."</tr>";
-        echo "<tr><td>四辩</td> <td>陈词<br> ".$score[0]['chenci']."</td><td>  "."</td><td>   语言风度<br>".$score[0]['yuyan_4']."</td><td>    自由辩论<br>".$score[0]['ziyou_4']."</tr>";
-        echo "<tr><td colspan='5'>团体配合和合作精神  ".$score[0]['tuanti']."</td></tr>";
-        echo "<tr><td colspan='5'>总分  ".$score[0]['total_mark']."</td></tr>";
+        echo "<table class='table table-striped'>" ;
+        echo "<thead><tr><th colspan='6' style='text-align:center;'>正方</th></tr></thead><tbody>";
+
+        echo "<tr><td>一辩</td> <td>立论<br> ".$score[0]['lilun']."</td><td>  质询 <br>".$score[0]['zhixun_1']."</td><td>   语言风度<br>".$score[0]['yuyan_1']."</td><td>    自由辩论<br>".$score[0]['ziyou_1']."</td><td>    一辩总分<br>"
+        .($score[0]['lilun']+$score[0]['zhixun_1']+$score[0]['yuyan_1']+$score[0]['ziyou_1'])."</td></tr>";
+
+        echo "<tr><td>二辩</td> <td>驳论<br> ".$score[0]['bolun']."</td><td>  攻辩 <br>".$score[0]['gongbian']."</td><td>   语言风度<br>".$score[0]['yuyan_2']."</td><td>    自由辩论<br>".$score[0]['ziyou_2']."</td><td>    二辩总分<br>"
+        .($score[0]['bolun']+$score[0]['gongbian']+$score[0]['yuyan_2']+$score[0]['ziyou_2'])."</td></tr>";
+
+        echo "<tr><td>三辩</td> <td>质询<br> ".$score[0]['zhixun_3']."</td><td>  小结 <br>".$score[0]['xiaojie']."</td><td>   语言风度<br>".$score[0]['yuyan_3']."</td><td>    自由辩论<br>".$score[0]['ziyou_3']."</td><td>    三辩总分<br>"
+        .($score[0]['zhixun_3']+$score[0]['xiaojie']+$score[0]['yuyan_3']+$score[0]['ziyou_3'])."</td></tr>";
+
+        echo "<tr><td>四辩</td> <td>陈词<br> ".$score[0]['chenci']."</td><td>  "."</td><td>   语言风度<br>".$score[0]['yuyan_4']."</td><td>    自由辩论<br>".$score[0]['ziyou_4']."</td><td>    四辩总分<br>"
+        .($score[0]['chenci']+$score[0]['yuyan_4']+$score[0]['ziyou_4'])."</td></tr>"."</td></tr>";
+
+        echo "<tr><td colspan='6'>团体配合和合作精神  ".$score[0]['tuanti']."</td></tr>";
+        echo "<tr><td colspan='6'>总分  ".$score[0]['total_mark']."</td></tr>";
         echo "</tbody></table>";
         try {
     
@@ -66,13 +76,22 @@ catch(PDOException $e)
             {
             echo $stmt . "<br>" . $e->getMessage();
             }
-        echo "<table class='table table-striped'> <thead><tr><th></th><th></th><th></th><th>反方</th><th></th></tr></thead><tbody>";
-        echo "<tr><td>一辩</td> <td>立论<br> ".$score1[0]['lilun']."</td><td>  质询 <br>".$score1[0]['zhixun_1']."</td><td>   语言风度<br>".$score1[0]['yuyan_1']."</td><td>    自由辩论<br>".$score1[0]['ziyou_1']."</tr>";
-        echo "<tr><td>二辩</td> <td>驳论<br> ".$score1[0]['bolun']."</td><td>  攻辩 <br>".$score1[0]['gongbian']."</td><td>   语言风度<br>".$score1[0]['yuyan_2']."</td><td>    自由辩论<br>".$score1[0]['ziyou_2']."</tr>";
-        echo "<tr><td>三辩</td> <td>质询<br> ".$score1[0]['zhixun_3']."</td><td>  小结 <br>".$score1[0]['xiaojie']."</td><td>   语言风度<br>".$score1[0]['yuyan_3']."</td><td>    自由辩论<br>".$score1[0]['ziyou_3']."</tr>";
-        echo "<tr><td>四辩</td> <td>陈词<br> ".$score1[0]['chenci']."</td><td>  "."</td><td>   语言风度<br>".$score1[0]['yuyan_4']."</td><td>    自由辩论<br>".$score1[0]['ziyou_4']."</tr>";
-        echo "<tr><td colspan='5'>团体配合和合作精神  ".$score1[0]['tuanti']."</td></tr>";
-        echo "<tr><td colspan='5'>总分  ".$score1[0]['total_mark']."</td></tr>";
+        echo "<table class='table table-striped'>";
+        echo "<thead><tr><th colspan='6' style='text-align:center;'>反方</th></tr></thead><tbody>";
+        echo "<tr><td>一辩</td> <td>立论<br> ".$score1[0]['lilun']."</td><td>  质询 <br>".$score1[0]['zhixun_1']."</td><td>   语言风度<br>".$score1[0]['yuyan_1']."</td><td>    自由辩论<br>".$score1[0]['ziyou_1']."</td><td>    一辩总分<br>"
+        .($score1[0]['lilun']+$score1[0]['zhixun_1']+$score1[0]['yuyan_1']+$score1[0]['ziyou_1'])."</td></tr>";
+
+        echo "<tr><td>二辩</td> <td>驳论<br> ".$score1[0]['bolun']."</td><td>  攻辩 <br>".$score1[0]['gongbian']."</td><td>   语言风度<br>".$score1[0]['yuyan_2']."</td><td>    自由辩论<br>".$score1[0]['ziyou_2']."</td><td>    二辩总分<br>"
+        .($score1[0]['bolun']+$score1[0]['gongbian']+$score1[0]['yuyan_2']+$score1[0]['ziyou_2'])."</td></tr>";
+
+        echo "<tr><td>三辩</td> <td>质询<br> ".$score1[0]['zhixun_3']."</td><td>  小结 <br>".$score1[0]['xiaojie']."</td><td>   语言风度<br>".$score1[0]['yuyan_3']."</td><td>    自由辩论<br>".$score1[0]['ziyou_3']."</td><td>    三辩总分<br>"
+        .($score1[0]['zhixun_3']+$score1[0]['xiaojie']+$score1[0]['yuyan_3']+$score1[0]['ziyou_3'])."</td></tr>";
+
+        echo "<tr><td>四辩</td> <td>陈词<br> ".$score1[0]['chenci']."</td><td>  "."</td><td>   语言风度<br>".$score1[0]['yuyan_4']."</td><td>    自由辩论<br>".$score1[0]['ziyou_4']."</td><td>    四辩总分<br>"
+        .($score1[0]['chenci']+$score1[0]['yuyan_4']+$score1[0]['ziyou_4'])."</td></tr>"."</td></tr>";
+
+        echo "<tr><td colspan='6'>团体配合和合作精神  ".$score1[0]['tuanti']."</td></tr>";
+        echo "<tr><td colspan='6'>总分  ".$score1[0]['total_mark']."</td></tr>";
         echo "</tbody></table>";
         echo "</div>";
         }

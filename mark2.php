@@ -9,7 +9,7 @@
  
     
     try {
-        $stmt = $conn->prepare("SELECT impression_ticket FROM competition WHERE competition_id=? AND judge_id=?"); 
+        $stmt = $conn->prepare("SELECT impression_ticket FROM competition WHERE competition_id=? AND judge_id=? and side=0"); 
         $stmt->execute([$_SESSION['titleID'], $_SESSION['userID']]);
               
         
@@ -17,9 +17,25 @@
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
         // //  var_dump($stmt->fetchAll());
         $data=$stmt->fetchAll();
-        // print_r($data);
-        // echo $data[1]['impression_ticket'];
-        // echo $data[0]['impression_ticket']; 
+        if(sizeof($data)<1){
+            header('Location:index.php');
+        }
+        $negative=$data[0]['impression_ticket'];
+        
+        $stmt1 = $conn->prepare("SELECT impression_ticket FROM competition WHERE competition_id=? AND judge_id=? and side=1"); 
+        $stmt1->execute([$_SESSION['titleID'], $_SESSION['userID']]);
+        
+              
+        
+        // // set the resulting array to associative
+        $result = $stmt1->setFetchMode(PDO::FETCH_ASSOC);
+        // //  var_dump($stmt->fetchAll());
+        $data1=$stmt1->fetchAll();
+        $affirmative=$data1[0]['impression_ticket'];
+        
+        
+
+
         }
     catch(PDOException $e) {
         echo "Error: " . $e->getMessage();
@@ -109,8 +125,8 @@
 </html>
 
 <script>
-    var affirmative=<?php echo $data[1]['impression_ticket'];?>;
-    var negative=<?php echo $data[0]['impression_ticket'];?>;
+    var affirmative=<?php echo $affirmative;?>;
+    var negative=<?php echo $negative;?>;
     if(affirmative==1)
     {
         document.getElementById("affirmative").style.backgroundColor = "darkred";

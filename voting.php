@@ -17,6 +17,7 @@ try {
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
         $participant[] = $row;
         }
+       
     }
 catch(PDOException $e)
     {
@@ -55,19 +56,28 @@ catch(PDOException $e)
                     $participant[0]['bestParticipant3']=='0')
                     {
                 
-                    $sql = $conn->prepare("SELECT name_cn,uni FROM participants WHERE round1='".$_SESSION['titleID']."'  or round1_2='".$_SESSION['titleID']."'");
+                    // $sql = $conn->prepare("SELECT name_cn,uni FROM participants WHERE round1='".$_SESSION['titleID']."'  or round1_2='".$_SESSION['titleID']."'");
 
-                    $products = array();
-                    $count = 0;
-                        if($sql->execute())
-                        {
-                            while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
-                                $participant[] = $row;
-                                print_r($participant);
-                                echo "<option value='".$participant[$count]['name_cn']."' >".$participant[$count]['name_cn']."  ".$participant[$count]['uni']."</option>";
-                                $count++;
-                                }
-                        }
+                    // $products = array();
+                    // $count = 0;
+                    //     if($sql->execute())
+                    //     {
+                    //         while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+                    //             $participant[] = $row;
+                    //             print_r($participant);
+                    //             echo "<option value='".$participant[$count]['name_cn']."' >".$participant[$count]['name_cn']."  ".$participant[$count]['uni']."</option>";
+                    //             $count++;
+                    //             }
+                    //     }
+                     echo "<option value='正方一辩'>正方一辩</option>";
+                     echo "<option value='正方二辩'>正方二辩</option>";
+                     echo "<option value='正方三辩'>正方三辩</option>";
+                     echo "<option value='正方四辩'>正方四辩</option>";
+                     echo "<option value='反方一辩'>反方一辩</option>";
+                     echo "<option value='反方二辩'>反方二辩</option>";
+                     echo "<option value='反方三辩'>反方三辩</option>";
+                     echo "<option value='反方四辩'>反方四辩</option>";
+
                     }
                     
                 ?>
@@ -107,18 +117,26 @@ catch(PDOException $e)
                     $participant[0]['bestParticipant3']=='0')
                     {
                 
-                    $sql = $conn->prepare("SELECT name_cn,uni FROM participants WHERE round1='".$_SESSION['titleID']."'  or round1_2='".$_SESSION['titleID']."'");
+                    // $sql = $conn->prepare("SELECT name_cn,uni FROM participants WHERE round1='".$_SESSION['titleID']."'  or round1_2='".$_SESSION['titleID']."'");
 
-                    $products = array();
-                    $count = 0;
-                        if($sql->execute())
-                        {
-                            while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
-                                $participant[] = $row;
-                                echo "<option value='".$participant[$count]['name_cn']."' >".$participant[$count]['name_cn']."  ".$participant[$count]['uni']."</option>";
-                                $count++;
-                                }
-                        }
+                    // $products = array();
+                    // $count = 0;
+                    //     if($sql->execute())
+                    //     {
+                    //         while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+                    //             $participant[] = $row;
+                    //             echo "<option value='".$participant[$count]['name_cn']."' >".$participant[$count]['name_cn']."  ".$participant[$count]['uni']."</option>";
+                    //             $count++;
+                    //             }
+                    //     }
+                    echo "<option value='正方一辩'>正方一辩</option>";
+                     echo "<option value='正方二辩'>正方二辩</option>";
+                     echo "<option value='正方三辩'>正方三辩</option>";
+                     echo "<option value='正方四辩'>正方四辩</option>";
+                     echo "<option value='反方一辩'>反方一辩</option>";
+                     echo "<option value='反方二辩'>反方二辩</option>";
+                     echo "<option value='反方三辩'>反方三辩</option>";
+                     echo "<option value='反方四辩'>反方四辩</option>";
                     }
                     
                 ?>
@@ -157,22 +175,31 @@ catch(PDOException $e)
                     $participant[0]['bestParticipant3']=='0')
                     {
                 
-                    $sql = $conn->prepare("SELECT name_cn,uni FROM participants WHERE round1='".$_SESSION['titleID']."'  or round1_2='".$_SESSION['titleID']."'");
+                    // $sql = $conn->prepare("SELECT name_cn,uni FROM participants WHERE round1='".$_SESSION['titleID']."'  or round1_2='".$_SESSION['titleID']."'");
 
-                    $products = array();
-                    $count = 0;
-                        if($sql->execute())
-                        {
-                            while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
-                                $participant[] = $row;
-                                echo "<option value='".$participant[$count]['name_cn']."' >".$participant[$count]['name_cn']."  ".$participant[$count]['uni']."</option>";
-                                $count++;
-                                }
-                        }
+                    // $products = array();
+                    // $count = 0;
+                    //     if($sql->execute())
+                    //     {
+                    //         while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+                    //             $participant[] = $row;
+                    //             echo "<option value='".$participant[$count]['name_cn']."' >".$participant[$count]['name_cn']."  ".$participant[$count]['uni']."</option>";
+                    //             $count++;
+                    //             }
+                    //     }
+                    echo "<option value='正方一辩'>正方一辩</option>";
+                     echo "<option value='正方二辩'>正方二辩</option>";
+                     echo "<option value='正方三辩'>正方三辩</option>";
+                     echo "<option value='正方四辩'>正方四辩</option>";
+                     echo "<option value='反方一辩'>反方一辩</option>";
+                     echo "<option value='反方二辩'>反方二辩</option>";
+                     echo "<option value='反方三辩'>反方三辩</option>";
+                     echo "<option value='反方四辩'>反方四辩</option>";
                     }
                     
                 ?>
 </select>
+<br/>
 <button class="btn btn-primary btn-block btn-login" type="submit"
 <?php
                 if(
