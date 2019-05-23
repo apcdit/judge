@@ -31,10 +31,11 @@ try {
                     // echo $participant[$count]['bestParticipant1']." ".$participant[$count]['bestParticipant2']."  ".$participant[$count]['bestParticipant3']."</br>";
                     array_push($products, $participant[$count]['bestParticipant1'],$participant[$count]['bestParticipant2'],$participant[$count]['bestParticipant3']);
                     $count++;
+                    echo $row;
                 }
                 }
                 var_dump($products);
-                
+                echo "hihi";
                 $vals = array_count_values($products);// calculate the number of occurerance 
                 
                 //var_dump($vals);
