@@ -2,7 +2,7 @@
 include('header.php'); 
 
 session_start();
-include('/inc/connect.php');
+include('inc/connect.php');
 if(!isset($_SESSION['userID'])){
     header("Location: login.php");
 }?>
@@ -20,6 +20,7 @@ if(!isset($_SESSION['userID'])){
                 if($sql->execute()){
                 while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
                     $participant[] = $row;
+
                     echo "<option value='".$participant[$count]['name_cn']."' >".$participant[$count]['name_cn']."  ".$participant[$count]['uni']."</option>";
                     $count++;
                 }
@@ -29,14 +30,15 @@ if(!isset($_SESSION['userID'])){
 <h3>最佳辩手2</h3>
 <select name="participant2" id="participant2" class="form-control group">
 <option value="">- 选择姓名 -</option>
-<?php
-$sql = $conn->prepare("SELECT name_cn,uni FROM participants WHERE round1='A1' ");
+<?php>
+$sql = $conn->prepare("SELECT name_cn,uni FROM participants WHERE round1='".$_SESSION['titleID']."'  or round1_2='".$_SESSION['titleID']."'");
 
 $products = array();
 $count = 0;
 if($sql->execute()){
 while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
     $participant[] = $row;
+    echo "a";
     echo "<option value='".$participant[$count]['name_cn']."' >".$participant[$count]['name_cn']."  ".$participant[$count]['uni']."</option>";
     $count++;
 }
