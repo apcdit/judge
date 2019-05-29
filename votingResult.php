@@ -64,10 +64,10 @@ try{
         if($stmt->execute()){
             $row1 = $stmt->fetch(PDO::FETCH_ASSOC);
             $score1[] = $row1;
-            $negative1=$score1[0]['lilun']+$score1[0]['zhixun_1']+$score1[0]['yuyan_1']+$score1[0]['ziyou_1'];
-            $negative2=$score1[0]['bolun']+$score1[0]['gongbian']+$score1[0]['yuyan_2']+$score1[0]['ziyou_2'];
-            $negative3=$score1[0]['zhixun_3']+$score1[0]['xiaojie']+$score1[0]['yuyan_3']+$score1[0]['ziyou_3'];
-            $negetive4=$score1[0]['chenci']+$score1[0]['yuyan_4']+$score1[0]['ziyou_4'];
+            $negative1=$score1[0]['lilun']+$score1[0]['zhixun_1']+$score1[0]['yuyan_1'];
+            $negative2=$score1[0]['bolun']+$score1[0]['gongbian']+$score1[0]['yuyan_2'];
+            $negative3=$score1[0]['zhixun_3']+$score1[0]['xiaojie']+$score1[0]['yuyan_3'];
+            $negetive4=$score1[0]['chenci']+$score1[0]['yuyan_4'];
             echo "<div class='row' style='text-align:center;width:300px;margin:auto auto;'><div class='col-sm-6'>";
             echo "总分";
             echo "<br>反方一辩".($negative1);
@@ -84,10 +84,10 @@ try{
             $score[] = $row1;
             echo "<div class='col-sm-6'>";
             echo "总分";
-            $affirmative1=$score[0]['lilun']+$score[0]['zhixun_1']+$score[0]['yuyan_1']+$score[0]['ziyou_1'];
-            $affirmative2=$score[0]['bolun']+$score[0]['gongbian']+$score[0]['yuyan_2']+$score[0]['ziyou_2'];
-            $affirmative3=$score[0]['zhixun_3']+$score[0]['xiaojie']+$score[0]['yuyan_3']+$score[0]['ziyou_3'];
-            $affirmative4=$score[0]['chenci']+$score[0]['yuyan_4']+$score[0]['ziyou_4'];
+            $affirmative1=$score[0]['lilun']+$score[0]['zhixun_1']+$score[0]['yuyan_1'];
+            $affirmative2=$score[0]['bolun']+$score[0]['gongbian']+$score[0]['yuyan_2'];
+            $affirmative3=$score[0]['zhixun_3']+$score[0]['xiaojie']+$score[0]['yuyan_3'];
+            $affirmative4=$score[0]['chenci']+$score[0]['yuyan_4'];
             echo "<br>正方一辩".($affirmative1);
             echo "<br>正方二辩".($affirmative2);
             echo "<br>正方三辩".($affirmative3);

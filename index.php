@@ -135,7 +135,7 @@ catch(PDOException $e)
                     <td class="mark-title">质询
                     <br>
                         <select name="zhixun_pos_1" id="zhixun_pos_1">
-                            <?php generateMarks(20) ?>
+                            <?php generateMarks(30) ?>
                         </select>
                     </td>
                     
@@ -207,7 +207,7 @@ catch(PDOException $e)
                     <td class="participant-id">四辩</td>
                     <td class="mark-title">陈词<br>
                         <select name="chenci_pos" id="chenci_pos">
-                            <?php generateMarks(30) ?>
+                            <?php generateMarks(60) ?>
                         </select>
                     </td>
                     <td></td>
@@ -257,7 +257,7 @@ catch(PDOException $e)
                     <td class="mark-title">质询
                     <br>
                         <select name="zhixun_neg_1" id="zhixun_neg_1">
-                            <?php generateMarks(20) ?>
+                            <?php generateMarks(30) ?>
                         </select>
                     </td>
                     
@@ -327,7 +327,7 @@ catch(PDOException $e)
                 <td class="participant-id">四辩</td>
                     <td class="mark-title">陈词<br>
                         <select name="chenci_neg" id="chenci_neg">
-                            <?php generateMarks(30) ?>
+                            <?php generateMarks(60) ?>
                         </select>
                     </td>
                     <td></td>
