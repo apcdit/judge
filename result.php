@@ -64,7 +64,9 @@
 <script>
     $(document).ready(function(){
         $("#submit").click(checkStatus);
-        
+        $(document).on('click','#generate',function(){
+            var competition_id = $('#competition_id').val()
+        });
     });
     
     const checkStatus = () => {
@@ -94,8 +96,10 @@
                         render += `<h5 style="color:green;">${key}. ${value['name']}</h5>`;
                     }
                 });
-                if(!error) render += `<button class="btn btn-primary" id="generate" style="background-color:darkred;">Generate result...</button>`;
-
+                if(!error) {
+                    render += `<a class="btn btn-primary" href="result/impression_result.php?competition_id=${competition_id}" id="generate" style="background-color:darkred;" target="_blank">印象票</a><br>`;
+                    render += `<a class="btn btn-primary" href="result/candidates_result.php?competition_id=${competition_id}" id="generate" style="background-color:darkred;" target="_blank">最佳辩手</a>`;
+                }
 
                 $('#result').html(render);
 
@@ -155,6 +159,9 @@
 
 <style>
 
+    .btn-primary{
+        margin: 2%;
+    }
     .column {
     width: 25%;
     padding: 0 10px;

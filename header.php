@@ -1,5 +1,5 @@
 <head>
-	<title>亚太辩评审页面</title>
+	<!-- <title>亚太辩评审页面</title> -->
 	<meta charset="utf-8">
 	<meta content="width=device-width,initial-scale=1.0" name="viewport" >
     <link rel="icon" href="https://i.imgur.com/90YSaaO.png">
