@@ -54,18 +54,18 @@ function calResult($num,$count, &$minVote){
     }
     return $bestParticipant;
 }
+
 $minVote = -9999;
 $numBest = 1;
 $bestParticipant = calResult($numBest, $count, $minVote);
 
-if(count($bestParticipant) > $numBest){
+// if(count($bestParticipant) > $numBest){
     $min_keys = array_keys($bestParticipant, min($bestParticipant));
-
     //正方
     $stmt = $conn->prepare("SELECT * FROM competition WHERE competition_id=? and side=1");
     $stmt->execute([$competition_id]);
     $pointsPos = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+    
     //反方
     $stmt = $conn->prepare("SELECT * FROM competition WHERE competition_id=? and side=0");
     $stmt->execute([$competition_id]);
@@ -122,11 +122,23 @@ if(count($bestParticipant) > $numBest){
     $total_marks = array("正方一辩" => $positive1, "正方二辩" => $positive2, "正方三辩" => $positive3, 
     "正方四辩" => $positive4, "反方一辩" => $negative1, "反方二辩" => $negative2, "反方三辩" => $negative3, "反方四辩" => $negative4);
 
+    foreach($total_marks as $key => $ma){
+        if($ma == 0) unset($total_marks[$key]);
+    }
     arsort($total_marks);
 
     $k = 0;
-    $diff = count($bestParticipant) - $numBest;
+    $current = count($bestParticipant) - count($min_keys);
+    $diff = $numBest - $current;
     $best = array();
+
+    foreach($bestParticipant as $key => $p){
+        if($p == $minVote){
+            unset($bestParticipant[$key]);
+        }
+    }
+
+    //get the top how many and insert
     foreach($total_marks as $key => $mark){
         if($k < $diff){
             $best[$key] = $mark;
@@ -135,18 +147,12 @@ if(count($bestParticipant) > $numBest){
             break;
     }
 
-    
-    foreach($bestParticipant as $key => $p){
-        if($p == $minVote && !array_key_exists($key, $best)){
-            unset($bestParticipant[$key]);
-        }
-    }
-
     foreach($best as $key => $q){
         $bestParticipant[$key] = $q;
     }
 
-}
+
+// }
 ?>
 
 <html>
@@ -179,7 +185,6 @@ if(count($bestParticipant) > $numBest){
                         echo '<th></th>';
                         echo '</tr>';
                     }
-
                 ?>
             </tbody>
         </table>
