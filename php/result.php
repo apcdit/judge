@@ -127,7 +127,7 @@
         }
 
         foreach($best as $key => $q){
-            $bestParticipant[$key] = $q;
+            $bestParticipant[$key] = $count[$key];
         }
     }
     echo json_encode(array($competitions,$bestParticipant));
