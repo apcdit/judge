@@ -55,6 +55,12 @@
             
             </div>
         </div>
+
+        <div class="column" style="margin-top: 100px;">
+            <div id="result_summary" class="card" style="display:none">
+            
+            </div>
+        </div>
     </div>
     
 </body>
@@ -64,6 +70,7 @@
 <script>
     $(document).ready(function(){
         $("#submit").click(checkStatus);
+        $("#submit").click(fetchResult);
         $(document).on('click','#generate',function(){
             var competition_id = $('#competition_id').val()
         });
@@ -99,6 +106,9 @@
                 if(!error) {
                     render += `<a class="btn btn-primary" href="result/impression_result.php?competition_id=${competition_id}" id="generate" style="background-color:darkred;" target="_blank">印象票</a><br>`;
                     render += `<a class="btn btn-primary" href="result/candidates_result.php?competition_id=${competition_id}" id="generate" style="background-color:darkred;" target="_blank">最佳辩手</a>`;
+                    render += `<a class="btn btn-primary" href="result/zongjie_result.php?competition_id=${competition_id}" id="generate" style="background-color:darkred;" target="_blank">总结票</a>`;
+                    render += `<a class="btn btn-primary" href="result/mark_result.php?competition_id=${competition_id}" id="generate" style="background-color:darkred;" target="_blank">分数票</a>`;
+                    render += `<a class="btn btn-primary" href="result/result_summary.php?competition_id=${competition_id}" id="generate" style="background-color:darkred;" target="_blank">Summary</a>`;
                 }
 
                 $('#result').html(render);
@@ -123,7 +133,7 @@
     }
     
     function processResult(data){
-        var arrayResults = data;
+        var arrayResults = data[0];
         arrayPos = arrayResults.filter(function(value){
             return value['side'] == 1;
         })
@@ -150,9 +160,21 @@
             zongjie_neg += parseInt(value['zongjie_ticket']);
         });
 
-        var content = "<div class='container'>abc</div>";
+        var bestParticipant = data[1];
+        var output = "";
+        $.each(bestParticipant, function(key,value){
+            output += `<tr><td style="text-align:center">${key}</td><td style="text-align:center">${value}</td></tr>`;
+        });
+        var content = `<table style="margin:0 auto;" border="1"><tbody>
+           <tr><td>印象票（正）: ${impression_pos}</td><td>印象票（反）: ${impression_neg}</td></tr>
+           <tr><td>分数票（正）: ${mark_pos} </td><td>分数票（反）: ${mark_neg} </td></tr>
+           <tr><td>总结票（正）: ${zongjie_pos} </td><td>总结票（反）: ${zongjie_neg} </td></tr>
+           <tr><td colspan="2" style="text-align:center">辩手候选人</td></tr>${output}
+        </tbody>
+        </table>`;
 
-       $("#result").html(content);
+        $('#result_summary').html(content);
+        $('#result_summary').css('display','block');
     }
    
 </script>
@@ -166,7 +188,6 @@
     width: 25%;
     padding: 0 10px;
     margin: 0 auto;
-
     }
 
     /* Style the counter cards */
@@ -245,5 +266,7 @@
         padding: 0px 10px;
     }
 
-    
+    #result_summary{
+        margin-bottom: 20%;
+    }
 </style>

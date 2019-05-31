@@ -144,9 +144,10 @@
                                 <td><input type="text" name="competitionID"><td>
                             </tr>
                             <tr>
-                                <th>Title:<th>
+                                <th>辩题:<th>
                                 <td><input type="text" name="title"></td>
-                            </tr>        
+                            </tr> 
+                                   
                         </tbody>
                     </table>
                     <h6><strong>Judges:</strong></h6>
