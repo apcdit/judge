@@ -36,6 +36,7 @@ try {
                 }
                 //var_dump($products);
                 
+                
                 $vals = array_count_values($products);// calculate the number of occurerance               
                 $keys = array_keys($vals); // get the key
                 // var_dump($vals);
@@ -58,36 +59,57 @@ catch(PDOException $e)
    
     }
 try{
-    $stmt = $conn->prepare("SELECT * FROM `competition` WHERE judge_id='$userID' and competition_id='$competition_id1' and side=0");
+    
         // use exec() because no results are returned
         
+        $stmt = $conn->prepare("SELECT * FROM `competition` WHERE competition_id='$competition_id1' and side=0");
         if($stmt->execute()){
-            $row1 = $stmt->fetch(PDO::FETCH_ASSOC);
-            $score1[] = $row1;
-            $negative1=$score1[0]['lilun']+$score1[0]['zhixun_1']+$score1[0]['yuyan_1'];
-            $negative2=$score1[0]['bolun']+$score1[0]['gongbian']+$score1[0]['yuyan_2'];
-            $negative3=$score1[0]['zhixun_3']+$score1[0]['xiaojie']+$score1[0]['yuyan_3'];
-            $negetive4=$score1[0]['chenci']+$score1[0]['yuyan_4'];
-            echo "<div class='row' style='text-align:center;width:300px;margin:auto auto;'><div class='col-sm-6'>";
-            echo "总分";
-            echo "<br>反方一辩".($negative1);
-            echo "<br>反方二辩".($negative2);
-            echo "<br>反方三辩".($negative3);
-            echo "<br>反方四辩".($negetive4);
-            echo "</div>";
+            $score1=[];
+            $i=0;
+            $negative1=0;
+            $negative2=0;
+            $negative3=0;
+            $negative4=0;
+            while($row1 = $stmt->fetch(PDO::FETCH_ASSOC))
+            {
+            array_push($score1,$row1);
+            $negative1=$negative1+$score1[$i]['lilun']+$score1[$i]['zhixun_1']+$score1[$i]['yuyan_1'];
+            $negative2=$negative2+$score1[$i]['bolun']+$score1[$i]['gongbian']+$score1[$i]['yuyan_2'];
+            $negative3=$negative3+$score1[$i]['zhixun_3']+$score1[$i]['xiaojie']+$score1[$i]['yuyan_3'];
+            $negetive4=$negative4+$score1[$i]['chenci']+$score1[$i]['yuyan_4'];
+            $i++;
+           
+        }
+        echo "<div class='row' style='text-align:center;width:300px;margin:auto auto;'><div class='col-sm-6'>";
+        echo "总分";
+        echo "<br>反方一辩".($negative1);
+        echo "<br>反方二辩".($negative2);
+        echo "<br>反方三辩".($negative3);
+        echo "<br>反方四辩".($negetive4);
+        echo "</div>";
         }
         $stmt1 = $conn->prepare("SELECT * FROM `competition` WHERE judge_id='$userID' and competition_id='$competition_id1' and side=1");
         // use exec() because no results are returned
         
         if($stmt1->execute()){
-            $row1 = $stmt1->fetch(PDO::FETCH_ASSOC);
-            $score[] = $row1;
+            $score=[];
+            $affirmative1=0;
+            $affirmative2=0;
+            $affirmative3=0;
+            $affirmative4=0;
+            $j=0;
+            while($row1 = $stmt1->fetch(PDO::FETCH_ASSOC))
+            {
+                array_push($score,$row1);
+                
+                $affirmative1=$affirmative1+$score[$j]['lilun']+$score[$j]['zhixun_1']+$score[$j]['yuyan_1'];
+                $affirmative2=$affirmative2+$score[$j]['bolun']+$score[$j]['gongbian']+$score[$j]['yuyan_2'];
+                $affirmative3=$affirmative3+$score[$j]['zhixun_3']+$score[$j]['xiaojie']+$score[$j]['yuyan_3'];
+                $affirmative4=$affirmative4+$score[$j]['chenci']+$score[$j]['yuyan_4'];
+                $j++;
+            }
             echo "<div class='col-sm-6'>";
             echo "总分";
-            $affirmative1=$score[0]['lilun']+$score[0]['zhixun_1']+$score[0]['yuyan_1'];
-            $affirmative2=$score[0]['bolun']+$score[0]['gongbian']+$score[0]['yuyan_2'];
-            $affirmative3=$score[0]['zhixun_3']+$score[0]['xiaojie']+$score[0]['yuyan_3'];
-            $affirmative4=$score[0]['chenci']+$score[0]['yuyan_4'];
             echo "<br>正方一辩".($affirmative1);
             echo "<br>正方二辩".($affirmative2);
             echo "<br>正方三辩".($affirmative3);
@@ -101,44 +123,44 @@ try{
             // echo $keys[$j].$vals[$keys[$j]];
             if($keys[$j]=="正方一辩")
             {
-                array_push($participant_score,(array($keys[$j] => $vals[$keys[$j]]*100+$affirmative1)));
-                array_push($ranking,$vals[$keys[$j]]*100+$affirmative1);
+                array_push($participant_score,(array($keys[$j] => $vals[$keys[$j]]*10000+$affirmative1)));
+                array_push($ranking,$vals[$keys[$j]]*10000+$affirmative1);
             
             }
             if($keys[$j]=="正方二辩")
-            {array_push($participant_score,(array($keys[$j] => $vals[$keys[$j]]*100+$affirmative2)));
-                array_push($ranking,$vals[$keys[$j]]*100+$affirmative2);
+            {array_push($participant_score,(array($keys[$j] => $vals[$keys[$j]]*10000+$affirmative2)));
+                array_push($ranking,$vals[$keys[$j]]*10000+$affirmative2);
             }
             if($keys[$j]=="正方三辩")
             {
-                array_push($participant_score,(array($keys[$j] => $vals[$keys[$j]]*100+$affirmative3)));
-                array_push($ranking,$vals[$keys[$j]]*100+$affirmative3);
+                array_push($participant_score,(array($keys[$j] => $vals[$keys[$j]]*10000+$affirmative3)));
+                array_push($ranking,$vals[$keys[$j]]*10000+$affirmative3);
                 
             }
             if($keys[$j]=="正方四辩")
             {
-                array_push($participant_score,(array($keys[$j] => $vals[$keys[$j]]*100+$affirmative4)));
-                array_push($ranking,$vals[$keys[$j]]*100+$affirmative4);
+                array_push($participant_score,(array($keys[$j] => $vals[$keys[$j]]*10000+$affirmative4)));
+                array_push($ranking,$vals[$keys[$j]]*10000+$affirmative4);
             }
             if($keys[$j]=="反方一辩")
             {
-                array_push($participant_score,(array($keys[$j] => $vals[$keys[$j]]*100+$negative1)));
-                array_push($ranking,$vals[$keys[$j]]*100+$negative1);
+                array_push($participant_score,(array($keys[$j] => $vals[$keys[$j]]*10000+$negative1)));
+                array_push($ranking,$vals[$keys[$j]]*10000+$negative1);
             }
             if($keys[$j]=="反方二辩")
             {
-                array_push($participant_score,(array($keys[$j] => $vals[$keys[$j]]*100+$negative2)));
-                array_push($ranking,$vals[$keys[$j]]*100+$negative2);
+                array_push($participant_score,(array($keys[$j] => $vals[$keys[$j]]*10000+$negative2)));
+                array_push($ranking,$vals[$keys[$j]]*10000+$negative2);
             }
             if($keys[$j]=="反方三辩")
             {
-                array_push($participant_score,(array($keys[$j] => $vals[$keys[$j]]*100+$negative3)));
-                array_push($ranking,$vals[$keys[$j]]*100+$negative3);
+                array_push($participant_score,(array($keys[$j] => $vals[$keys[$j]]*10000+$negative3)));
+                array_push($ranking,$vals[$keys[$j]]*10000+$negative3);
             }
             if($keys[$j]=="反方四辩")
             {
-                array_push($participant_score,(array($keys[$j] => $vals[$keys[$j]]*100+$negative4)));
-                array_push($ranking,$vals[$keys[$j]]*100+$negative4);
+                array_push($participant_score,(array($keys[$j] => $vals[$keys[$j]]*10000+$negative4)));
+                array_push($ranking,$vals[$keys[$j]]*10000+$negative4);
             }
         }
         rsort($ranking);
