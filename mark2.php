@@ -62,7 +62,7 @@
             <h1>印象票</h1>
             <h3 id="winner"></h3>
         </div>
-        <div class="row justify-content-center" style="align-items: center;height:90%">
+        <div class="row justify-content-center" style="align-items: center;height:90%;width:80%;margin:auto auto;">
             <button class="col-md-4 box" data-toggle="modal" data-target="#exampleModal" id="affirmative">正方</button>
             <button class="col-md-4 box" data-toggle="modal" data-target="#exampleModal2" id="negative">反方</button>
             
