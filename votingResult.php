@@ -76,7 +76,7 @@ try{
             $negative1=$negative1+$score1[$i]['lilun']+$score1[$i]['zhixun_1']+$score1[$i]['yuyan_1'];
             $negative2=$negative2+$score1[$i]['bolun']+$score1[$i]['gongbian']+$score1[$i]['yuyan_2'];
             $negative3=$negative3+$score1[$i]['zhixun_3']+$score1[$i]['xiaojie']+$score1[$i]['yuyan_3'];
-            $negetive4=$negative4+$score1[$i]['chenci']+$score1[$i]['yuyan_4'];
+            $negative4=$negative4+$score1[$i]['chenci']+$score1[$i]['yuyan_4'];
             $i++;
            
         }
@@ -85,10 +85,10 @@ try{
         echo "<br>反方一辩".($negative1);
         echo "<br>反方二辩".($negative2);
         echo "<br>反方三辩".($negative3);
-        echo "<br>反方四辩".($negetive4);
+        echo "<br>反方四辩".($negative4);
         echo "</div>";
         }
-        $stmt1 = $conn->prepare("SELECT * FROM `competition` WHERE judge_id='$userID' and competition_id='$competition_id1' and side=1");
+        $stmt1 = $conn->prepare("SELECT * FROM `competition` WHERE competition_id='$competition_id1' and side=1");
         // use exec() because no results are returned
         
         if($stmt1->execute()){
