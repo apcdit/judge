@@ -34,7 +34,7 @@ try {
                     $count++;
                 }
                 }
-                //var_dump($products);
+                // var_dump($products);
                 
                 
                 $vals = array_count_values($products);// calculate the number of occurerance               
@@ -116,6 +116,7 @@ try{
             echo "<br>正方四辩".($affirmative4);
             echo "</div></div>";
         }
+        
         $participant_score=[];   // use to store key=>value  ...... value = TotalVotingTicketbyParticipant*100+his competition result
         $ranking=[]; // use to score user value of array :participant_score  for ranking
         for($j=0;$j<sizeof($vals);$j++)
@@ -169,9 +170,12 @@ try{
         // echo $participant_score[0][$keys[0]];
         $bestParticipant=[];
         
+        
         for($i=0;$i<3 && $i<$j;$i++)
         {
-            for($j=0;$j<sizeof($participant_score);$j++)
+            echo sizeof($participant_score);
+            
+            for($j=0;$j<sizeof($participant_score)&&sizeof($ranking)>0;$j++)
             {
                 if($participant_score[$j][$keys[$j]]==$ranking[$i]){array_push($bestParticipant,key($participant_score[$j])); }
             }
