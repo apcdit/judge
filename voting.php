@@ -29,8 +29,8 @@ catch(PDOException $e)
 <?php include('navigation.php');?>
 <div class="container">
 <form method="POST" action="php/bestparticipantHandler.php">
-        <h3>最佳辩手1</h3>
-        <select name="participant1" id="participant1" class="form-control group"
+        <h3>最佳辩手1<span style="color:red;">*</span></h3>
+        <select name="participant1" id="participant1" class="form-control group" required
         <?php
             if($participant[0]['bestParticipant1']!='0' && $participant[0]['bestParticipant2']!='0' && $participant[0]['bestParticipant3']!='0')
                 echo "disabled" ; 
@@ -83,8 +83,8 @@ catch(PDOException $e)
                 ?>
         </select>
         <br>
-<h3>最佳辩手2</h3>
-<select name="participant2" id="participant2" class="form-control group"
+<h3>最佳辩手2<span style="color:red;">*</span></h3>
+<select name="participant2" id="participant2" class="form-control group" required
         <?php
             if(
                     $participant[0]['bestParticipant1']!='0' &&
@@ -142,8 +142,8 @@ catch(PDOException $e)
                 ?>
 </select>
 <br>
-<h3>最佳辩手3</h3>
-<select name="participant3" id="participant3" class="form-control group"
+<h3>最佳辩手3<span style="color:red;">*</span></h3>
+<select name="participant3" id="participant3" class="form-control group" required
     <?php
                     if(
                             $participant[0]['bestParticipant1']!='0' &&
@@ -200,7 +200,7 @@ catch(PDOException $e)
                 ?>
 </select>
 <br/>
-<button class="btn btn-primary btn-block btn-login" type="submit"
+<button class="btn btn-primary btn-block btn-login" type="submit" onclick=check()
 <?php
                 if(
                         $participant[0]['bestParticipant1']!='0' &&
@@ -213,6 +213,18 @@ catch(PDOException $e)
                 ?>
 >提交</button>
 </form>
+<div>
+    <p style="font-size:0.8rem;color:darkred;">*选出三位心目中最佳的三位辩手!</p>
+</div>
 </div>
 
 </body>
+
+<script>
+if(<?php
+    echo $participant[0]['bestParticipant1']=='0' &&    $participant[0]['bestParticipant2']=='0' &&    $participant[0]['bestParticipant3']=='0'
+?>){
+$(window).bind('beforeunload', function(){
+  return "离开前选出三位辩手";
+});}
+</script>
