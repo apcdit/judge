@@ -140,14 +140,29 @@
                     <table>
                         <tbody>
                             <tr>
-                                <th>Competition ID: <th>
-                                <td><input type="text" name="competitionID"><td>
+                                <th>Competition ID: </th>
+                                <td><input type="text" name="competitionID"></td>
                             </tr>
                             <tr>
-                                <th>辩题:<th>
+                                <th>辩题:</th>
                                 <td><input type="text" name="title"></td>
                             </tr> 
-                                   
+                            <tr>
+                                <th>正方辩题:</th>
+                                <td><input type="text" name="posTitle"></td>
+                            </tr>
+                            <tr>
+                                <th>反方辩题:</th>
+                                <td><input type="text" name="negTitle"></td>
+                            </tr>
+                            <tr>
+                                <th>正方学校:</th>
+                                <td><input type="text" name="posUni"></td>
+                            </tr>
+                            <tr>
+                                <th>反方学校:</th>
+                                <td><input type="text" name="negUni"></td>
+                            </tr>
                         </tbody>
                     </table>
                     <h6><strong>Judges:</strong></h6>

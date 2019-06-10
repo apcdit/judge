@@ -7,7 +7,9 @@
         header("Location: index.php");
     }
 ?>
-
+<head>
+    <title>亚太大专辩论线上评审系统</title>
+</head>
 <body>
     <div class="container">
     <br>
@@ -120,12 +122,11 @@
             dataType : 'JSON',
             success  : function(data) {            
                 var output = '<option value="">- 选择辩题 -</option>';
-
-                $.each(data, function(i,s){
+                $.each(data[0], function(i,s){
                     var title = s['title'];
                     var competition_id = s['competition_id'];
 
-                    output += '<option value="' + competition_id + '">' + competition_id + '. ' + title + '</option>';
+                    output += `<option value=${competition_id}>${competition_id}. ${title} (${data[1][competition_id]['uni_pos']} vs ${data[1][competition_id]['uni_neg']})</option>`;
                 });
 
                 $('#title').empty().append(output);
