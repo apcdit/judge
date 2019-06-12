@@ -33,11 +33,14 @@
                     $sql = $conn->prepare("SELECT * FROM titles");
                     $products = array();
                     $count = 0;
+                    $stmt = $conn->prepare("SELECT uni_pos, uni_neg FROM rounds WHERE competition_id=?");
                     if($sql->execute()){
                     while ($row = $sql->fetch(PDO::FETCH_ASSOC)) {
-                        print_r($row);
                         $titles[] = $row;
-                        echo "<option value='".$titles[$count]['competition_id']."' >".$titles[$count]['competition_id'].". ".$titles[$count]['title']."</option>";
+                        $competition_id = $titles[$count]['competition_id'];
+                        $stmt->execute([$competition_id]);
+                        $uni = $stmt->fetch();
+                        echo "<option value='".$titles[$count]['competition_id']."' >".$titles[$count]['competition_id'].". ".$titles[$count]['title']."(".$uni['uni_pos']." vs ".$uni['uni_neg'].")</option>";
                         $count++;
                     }
                     }
