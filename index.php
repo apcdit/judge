@@ -126,27 +126,27 @@ catch(PDOException $e)
                 <tbody>
                 <tr>
                     <td class="participant-id">一辩</td>
-                    <td class="mark-title">立论
+                    <td class="mark-title">立论(30)
                     <br>
                         <select name="lilun_pos" id="lilun_pos">
                             <?php generateMarks(30) ?>
                         </select>
                     </td>
-                    <td class="mark-title">质询
+                    <td class="mark-title">质询(30)
                     <br>
                         <select name="zhixun_pos_1" id="zhixun_pos_1">
                             <?php generateMarks(30) ?>
                         </select>
                     </td>
                     
-                    <td class="mark-title">语言风度
+                    <td class="mark-title">语言风度(10)
                     <br>
                         <select name="yuyan_pos_1" id="yuyan_pos_1">
                             <?php generateMarks(10) ?>
                         </select>
                     </td>
                     
-                    <td>自由辩论<br><span>
+                    <td>自由辩论(25)<br><span>
                     
                         <select name="ziyou_pos_1" id="ziyou_pos_1">
                             <?php generateMarks(25) ?>
@@ -157,24 +157,24 @@ catch(PDOException $e)
                
                 <tr>
                     <td class="participant-id">二辩</td>
-                    <td class="mark-title">驳论
+                    <td class="mark-title">驳论(30)
                         <br>
                         <select name="bolun_pos" id="bolun_pos">
                             <?php generateMarks(30) ?>
                         </select>
                     </td>
-                    <td class="mark-title">攻辩
+                    <td class="mark-title">攻辩(30)
                     <br>
                         <select name="gongbian_pos" id="gongbian_pos">
                             <?php generateMarks(30) ?>
                         </select>
                     </td>
-                    <td class="mark-title">语言风度<br>
+                    <td class="mark-title">语言风度(10)<br>
                         <select name="yuyan_pos_2" id="yuyan_pos_2">
                             <?php generateMarks(10) ?>
                         </select>
                     </td>
-                    <td class="mark-title">自由辩论<br>
+                    <td class="mark-title">自由辩论(25)<br>
                         <select name="ziyou_pos_2" id="ziyou_pos_2">
                             <?php generateMarks(25) ?>
                         </select>
@@ -182,22 +182,22 @@ catch(PDOException $e)
                 </tr>
                 <tr>
                     <td class="participant-id">三辩</td>
-                    <td class="mark-title">质询<br>
+                    <td class="mark-title">质询(30)<br>
                         <select name="zhixun_pos_2" id="zhixun_pos_2">
                             <?php generateMarks(30) ?>
                         </select>
                     </td>
-                    <td class="mark-title">小结<br>
+                    <td class="mark-title">小结(30)<br>
                         <select name="xiaojie_pos" id="xiaojie_pos">
                             <?php generateMarks(30) ?>
                         </select>
                     </td>
-                    <td class="mark-title">语言风度<br>
+                    <td class="mark-title">语言风度(10)<br>
                         <select name="yuyan_pos_3" id="yuyan_pos_3">
                             <?php generateMarks(10) ?>
                         </select>
                     </td>
-                    <td class="mark-title">自由辩论<br>
+                    <td class="mark-title">自由辩论(25)<br>
                         <select name="ziyou_pos_3" id="ziyou_pos_3">
                             <?php generateMarks(25) ?>
                         </select>
@@ -205,24 +205,24 @@ catch(PDOException $e)
                 </tr>
                 <tr>
                     <td class="participant-id">四辩</td>
-                    <td class="mark-title">陈词<br>
+                    <td class="mark-title">陈词(60)<br>
                         <select name="chenci_pos" id="chenci_pos">
                             <?php generateMarks(60) ?>
                         </select>
                     </td>
                     <td></td>
-                    <td class="mark-title">语言风度<br>
+                    <td class="mark-title">语言风度(10)<br>
                         <select name="yuyan_pos_4" id="yuyan_pos_4">
                             <?php generateMarks(10) ?>
                         </select>
                     </td>
-                    <td class="mark-title">自由辩论<br>
+                    <td class="mark-title">自由辩论(25)<br>
                         <select name="ziyou_pos_4" id="ziyou_pos_4">
                             <?php generateMarks(25) ?>
                         </select>
                     </td>                
                 </tr>
-                <tr><td colspan="5">团体配合和合作精神 
+                <tr><td colspan="5">团体配合和合作精神(30) 
                         <select name="tuanti_pos" id="tuanti_pos">
                             <?php generateMarks(30) ?>
                         </select>
@@ -248,27 +248,27 @@ catch(PDOException $e)
                 <tbody>
                 <tr>
                 <td class="participant-id">一辩</td>
-                    <td class="mark-title">立论
+                    <td class="mark-title">立论(30)
                     <br>
                         <select name="lilun_neg" id="lilun_neg">
                             <?php generateMarks(30) ?>
                         </select>
                     </td>
-                    <td class="mark-title">质询
+                    <td class="mark-title">质询(30)
                     <br>
                         <select name="zhixun_neg_1" id="zhixun_neg_1">
                             <?php generateMarks(30) ?>
                         </select>
                     </td>
                     
-                    <td class="mark-title">语言风度
+                    <td class="mark-title">语言风度(10)
                     <br>
                         <select name="yuyan_neg_1" id="yuyan_neg_1">
                             <?php generateMarks(10) ?>
                         </select>
                     </td>
                     
-                    <td class="mark-title">自由辩论
+                    <td class="mark-title">自由辩论(25)
                     <br>
                         <select name="ziyou_neg_1" id="ziyou_neg_1">
                             <?php generateMarks(25) ?>
@@ -277,24 +277,24 @@ catch(PDOException $e)
                 </tr>
                 <tr>
                 <td class="participant-id">二辩</td>
-                    <td class="mark-title">驳论
+                    <td class="mark-title">驳论(30)
                         <br>
                         <select name="bolun_neg" id="bolun_neg">
                             <?php generateMarks(30) ?>
                         </select>
                     </td>
-                    <td class="mark-title">攻辩
+                    <td class="mark-title">攻辩(30)
                     <br>
                         <select name="gongbian_neg" id="gongbian_neg">
                             <?php generateMarks(30) ?>
                         </select>
                     </td>
-                    <td class="mark-title">语言风度<br>
+                    <td class="mark-title">语言风度(10)<br>
                         <select name="yuyan_neg_2" id="yuyan_neg_2">
                             <?php generateMarks(10) ?>
                         </select>
                     </td>
-                    <td class="mark-title">自由辩论<br>
+                    <td class="mark-title">自由辩论(25)<br>
                         <select name="ziyou_neg_2" id="ziyou_neg_2">
                             <?php generateMarks(25) ?>
                         </select>
@@ -302,22 +302,22 @@ catch(PDOException $e)
                 </tr>
                 <tr>
                 <td class="participant-id">三辩</td>
-                    <td class="mark-title">质询<br>
+                    <td class="mark-title">质询(30)<br>
                         <select name="zhixun_neg_2" id="zhixun_neg_3">
                             <?php generateMarks(30) ?>
                         </select>
                     </td>
-                    <td class="mark-title">小结<br>
+                    <td class="mark-title">小结(30)<br>
                         <select name="xiaojie_neg" id="xiaojie_neg">
                             <?php generateMarks(30) ?>
                         </select>
                     </td>
-                    <td class="mark-title">语言风度<br>
+                    <td class="mark-title">语言风度(10)<br>
                         <select name="yuyan_neg_3" id="yuyan_neg_3">
                             <?php generateMarks(10) ?>
                         </select>
                     </td>
-                    <td class="mark-title">自由辩论<br>
+                    <td class="mark-title">自由辩论(25)<br>
                         <select name="ziyou_neg_3" id="ziyou_neg_3">
                             <?php generateMarks(25) ?>
                         </select>
@@ -325,24 +325,24 @@ catch(PDOException $e)
                 </tr>
                 <tr>
                 <td class="participant-id">四辩</td>
-                    <td class="mark-title">陈词<br>
+                    <td class="mark-title">陈词(60)<br>
                         <select name="chenci_neg" id="chenci_neg">
                             <?php generateMarks(60) ?>
                         </select>
                     </td>
                     <td></td>
-                    <td class="mark-title">语言风度<br>
+                    <td class="mark-title">语言风度(10)<br>
                         <select name="yuyan_neg_4" id="yuyan_neg_4">
                             <?php generateMarks(10) ?>
                         </select>
                     </td>
-                    <td class="mark-title">自由辩论<br>
+                    <td class="mark-title">自由辩论(25)<br>
                         <select name="ziyou_neg_4" id="ziyou_neg_4">
                             <?php generateMarks(25) ?>
                         </select>
                     </td>   
                 </tr>
-                <tr><td colspan="5">团体配合和合作精神 
+                <tr><td colspan="5">团体配合和合作精神(30) 
                         <select name="tuanti_neg" id="tuanti_neg">
                             <?php generateMarks(30) ?>
                         </select>

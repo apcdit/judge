@@ -56,8 +56,8 @@
             </div>
         </div>
 
-        <div class="column" style="margin-top: 100px;">
-            <div id="result_summary" class="card" style="display:none">
+        <div class="column" style="margin-top: 100px;width:100%;">
+            <div id="result_summary" class="card" style="display:none;">
             
             </div>
         </div>
@@ -98,12 +98,12 @@
                 $.each(names, function(key,value){
                     if(problematic.includes(key)){
                         render += `<h5 style="color:red;">${key}. ${value['name']}</h5>`;
-                        error = true;                        
+                        // error = true;                        
                     }else{
                         render += `<h5 style="color:green;">${key}. ${value['name']}</h5>`;
                     }
                 });
-                if(!error) {
+                if(true) {
                     render += `<a class="btn btn-primary" href="result/impression_result.php?competition_id=${competition_id}" id="generate" style="background-color:darkred;" target="_blank">印象票</a><br>`;
                     render += `<a class="btn btn-primary" href="result/candidates_result.php?competition_id=${competition_id}" id="generate" style="background-color:darkred;" target="_blank">最佳辩手</a>`;
                     render += `<a class="btn btn-primary" href="result/zongjie_result.php?competition_id=${competition_id}" id="generate" style="background-color:darkred;" target="_blank">总结票</a>`;
@@ -127,6 +127,7 @@
             },
             dataType: "JSON",
             success: function(response){
+                console.log(response)
                 processResult(response);
             }
         });
@@ -134,6 +135,8 @@
     
     function processResult(data){
         var arrayResults = data[0];
+        var judgeResult = data[2];
+        console.log(arrayResults);
         arrayPos = arrayResults.filter(function(value){
             return value['side'] == 1;
         })
@@ -141,35 +144,69 @@
             return value['side'] == 0;
         })
         var impression_pos = 0;
+        var impression_pos_judges = [];
         var mark_pos = 0;
+        var mark_pos_judges = [];
         var zongjie_pos = 0;
+        var zongjie_pos_judges = [];
 
         var impression_neg = 0;
+        var impression_neg_judges = [];
         var mark_neg = 0;
+        var mark_neg_judges = [];
         var zongjie_neg = 0;
+        var zongjie_neg_judges = [];
         
         $.each(arrayPos, function(index,value){
             impression_pos += parseInt(value['impression_ticket']);
+            if(parseInt(value['impression_ticket']) == 1)
+                impression_pos_judges.push(judgeResult[value['judge_id']]);
             mark_pos += parseInt(value['mark_ticket']);
+            if(parseInt(value['mark_ticket']) == 1)
+                mark_pos_judges.push(judgeResult[value['judge_id']]);
             zongjie_pos += parseInt(value['zongjie_ticket']);
+            if(parseInt(value['zongjie_ticket']) == 1)
+                zongjie_pos_judges.push(judgeResult[value['judge_id']]);
         });
 
         $.each(arrayNeg, function(index,value){
             impression_neg += parseInt(value['impression_ticket']);
+            if(parseInt(value['impression_ticket']) == 1)
+                impression_neg_judges.push(judgeResult[value['judge_id']]); 
             mark_neg += parseInt(value['mark_ticket']);
+            if(parseInt(value['mark_ticket']) == 1)
+                mark_neg_judges.push(judgeResult[value['judge_id']]); 
             zongjie_neg += parseInt(value['zongjie_ticket']);
+            if(parseInt(value['zongjie_ticket']) == 1)
+                zongjie_neg_judges.push(judgeResult[value['judge_id']]);
         });
 
         var bestParticipant = data[1];
+        var first = data[3];
         var output = "";
+        
         $.each(bestParticipant, function(key,value){
-            output += `<tr><td style="text-align:center">${key}</td><td style="text-align:center">${value}</td></tr>`;
+            output += `<tr style="font-size:40px;"><td style="text-align:center">${key}</td><td style="text-align:center">${value[0]}</td><td style="text-align:center">${value[1]}</td></tr>`;
         });
-        var content = `<table style="margin:0 auto;" border="1"><tbody>
-           <tr><td>印象票（正）: ${impression_pos}</td><td>印象票（反）: ${impression_neg}</td></tr>
-           <tr><td>分数票（正）: ${mark_pos} </td><td>分数票（反）: ${mark_neg} </td></tr>
-           <tr><td>总结票（正）: ${zongjie_pos} </td><td>总结票（反）: ${zongjie_neg} </td></tr>
-           <tr><td colspan="2" style="text-align:center">辩手候选人</td></tr>${output}
+        var empty = [];
+        $.each(first,function(key,value){
+            empty.push([key,value]);
+        });
+
+        var content = `<table style="margin:0 auto;width:80%;" border="1"><tbody>
+           <tr style="font-size:40px;font-weight:900;"><td></td><td>正</td><td>反</td></tr>
+           <tr style="text-align:center;font-size: 40px;"><td rowspan="2">印象票</td><td>${impression_pos}</td><td>${impression_neg}</td></tr>
+           <tr><td>${impression_pos_judges}</td><td>${impression_neg_judges}</td></tr>
+
+           <tr style="text-align:center;font-size: 40px;"><td rowspan="2">分数票</td><td>${mark_pos}</td><td>${mark_neg}</td></tr>
+           <tr><td>${mark_pos_judges}</td><td>${mark_neg_judges}</td></tr>
+           
+           <tr style="text-align:center;font-size: 40px;"><td rowspan="2">分数票</td><td>${zongjie_pos}</td><td>${zongjie_neg}</td></tr>
+           <tr><td>${zongjie_pos_judges}</td><td>${zongjie_neg_judges}</td></tr>
+           
+           <tr><td colspan="3" style="text-align:center"><strong style="color:darkred;font-size:25px;">最佳三位辩手</strong></td></tr>${output}
+           <tr><td colspan="3"><strong style="color:darkred;font-size:25px;">最佳辩手</strong></td></tr>
+           <tr><td colspan="3"><strong style="font-size:25px;">${empty[0]}</strong></td></tr>
         </tbody>
         </table>`;
 
@@ -190,6 +227,10 @@
     margin: 0 auto;
     }
 
+    #result_summary tr{
+        height:75px;
+        text-align:center;
+    }
     /* Style the counter cards */
     .card {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
