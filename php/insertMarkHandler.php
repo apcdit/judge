@@ -26,6 +26,7 @@ $chenci_pos = $_REQUEST["chenci_pos"];
 $yuyan_pos_4 = $_REQUEST["yuyan_pos_4"];
 $ziyou_pos_4 = $_REQUEST["ziyou_pos_4"];
 $tuanti_pos = $_REQUEST["tuanti_pos"];
+$total_ziyou_pos=$ziyou_pos_1+$ziyou_pos_2+$ziyou_pos_3+$ziyou_pos_4;
 $marks_pos_1 =$lilun_pos+ $zhixun_pos_1+$yuyan_pos_1+$ziyou_pos_1+$bolun_pos+$gongbian_pos
 +$yuyan_pos_2+$ziyou_pos_2+$zhixun_pos_2+$xiaojie_pos+$yuyan_pos_3+$ziyou_pos_3+$chenci_pos+$yuyan_pos_4
 +$ziyou_pos_4+$tuanti_pos;
@@ -47,13 +48,14 @@ $chenci_neg = $_REQUEST["chenci_neg"];
 $yuyan_neg_4 = $_REQUEST["yuyan_neg_4"];
 $ziyou_neg_4 = $_REQUEST["ziyou_neg_4"];
 $tuanti_neg = $_REQUEST["tuanti_neg"];
+$total_ziyou_neg=$ziyou_neg_1+$ziyou_neg_2+$ziyou_neg_3+$ziyou_neg_4;
 $marks_neg_1 = $lilun_neg+ $zhixun_neg_1+$yuyan_neg_1+$ziyou_neg_1+$bolun_neg+$gongbian_neg
 +$yuyan_neg_2+$ziyou_neg_2+$zhixun_neg_2+$xiaojie_neg+$yuyan_neg_3+$ziyou_neg_3+$chenci_neg
 +$yuyan_neg_4+$ziyou_neg_4+$tuanti_neg;
 
 $fen_shu_ticket_pos=0;
 $fen_shu_ticket_neg=0;
-
+//rules of fenshu system-------------------------------------------------------------------
 if($marks_pos_1>$marks_neg_1)
 {
     $fen_shu_ticket_pos=$fen_shu_ticket_pos+1;
@@ -64,12 +66,22 @@ else if($marks_pos_1<$marks_neg_1)
 }
 else if($marks_pos_1==$marks_neg_1)
 {
-    if($tuanti_pos>$tuanti_neg){
-        $fen_shu_ticket_pos=$fen_shu_ticket_pos+1;
-    }
-    else if($tuanti_pos<$tuanti_neg){
-        $fen_shu_ticket_neg=$fen_shu_ticket_neg+1;
-    }
+            if(($tuanti_pos+$total_ziyou_pos)>($tuanti_neg+$total_ziyou_neg)){
+                $fen_shu_ticket_pos=$fen_shu_ticket_pos+1;
+            }
+            else if(($tuanti_pos+$total_ziyou_pos)<($tuanti_neg+$total_ziyou_neg)){
+                $fen_shu_ticket_neg=$fen_shu_ticket_neg+1;
+            }
+            else if(($tuanti_pos+$total_ziyou_pos)==($tuanti_neg+$total_ziyou_neg)){
+
+                    if($tuanti_pos>$tuanti_neg){
+                        $fen_shu_ticket_pos=$fen_shu_ticket_pos+1;
+                    }
+                    else if($tuanti_pos<$tuanti_neg){
+                        $fen_shu_ticket_neg=$fen_shu_ticket_neg+1;
+                    }
+
+            }
 }
 try {
     
