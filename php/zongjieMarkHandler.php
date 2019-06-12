@@ -28,7 +28,7 @@ try {
     }
     if($mark_ticket_positive==$mark_ticket_negative)
     {
-        $sql1 = "UPDATE competition SET mark_ticket=1 WHERE judge_id=$userID AND side=$side AND competition_id='$competition_id1'";
+        $sql1 = "UPDATE competition SET mark_ticket=1,zongjie_ticket=1 WHERE judge_id=$userID AND side=$side AND competition_id='$competition_id1'";
         $conn->exec($sql1);
         header('Location:../votingResult.php');
     }

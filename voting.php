@@ -9,7 +9,39 @@ if(!isset($_SESSION['userID'])){
 $competition_id1 = $_SESSION['titleID'];
 $userID= $_SESSION['userID'] ;
 try {
+
+    //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    $stmt123 = $conn->prepare("SELECT impression_ticket FROM competition WHERE competition_id=? AND judge_id=? and side=0"); 
+    $stmt123->execute([$_SESSION['titleID'], $_SESSION['userID']]);
+          
     
+    // // set the resulting array to associative
+    $result = $stmt123->setFetchMode(PDO::FETCH_ASSOC);
+    // //  var_dump($stmt->fetchAll());
+    $data=$stmt123->fetchAll();
+    if(sizeof($data)<1){
+        header('Location:index.php');
+    }
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    $result=[];
+    $check_status = $conn->prepare("SELECT  total_mark FROM `competition` WHERE judge_id='$userID' and competition_id='$competition_id1'");
+    if($check_status->execute()){
+        while($result_row = $check_status->fetch(PDO::FETCH_ASSOC)){
+            
+            // var_dump($result_row);
+            array_push($result,$result_row['total_mark']);
+            if(($result[0]==0)&&($result[1]==0))
+            {
+                header("Location:mark2.php");
+            }
+        }
+        // var_dump($result);
+
+    }
+    // var_dump($result);
+
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     $stmt = $conn->prepare("SELECT bestParticipant1,bestParticipant2,bestParticipant3 FROM `competition` WHERE judge_id='$userID' and competition_id='$competition_id1' and side=0");
     // use exec() because no results are returned
     $products = array();

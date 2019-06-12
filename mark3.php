@@ -5,10 +5,35 @@
     if(!isset($_SESSION['userID'])){
         header("Location: login.php");
     }
-
+    $competition_id1 = $_SESSION['titleID'];
+    $userID= $_SESSION['userID'] ;
  
     
     try {
+
+        $result_impressionTicket=[];
+        $check_status = $conn->prepare("SELECT  impression_ticket,bestParticipant1,bestParticipant2,bestParticipant3 FROM `competition` WHERE judge_id='$userID' and competition_id='$competition_id1'");
+        if($check_status->execute()){
+            while($result_row = $check_status->fetch(PDO::FETCH_ASSOC)){
+                
+                // var_dump($result_row);
+                array_push($result_impressionTicket,$result_row['impression_ticket']);
+                if(($result_row["bestParticipant1"]=="0")&&($result_row["bestParticipant2"]=="0")&&($result_row["bestParticipant3"]=="0"))
+                {
+                    header("Location:voting.php");
+                    
+                }
+                
+            }
+            if(($result_impressionTicket[0]==0)&&($result_impressionTicket[1]==0))
+                {
+                    header("Location:mark2.php");
+                }
+               
+            // var_dump($result);
+    
+        }
+
         $stmt = $conn->prepare("SELECT zongjie_ticket FROM competition WHERE competition_id=? AND judge_id=? and side=0"); 
         $stmt->execute([$_SESSION['titleID'],$_SESSION['userID']]);
 

@@ -70,7 +70,27 @@ catch(PDOException $e)
    
     }
 try{
-    
+    $result_impressionTicket=[];
+    $stmt_result = $conn->prepare("SELECT zongjie_ticket,bestParticipant1,bestParticipant2,bestParticipant3 FROM `competition` WHERE judge_id='$userID' and competition_id='$competition_id1' ");
+    if($stmt_result->execute()){
+
+        while($row_participant= $stmt_result->fetch(PDO::FETCH_ASSOC))
+        {
+                // var_dump($row_participant);
+                // echo(($row_participant["bestParticipant1"])=="0");
+                if(($row_participant["bestParticipant1"]=="0")&&($row_participant["bestParticipant2"]=="0")&&($row_participant["bestParticipant3"]=="0")){
+                    header("Location:voting.php");
+                }
+                array_push($result_impressionTicket,$row_participant["zongjie_ticket"]);
+
+        }
+        if($result_impressionTicket[0]==$result_impressionTicket[1]){
+            header("Location:mark3.php");
+
+        }
+
+
+    }
         // use exec() because no results are returned
         
 
