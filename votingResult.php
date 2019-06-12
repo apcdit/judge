@@ -19,6 +19,17 @@ $title = $_SESSION['title'];
 $userID = $_SESSION['userID'];
 $competition_id1 = $_SESSION['titleID'];
 
+$stmt123 = $conn->prepare("SELECT zongjie_ticket FROM competition WHERE competition_id=? AND judge_id=? and side=0"); 
+$stmt123->execute([$_SESSION['titleID'],$_SESSION['userID']]);
+
+$result = $stmt123->setFetchMode(PDO::FETCH_ASSOC);
+// //  var_dump($stmt->fetchAll());
+$data=$stmt123->fetchAll();
+$negative=$data[0]['zongjie_ticket'];
+if(sizeof($data)<1){
+    header('Location:mark3.php');
+}
+
 try {
     
     $stmt = $conn->prepare("SELECT bestParticipant1,bestParticipant2,bestParticipant3 FROM `competition` WHERE competition_id='$competition_id1' and side=0");
@@ -62,6 +73,7 @@ try{
     
         // use exec() because no results are returned
         
+
         $stmt = $conn->prepare("SELECT * FROM `competition` WHERE competition_id='$competition_id1' and side=0");
         if($stmt->execute()){
             $score1=[];
@@ -173,7 +185,7 @@ try{
         
         for($i=0;$i<3 && $i<$j;$i++)
         {
-            echo sizeof($participant_score);
+            // echo sizeof($participant_score);
             
             for($j=0;$j<sizeof($participant_score)&&sizeof($ranking)>0;$j++)
             {
