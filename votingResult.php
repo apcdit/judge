@@ -250,8 +250,15 @@ catch(PDOException $e)
             ?>
         >
         <?php
-            for($i=0;$i<3;$i++){
-                echo "<option value='$bestParticipant[$i]'>$bestParticipant[$i]</option>";
+        if($bestParticipantResult!="0")
+            {
+                echo "<option>".$bestParticipantResult."</option>";
+            }
+            else
+            {
+                for($i=0;$i<3;$i++){
+                    echo "<option value='$bestParticipant[$i]'>$bestParticipant[$i]</option>";
+                }
             }
         ?>
         </select>
