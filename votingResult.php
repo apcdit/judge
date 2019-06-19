@@ -32,9 +32,9 @@ if(sizeof($data)<1){
 
 try {
     
-    $stmt = $conn->prepare("SELECT bestParticipant1,bestParticipant2,bestParticipant3 FROM `competition` WHERE competition_id='$competition_id1' and side=0");
+    $stmt = $conn->prepare("SELECT bestParticipant1,bestParticipant2,bestParticipant3,bestParticipant FROM `competition` WHERE competition_id='$competition_id1' and side=0");
     // use exec() because no results are returned
-    
+    $bestParticipantResult="";
     $products = array();
                 $count = 0;
                 if($stmt->execute()){
@@ -42,7 +42,9 @@ try {
                     $participant[] = $row;
                     // echo $participant[$count]['bestParticipant1']." ".$participant[$count]['bestParticipant2']."  ".$participant[$count]['bestParticipant3']."</br>";
                     array_push($products, $participant[$count]['bestParticipant1'],$participant[$count]['bestParticipant2'],$participant[$count]['bestParticipant3']);
+                    $bestParticipantResult=$participant[$count]['bestParticipant'];
                     $count++;
+                    
                 }
                 }
                 // var_dump($products);
@@ -218,9 +220,11 @@ try{
         if(sizeof($bestParticipant)>2){
         echo $bestParticipant[2]."<br>";}
         echo "</div>";
-        echo "<div style='width:300px;margin:30px auto;text-align:center;'><h3>最佳辩手</h3>";
-        echo $bestParticipant[0]."<br>";        
-        echo "</div>";
+        // echo "<div style='width:300px;margin:30px auto;text-align:center;'><h3>最佳辩手</h3>";
+        // echo $bestParticipant[0]."<br>";        
+        // echo "</div>";
+        
+        
 
         
         // var_dump($participant_score);
@@ -236,4 +240,27 @@ catch(PDOException $e)
 }
 
 ?>
+<div class="container">
+    <form method="POST" action="/php/bestParticipant.php" style="width:300px;margin:auto auto;text-align:center;">
+    <h1>最佳辩手</h1>
+        <select name="bestParticipant" id="participant1" class="form-control group" required
+        <?php
+                if($bestParticipantResult!="0"){
+                    echo "disabled" ; }
+            ?>
+        >
+        <?php
+            for($i=0;$i<3;$i++){
+                echo "<option value='$bestParticipant[$i]'>$bestParticipant[$i]</option>";
+            }
+        ?>
+        </select>
+        <button type="submit" 
+        <?php
+                if($bestParticipantResult!="0"){
+                    echo "disabled" ; }
+            ?>
+        >提交</button>
+    </form>
+</div>
 
