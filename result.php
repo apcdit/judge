@@ -142,6 +142,9 @@
         var arrayResults = data[0];
         var judgeResult = data[2];
         console.log(arrayResults);
+        var mark_judge_pos = data[4];
+        var mark_judge_neg = data[5];
+
         arrayPos = arrayResults.filter(function(value){
             return value['side'] == 1;
         })
@@ -204,7 +207,7 @@
            <tr><td>${impression_pos_judges}</td><td>${impression_neg_judges}</td></tr>
 
            <tr style="text-align:center;font-size: 40px;"><td rowspan="2">分数票</td><td>${mark_pos}</td><td>${mark_neg}</td></tr>
-           <tr><td>${mark_pos_judges}</td><td>${mark_neg_judges}</td></tr>
+           <tr><td>${mark_judge_pos}</td><td>${mark_judge_neg}</td></tr>
            
            <tr style="text-align:center;font-size: 40px;"><td rowspan="2">总结票</td><td>${zongjie_pos}</td><td>${zongjie_neg}</td></tr>
            <tr><td>${zongjie_pos_judges}</td><td>${zongjie_neg_judges}</td></tr>
