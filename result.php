@@ -132,7 +132,7 @@
             },
             dataType: "JSON",
             success: function(response){
-                console.log(response)
+                // console.log(response)
                 processResult(response);
             }
         });
@@ -141,10 +141,12 @@
     function processResult(data){
         var arrayResults = data[0];
         var judgeResult = data[2];
-        console.log(arrayResults);
+        // console.log(arrayResults);
         var mark_judge_pos = data[4];
         var mark_judge_neg = data[5];
 
+        console.log(mark_judge_pos);
+        console.log(mark_judge_neg);
         arrayPos = arrayResults.filter(function(value){
             return value['side'] == 1;
         })
