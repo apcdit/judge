@@ -26,9 +26,9 @@
         $side = $c['side'];
 
         if($side == 0){
-            $impression_mark_neg[$judges[$j_id]] = $c['total_mark'];
+            $impression_mark_total_neg[$judges[$j_id]] = $c['total_mark'];
         }else if($side == 1){
-            $impression_mark_pos[$judges[$j_id]] = $c['total_mark'];
+            $impression_mark_total_pos[$judges[$j_id]] = $c['total_mark'];
         }
     }
     
