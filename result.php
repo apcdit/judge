@@ -142,8 +142,8 @@
         var arrayResults = data[0];
         var judgeResult = data[2];
         // console.log(arrayResults);
-        var mark_judge_pos = data[4];
-        var mark_judge_neg = data[5];
+        var mark_judge_pos = JSON.stringify(data[4],null,4);
+        var mark_judge_neg = JSON.stringify(data[5],null,4);
 
         console.log(mark_judge_pos);
         console.log(mark_judge_neg);
