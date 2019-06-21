@@ -206,7 +206,7 @@
            <tr style="text-align:center;font-size: 40px;"><td rowspan="2">分数票</td><td>${mark_pos}</td><td>${mark_neg}</td></tr>
            <tr><td>${mark_pos_judges}</td><td>${mark_neg_judges}</td></tr>
            
-           <tr style="text-align:center;font-size: 40px;"><td rowspan="2">分数票</td><td>${zongjie_pos}</td><td>${zongjie_neg}</td></tr>
+           <tr style="text-align:center;font-size: 40px;"><td rowspan="2">总结票</td><td>${zongjie_pos}</td><td>${zongjie_neg}</td></tr>
            <tr><td>${zongjie_pos_judges}</td><td>${zongjie_neg_judges}</td></tr>
            
            <tr><td colspan="3" style="text-align:center"><strong style="color:darkred;font-size:25px;">最佳三位辩手</strong></td></tr>${output}
