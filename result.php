@@ -108,11 +108,13 @@
                 });
                 if(true) {
                     render += `<a class="btn btn-primary" href="result/impression_result.php?competition_id=${competition_id}" id="generate" style="background-color:darkred;" target="_blank">印象票</a><br>`;
-                    render += `<a class="btn btn-primary" href="result/candidates_result.php?competition_id=${competition_id}" id="generate" style="background-color:darkred;" target="_blank">最佳辩手</a>`;
+                    render += `<a class="btn btn-primary" href="result/candidates_result.php?competition_id=${competition_id}" id="generate" style="background-color:darkred;" target="_blank">最佳辩手(1)</a>`;
+                    render += `<a class="btn btn-primary" href="result/candidate_result.php?competition_id=${competition_id}" id="generate" style="background-color:darkred;" target="_blank">最佳辩手（3）</a>`;
                     render += `<a class="btn btn-primary" href="result/zongjie_result.php?competition_id=${competition_id}" id="generate" style="background-color:darkred;" target="_blank">总结票</a>`;
                     render += `<a class="btn btn-primary" href="result/mark_result.php?competition_id=${competition_id}" id="generate" style="background-color:darkred;" target="_blank">分数票</a>`;
                     render += `<a class="btn btn-primary" href="result/result_summary.php?competition_id=${competition_id}" id="generate" style="background-color:darkred;" target="_blank">Summary</a>`;
                 }
+
 
                 $('#result').html(render);
 
@@ -130,7 +132,7 @@
             },
             dataType: "JSON",
             success: function(response){
-                console.log(response)
+                // console.log(response)
                 processResult(response);
             }
         });
@@ -139,7 +141,12 @@
     function processResult(data){
         var arrayResults = data[0];
         var judgeResult = data[2];
-        console.log(arrayResults);
+        // console.log(arrayResults);
+        var mark_judge_pos = JSON.stringify(data[4],null,4);
+        var mark_judge_neg = JSON.stringify(data[5],null,4);
+
+        console.log(mark_judge_pos);
+        console.log(mark_judge_neg);
         arrayPos = arrayResults.filter(function(value){
             return value['side'] == 1;
         })
@@ -202,9 +209,9 @@
            <tr><td>${impression_pos_judges}</td><td>${impression_neg_judges}</td></tr>
 
            <tr style="text-align:center;font-size: 40px;"><td rowspan="2">分数票</td><td>${mark_pos}</td><td>${mark_neg}</td></tr>
-           <tr><td>${mark_pos_judges}</td><td>${mark_neg_judges}</td></tr>
+           <tr><td>${mark_judge_pos}</td><td>${mark_judge_neg}</td></tr>
            
-           <tr style="text-align:center;font-size: 40px;"><td rowspan="2">分数票</td><td>${zongjie_pos}</td><td>${zongjie_neg}</td></tr>
+           <tr style="text-align:center;font-size: 40px;"><td rowspan="2">总结票</td><td>${zongjie_pos}</td><td>${zongjie_neg}</td></tr>
            <tr><td>${zongjie_pos_judges}</td><td>${zongjie_neg_judges}</td></tr>
            
            <tr><td colspan="3" style="text-align:center"><strong style="color:darkred;font-size:25px;">最佳三位辩手</strong></td></tr>${output}

@@ -1,3 +1,8 @@
+<?php
+  session_start();
+  $judge_name = $_SESSION['judge_name'];
+?>
+
 <nav aria-label="Page navigation" style="text-align: center;">
 <div style="display:inline-block;">
   <ul class="pagination" >
@@ -19,6 +24,7 @@
       </a>
     </li>
   </ul>
+    <h2>评审：<?php echo $judge_name; ?><h2>
   </div>
 </nav>
 

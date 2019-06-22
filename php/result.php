@@ -3,7 +3,7 @@
     include('../inc/connect.php');
 
     $competition_id = $_GET['competition_id'];
-    $sql = $conn->prepare("SELECT judge_id, side,mark_ticket, impression_ticket, zongjie_ticket  FROM competition WHERE competition_id=?");
+    $sql = $conn->prepare("SELECT * FROM competition WHERE competition_id=?");
     $sql->execute([$competition_id]);
     
     $competitions = $sql->fetchAll();
@@ -20,6 +20,18 @@
         }
     }
 
+    $impression_mark_total_pos = $impression_mark_total_neg = array();
+    foreach($competitions as $c){
+        $j_id = $c['judge_id'];
+        $side = $c['side'];
+
+        if($side == 0){
+            $impression_mark_total_neg[$judges[$j_id]] = $c['total_mark'];
+        }else if($side == 1){
+            $impression_mark_total_pos[$judges[$j_id]] = $c['total_mark'];
+        }
+    }
+    
        /*
     BEST PARTICIPANT
 */
@@ -363,5 +375,5 @@ $bestParticipant = calResult($numBest, $count, $minVote);
         };
         
 
-    echo json_encode(array($competitions,$top3,$judges,$bestParticipant));
+    echo json_encode(array($competitions,$top3,$judges,$bestParticipant,$impression_mark_total_pos,$impression_mark_total_neg));
 ?>
