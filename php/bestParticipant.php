@@ -16,7 +16,7 @@ try{
         $participant[] = $row;
         }
         var_dump($participant);
-        if($participant[0]['bestParticipant1']!="0")
+        if($participant[0]['bestParticipant']!="0")
         {header('Location:../votingResult.php');}
         else{
             try {
