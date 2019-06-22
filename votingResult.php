@@ -214,7 +214,7 @@ try{
                 if($participant_score[$j][$keys[$j]]==$ranking[$i]){array_push($bestParticipant,key($participant_score[$j])); }
             }
         }
-        echo "<div style='width:300px;margin:30px auto;text-align:center;'><h3>最佳三位辩手</h3>";
+        echo "<div style='width:300px;margin:30px auto;text-align:center;'><h3>最佳辩手候选人</h3>";
         echo $bestParticipant[0]."<br>";
         echo $bestParticipant[1]."<br>";
         if(sizeof($bestParticipant)>2){

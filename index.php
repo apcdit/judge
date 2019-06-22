@@ -23,8 +23,7 @@ try {
     $products = array();
     if($stmt->execute()){
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        $score[] = $row;
-        
+        $score[] = $row;      
         
         //  echo($score[0]['total_mark']);
         }
