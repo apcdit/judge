@@ -19,6 +19,22 @@ try{
      var_dump($participant);
      if($participant[0]['bestParticipant1']!="0" ||$participant[0]['bestParticipant1']!="0" || $participant[0]['bestParticipant1']!="0")
      { header('Location:../mark3.php');}
+     else{
+         
+            try {
+                
+                $sql = "UPDATE  competition  SET bestParticipant1='$participant1',bestParticipant2='$participant2',bestParticipant3='$participant3'
+                WHERE judge_id='$userID'  AND competition_id='$competition_id1'";
+                // use exec() because no results are returned
+                $conn->exec($sql);
+                header('Location:../mark3.php');
+                }
+            catch(PDOException $e)
+                {
+                echo $sql . "<br>" . $e->getMessage();
+                }
+
+     }
     
  }
 catch(PDOException $e)
@@ -26,17 +42,5 @@ catch(PDOException $e)
  echo $stmt . "<br>" . $e->getMessage();
  }
 
-try {
-    
-    $sql = "UPDATE  competition  SET bestParticipant1='$participant1',bestParticipant2='$participant2',bestParticipant3='$participant3'
-     WHERE judge_id='$userID'  AND competition_id='$competition_id1'";
-    // use exec() because no results are returned
-    $conn->exec($sql);
-     header('Location:../mark3.php');
-    }
-catch(PDOException $e)
-    {
-    echo $sql . "<br>" . $e->getMessage();
-    }
 
 ?>
