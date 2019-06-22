@@ -1,5 +1,5 @@
 <?php
-  session_start();
+  
   $judge_name = $_SESSION['judge_name'];
 ?>
 

@@ -1,10 +1,10 @@
 <?php
 include('header.php'); 
-
+session_start();
 include('navigation.php');
 
 
-session_start();
+
 
 
 if(!isset($_SESSION['userID'])){

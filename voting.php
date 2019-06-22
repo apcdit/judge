@@ -60,9 +60,9 @@ catch(PDOException $e)
 <body>
 <?php include('navigation.php');?>
 <div class="container">
-<form method="POST" action="php/bestparticipantHandler.php">
+<form method="POST" action="php/bestparticipantHandler.php" onsubmit="return validateForm()"> 
         <h3>最佳辩手1<span style="color:red;">*</span></h3>
-        <select name="participant1" id="participant1" class="form-control group" required
+        <select name="participant1" id="participant1" class="form-control group"  onchange="myFunction1()" required 
         <?php
             if($participant[0]['bestParticipant1']!='0' && $participant[0]['bestParticipant2']!='0' && $participant[0]['bestParticipant3']!='0')
                 echo "disabled" ; 
@@ -116,7 +116,7 @@ catch(PDOException $e)
         </select>
         <br>
 <h3>最佳辩手2<span style="color:red;">*</span></h3>
-<select name="participant2" id="participant2" class="form-control group" required
+<select name="participant2" id="participant2" class="form-control group" required onchange="myFunction2()"
         <?php
             if(
                     $participant[0]['bestParticipant1']!='0' &&
@@ -175,7 +175,7 @@ catch(PDOException $e)
 </select>
 <br>
 <h3>最佳辩手3<span style="color:red;">*</span></h3>
-<select name="participant3" id="participant3" class="form-control group" required
+<select name="participant3" id="participant3" class="form-control group" required onchange="myFunction3()"
     <?php
                     if(
                             $participant[0]['bestParticipant1']!='0' &&
@@ -232,7 +232,7 @@ catch(PDOException $e)
                 ?>
 </select>
 <br/>
-<button class="btn btn-primary btn-block btn-login" type="submit" onclick=check()
+<input class="btn btn-primary btn-block btn-login" type="submit" value="提交"
 <?php
                 if(
                         $participant[0]['bestParticipant1']!='0' &&
@@ -243,7 +243,7 @@ catch(PDOException $e)
                         }
                         
                 ?>
->提交</button>
+>
 </form>
 <div>
     <p style="font-size:0.8rem;color:darkred;">*选出三位心目中最佳的三位辩手!</p>
@@ -252,11 +252,28 @@ catch(PDOException $e)
 
 </body>
 
+
+
 <script>
-if(<?php
-    echo $participant[0]['bestParticipant1']=='0' &&    $participant[0]['bestParticipant2']=='0' &&    $participant[0]['bestParticipant3']=='0'
-?>){
-$(window).bind('beforeunload', function(){
-  return "离开前选出三位辩手";
-});}
+function myFunction1(){
+    var x =document.getElementById("participant1").value;
+    // alert(x);
+}
+function myFunction2(){
+    var y =document.getElementById("participant2").value;
+    // alert(y);
+}
+function myFunction3(){
+    var z =document.getElementById("participant3").value;
+    // alert(z);
+}
+function validateForm(){
+    var x =document.getElementById("participant1").value;
+    var y =document.getElementById("participant2").value;
+    var z =document.getElementById("participant3").value;
+    if((x==y) || (x==z)|| (y==z)){
+        alert("请选出不同的辩手！");
+        return false;
+    }
+}
 </script>

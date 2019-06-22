@@ -83,45 +83,70 @@ else if($marks_pos_1==$marks_neg_1)
 
             }
 }
-try {
-    
-    $sql = "INSERT INTO competition (competition_id,side, judge_id,lilun,zhixun_1,
-    yuyan_1,ziyou_1,bolun,gongbian,yuyan_2,ziyou_2,zhixun_3,xiaojie,yuyan_3,
-    ziyou_3,chenci,yuyan_4,ziyou_4,tuanti ,total_mark,mark_ticket)
-    VALUES ('$competition_id', $side_pos,$judge_id,$lilun_pos,
-    $zhixun_pos_1,$yuyan_pos_1,$ziyou_pos_1,$bolun_pos,
-    $gongbian_pos,$yuyan_pos_2,$ziyou_pos_2,$zhixun_pos_2,
-    $xiaojie_pos,$yuyan_pos_3,$ziyou_pos_3,$chenci_pos,$yuyan_pos_4,$ziyou_pos_4 ,$tuanti_pos,$marks_pos_1,$fen_shu_ticket_pos
-    )";
-    // use exec() because no results are returned
-    $conn->exec($sql);
-    // echo "New record created successfully";
-    Header("Location: mark2.php");
-    }
-catch(PDOException $e)
-    {
-    echo $sql . "<br>" . $e->getMessage();
-    }
 
-    try {
+try {
+    $stmt = $conn->prepare("SELECT * FROM competition WHERE competition_id=? AND judge_id=? "); 
+    $stmt->execute([$_SESSION['titleID'], $_SESSION['userID']]);
+          
     
-        $sql = "INSERT INTO competition (competition_id,side, judge_id,lilun,zhixun_1,
-        yuyan_1,ziyou_1,bolun,gongbian,yuyan_2,ziyou_2,zhixun_3,xiaojie,yuyan_3
-        ,	ziyou_3,chenci,yuyan_4,ziyou_4,	tuanti,total_mark,mark_ticket)
-        VALUES ('$competition_id',$side_neg , $judge_id  ,$lilun_neg,$zhixun_neg_1,$yuyan_neg_1,$ziyou_neg_1,
-        $bolun_neg,$gongbian_neg,$yuyan_neg_2,$ziyou_neg_2,$zhixun_neg_2,$xiaojie_neg,$yuyan_neg_3,$ziyou_neg_3,
-        $chenci_neg,$yuyan_neg_4,$ziyou_neg_4 ,$tuanti_neg,$marks_neg_1,$fen_shu_ticket_neg
-        )";
-        // use exec() because no results are returned
-        $conn->exec($sql);
-        // echo "New record created successfully";
+    // // set the resulting array to associative
+    $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    // //  var_dump($stmt->fetchAll());
+    $data=$stmt->fetchAll();
+    if(sizeof($data)>1){
         header('Location:../mark2.php');
-        }
-    catch(PDOException $e)
-        {
-        echo $sql . "<br>" . $e->getMessage();
-        }
-       
+    }
+    else{
+        try {
+    
+            $sql = "INSERT INTO competition (competition_id,side, judge_id,lilun,zhixun_1,
+            yuyan_1,ziyou_1,bolun,gongbian,yuyan_2,ziyou_2,zhixun_3,xiaojie,yuyan_3,
+            ziyou_3,chenci,yuyan_4,ziyou_4,tuanti ,total_mark,mark_ticket)
+            VALUES ('$competition_id', $side_pos,$judge_id,$lilun_pos,
+            $zhixun_pos_1,$yuyan_pos_1,$ziyou_pos_1,$bolun_pos,
+            $gongbian_pos,$yuyan_pos_2,$ziyou_pos_2,$zhixun_pos_2,
+            $xiaojie_pos,$yuyan_pos_3,$ziyou_pos_3,$chenci_pos,$yuyan_pos_4,$ziyou_pos_4 ,$tuanti_pos,$marks_pos_1,$fen_shu_ticket_pos
+            )";
+            // use exec() because no results are returned
+            $conn->exec($sql);
+            // echo "New record created successfully";
+            Header("Location: ../mark2.php");
+            }
+        catch(PDOException $e)
+            {
+            echo $sql . "<br>" . $e->getMessage();
+            }
+        
+            try {
+            
+                $sql = "INSERT INTO competition (competition_id,side, judge_id,lilun,zhixun_1,
+                yuyan_1,ziyou_1,bolun,gongbian,yuyan_2,ziyou_2,zhixun_3,xiaojie,yuyan_3
+                ,	ziyou_3,chenci,yuyan_4,ziyou_4,	tuanti,total_mark,mark_ticket)
+                VALUES ('$competition_id',$side_neg , $judge_id  ,$lilun_neg,$zhixun_neg_1,$yuyan_neg_1,$ziyou_neg_1,
+                $bolun_neg,$gongbian_neg,$yuyan_neg_2,$ziyou_neg_2,$zhixun_neg_2,$xiaojie_neg,$yuyan_neg_3,$ziyou_neg_3,
+                $chenci_neg,$yuyan_neg_4,$ziyou_neg_4 ,$tuanti_neg,$marks_neg_1,$fen_shu_ticket_neg
+                )";
+                // use exec() because no results are returned
+                $conn->exec($sql);
+                // echo "New record created successfully";
+                header('Location:../mark2.php');
+                }
+                catch(PDOException $e)
+                {
+                echo $sql . "<br>" . $e->getMessage();
+                }
+            }
+}   
+catch(PDOException $e)
+                {
+                echo $stmt . "<br>" . $e->getMessage();
+                }
+           
+           
+
+ 
+
+    
 
 
 ?>
