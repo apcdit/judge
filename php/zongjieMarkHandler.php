@@ -8,6 +8,29 @@ $side= $_REQUEST["side"];
 $userID= $_SESSION['userID'] ;
 $competition_id1 = $_SESSION['titleID'];
 
+//crosscheck data existed in database--------------------------------------------------------
+try{
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    $stmt = $conn->prepare("SELECT zongjie_ticket FROM `competition` WHERE judge_id='$userID' and competition_id='$competition_id1'");
+    // use exec() because no results are returned
+    $result=[];
+    if($stmt->execute()){
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+       array_push($result,$row["zongjie_ticket"]);
+       
+        }}
+        var_dump($result);
+       if(($result[0]==0 && $result[1]==1)||($result[0]==1 && $result[1]==0))
+       {
+        header('Location:../votingResult.php');
+       } 
+       
+    }
+catch(PDOException $e)
+{
+echo $stmt . "<br>" . $e->getMessage();
+}
+
 try {
     //------------------Set  mark ticket = zongjie mark if total mark negative=positve and tuanti neg = tuanti pos
     $compare = $conn->prepare("SELECT mark_ticket FROM competition WHERE judge_id=$userID and side=0 AND competition_id='$competition_id1'");

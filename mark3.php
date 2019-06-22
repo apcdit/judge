@@ -185,10 +185,3 @@ body{
 }
 </style>
 
-<script>
-var x=0;
-if(x==0){
-location.reload(forceGet);
-x++;
-}
-</script>
