@@ -52,6 +52,10 @@
                                     </select>
                                 </div>
                                 
+                                <div class="form-group row">
+                                    <h3>密码</h3>
+                                    <input type="password" id="password" name="password" class="form-control group" placeholder='请输入密码' required>
+                                </div>
                                 <br>
 
                                     <div>
@@ -88,26 +92,30 @@
                 },
                 title:{
                     required:true,
+                },
+                password:{
+                    required: true,
                 }
             },
             messages:{
                 judge: "请勿留空！",
-                title: "请勿留空！"
+                title: "请勿留空！",
+                password: "请勿留空！"
             }
         })
     });
 
     $(document).ready(function(){
         $('#judge').change(fetchTitle);
-        $('.btn-login').click(function(){
-            var pw = prompt("请输入大会密码");
-            if(pw == "" || pw == null){
-                return false;
-            }else if(pw != "apcdit123"){
-                alert("密码错误！");
-                return false;
-            }
-        })
+        // $('.btn-login').click(function(){
+        //     var pw = prompt("请输入大会密码");
+        //     if(pw == "" || pw == null){
+        //         return false;
+        //     }else if(pw != "apcdit123"){
+        //         alert("密码错误！");
+        //         return false;
+        //     }
+        // })
     })
 
     function fetchTitle(e){
