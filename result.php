@@ -198,10 +198,10 @@
         $.each(bestParticipant, function(key,value){
             output += `<tr style="font-size:40px;"><td style="text-align:center">${key}</td><td style="text-align:center">${value[0]}</td><td style="text-align:center">${value[1]}</td></tr>`;
         });
-        var empty = [];
-        $.each(first,function(key,value){
-            empty.push([key,value]);
-        });
+        // var empty = [];
+        // $.each(first,function(key,value){
+        //     empty.push([key,value]);
+        // });
 
         var content = `<table style="margin:0 auto;width:80%;" border="1"><tbody>
            <tr style="font-size:40px;font-weight:900;"><td></td><td>正</td><td>反</td></tr>
@@ -216,7 +216,7 @@
            
            <tr><td colspan="3" style="text-align:center"><strong style="color:darkred;font-size:25px;">最佳三位辩手</strong></td></tr>${output}
            <tr><td colspan="3"><strong style="color:darkred;font-size:25px;">最佳辩手</strong></td></tr>
-           <tr><td colspan="3"><strong style="font-size:25px;">${empty[0]}</strong></td></tr>
+           <tr><td colspan="3"><strong style="font-size:25px;">${first[0]['bestParticipant']}</strong></td></tr>
         </tbody>
         </table>`;
 
