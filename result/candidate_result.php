@@ -59,7 +59,8 @@ $minVote = -9999;
 $numBest = 3;
 $bestParticipant = calResult($numBest, $count, $minVote);
 
-// if(count($bestParticipant) > $numBest){
+// print_r($bestParticipant);
+if(count($bestParticipant) > $numBest){
     $min_keys = array_keys($bestParticipant, min($bestParticipant));
     //正方
     $stmt = $conn->prepare("SELECT * FROM competition WHERE competition_id=? and side=1");
@@ -150,9 +151,7 @@ $bestParticipant = calResult($numBest, $count, $minVote);
     foreach($best as $key => $q){
         $bestParticipant[$key] = $q;
     }
-
-
-// }
+}
 ?>
 
 <html>

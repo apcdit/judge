@@ -70,7 +70,7 @@ $minVote = -9999;
 $numBest = 3;
 $bestParticipant = calResult($numBest, $count, $minVote);
 
-// if(count($bestParticipant) > $numBest){
+if(count($bestParticipant) > $numBest){
     $min_keys = array_keys($bestParticipant, min($bestParticipant));
     //正方
     $stmt = $conn->prepare("SELECT * FROM competition WHERE competition_id=? and side=1");
@@ -209,7 +209,63 @@ $bestParticipant = calResult($numBest, $count, $minVote);
         foreach($best as $key => $q){
             $bestParticipant[$key] = array($q,$count[$key]);
         }
+}else{
+    $stmt = $conn->prepare("SELECT * FROM competition WHERE competition_id=? and side=1");
+    $stmt->execute([$competition_id]);
+    $pointsPos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    //反方
+    $stmt = $conn->prepare("SELECT * FROM competition WHERE competition_id=? and side=0");
+    $stmt->execute([$competition_id]);
+    $pointsNeg = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+    foreach($bestParticipant as $key => $q){
+        $p = 0;
+        switch($key){
+            case "正方一辩":
+                foreach($pointsPos as $point){
+                    $p = $p + $point['lilun']+$point['zhixun_1']+$point['yuyan_1'];
+                }
+                break;
+            case "正方二辩":
+                foreach($pointsPos as $point){
+                    $p = $p + $point['bolun'] + $point['gongbian'] + $point['yuyan_2'];
+                }
+                break;
+            case "正方三辩":
+                foreach($pointsPos as $point){
+                    $p = $p + $point['zhixun_3'] + $point['xiaojie'] + $point['yuyan_3'];
+                }
+                break;
+            case "正方四辩":
+                foreach($pointsPos as $point){
+                    $p = $p + $point['chenci']+ $point['yuyan_4'];
+                }
+                break;
+            case "反方一辩":
+                foreach($pointsNeg as $point){
+                    $p = $p + $point['lilun']+$point['zhixun_1']+$point['yuyan_1'];
+                }
+                break;
+            case "反方二辩":
+                foreach($pointsNeg as $point){
+                    $p = $p + $point['bolun'] + $point['gongbian'] + $point['yuyan_2'];
+                }
+                break;
+            case "反方三辩":
+                foreach($pointsNeg as $point){
+                    $p = $p + $point['zhixun_3'] + $point['xiaojie'] + $point['yuyan_3'];
+                }
+                break;
+            case "反方四辩":
+                foreach($pointsNeg as $point){
+                    $p = $p + $point['chenci']+ $point['yuyan_4'];
+                }
+                break;
+        }
+        $bestParticipant[$key] = array($p, $count[$key]);
+    }
+}
         $top3 = $bestParticipant;
         
 //                /*
