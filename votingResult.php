@@ -58,7 +58,7 @@ try {
                 // var_dump($vals);
                 
                 $bestParticipant='';
-                echo "<div id='showData1' style='text-align:center;width:300px;margin:50px auto;'>";
+                echo "<div id='showData1' style='text-align:center;width:300px;margin:50px auto;display:none;'>";
                 echo "<h3>投票票数</h3>";
                  for($i=0;$i<count($vals);$i++)
                  {
@@ -99,7 +99,7 @@ try{
         // use exec() because no results are returned
         
 
-        $stmt = $conn->prepare("SELECT * FROM `competition` WHERE competition_id='$competition_id1' and side=0");
+        $stmt = $conn->prepare("SELECT * FROM `competition` WHERE competition_id='$competition_id1' and side=0 and judge_id=$userID");
         if($stmt->execute()){
             $score1=[];
             $i=0;
@@ -109,15 +109,19 @@ try{
             $negative4=0;
             while($row1 = $stmt->fetch(PDO::FETCH_ASSOC))
             {
+                
             array_push($score1,$row1);
             $negative1=$negative1+$score1[$i]['lilun']+$score1[$i]['zhixun_1']+$score1[$i]['yuyan_1'];
             $negative2=$negative2+$score1[$i]['bolun']+$score1[$i]['gongbian']+$score1[$i]['yuyan_2'];
             $negative3=$negative3+$score1[$i]['zhixun_3']+$score1[$i]['xiaojie']+$score1[$i]['yuyan_3'];
             $negative4=$negative4+$score1[$i]['chenci']+$score1[$i]['yuyan_4'];
+            $impression_ticket_neg=$score1[$i]['impression_ticket'];
+            $zongjie_ticket_neg=$score1[$i]['zongjie_ticket'];
             $i++;
+            
            
         }
-        echo "<div class='row' id='showData2' style='text-align:center;width:300px;margin:auto auto;'><div class='col-sm-6'>";
+        echo "<div class='row' id='showData2' style='text-align:center;width:300px;margin:50px auto;'><div class='col-sm-6'>";
         echo "<span><b>反方辩手分数</b></span>";
         echo "<br>反方一辩"."  ".($negative1);
         echo "<br>反方二辩"."  ".($negative2);
@@ -125,7 +129,7 @@ try{
         echo "<br>反方四辩"."  ".($negative4);
         echo "</div>";
         }
-        $stmt1 = $conn->prepare("SELECT * FROM `competition` WHERE competition_id='$competition_id1' and side=1");
+        $stmt1 = $conn->prepare("SELECT * FROM `competition` WHERE competition_id='$competition_id1' and side=1 and judge_id=$userID");
         // use exec() because no results are returned
         
         if($stmt1->execute()){
@@ -143,7 +147,10 @@ try{
                 $affirmative2=$affirmative2+$score[$j]['bolun']+$score[$j]['gongbian']+$score[$j]['yuyan_2'];
                 $affirmative3=$affirmative3+$score[$j]['zhixun_3']+$score[$j]['xiaojie']+$score[$j]['yuyan_3'];
                 $affirmative4=$affirmative4+$score[$j]['chenci']+$score[$j]['yuyan_4'];
+                $impression_ticket_pos=$score[$j]['impression_ticket'];
+                $zongjie_ticket_pos=$score[$j]['zongjie_ticket'];
                 $j++;
+                
             }
             echo "<div class='col-sm-6'>";
             echo "<span><b>正方辩手分数</b></span>";
@@ -217,7 +224,7 @@ try{
                 if($participant_score[$j][$keys[$j]]==$ranking[$i]){array_push($bestParticipant,key($participant_score[$j])); }
             }
         }
-        echo "<div id='showData3' style='width:300px;margin:30px auto;text-align:center;'><h3>最佳辩手候选人</h3>";
+        echo "<div  style='width:300px;margin:30px auto;text-align:center;display:none;'><h3>最佳辩手候选人</h3>";
         echo $bestParticipant[0]."<br>";
         echo $bestParticipant[1]."<br>";
         if(sizeof($bestParticipant)>2){
@@ -243,10 +250,30 @@ catch(PDOException $e)
 }
 
 ?>
+
+<div class="container" style="width:300px;margin:50px auto;text-align:center;" id="showData3">
+
+<?php 
+    // echo $zongjie_ticket_neg;
+    // echo $zongjie_ticket_pos;
+    // echo $impression_ticket_neg;
+    // echo $impression_ticket_pos;
+    if($zongjie_ticket_neg==0){$zongjie="正方";}
+    else{$zongjie="反方";}
+    if($impression_ticket_neg==0){$impression="正方";}
+    else{$impression="反方";}
+    echo "<b>印象票</b>: ".$impression;
+    echo "<br><b>总结票</b>：".$zongjie;
+
+?>
+
+</div>
+
+
 <div class="container">
-    <form method="POST" action="/php/bestParticipant.php" style="width:300px;margin:auto auto;text-align:center;">
-    <h1>最佳辩手投票</h1>
-        <select name="bestParticipant" id="participant1" class="form-control group" required
+    <form method="POST" action="/php/bestParticipant.php" style="width:300px;margin:50px auto;text-align:center;">
+    <span><b>最佳辩手</b></span>
+        <select name="bestParticipant" id="participant1" class="form-control group" required 
             <?php
                     if($showData!="0"){
                         echo "disabled" ; }
@@ -255,7 +282,7 @@ catch(PDOException $e)
         <?php
         if($showData!="0")
             {
-                echo "<option>".$showData."</option>";
+                echo "</select><span>: ".$showData."</span>";
             }
             else
             {
@@ -268,12 +295,12 @@ catch(PDOException $e)
         <button type="submit" 
             <?php
                     if($showData!="0"){
-                        echo "disabled" ; }
+                        echo "style='display:none;'" ; }
                 ?>
         >提交</button>
     </form>
     <form method="POST" action="/php/delete.php">
-    <button>删除我的资料</button>
+    <button style="display:none;">删除我的资料</button>
     </form>
 </div>
 <div>
@@ -302,9 +329,15 @@ catch(PDOException $e)
 </div>
 
 <script>
-var x=<?php echo $showData;?>;
+var x='<?php echo $showData; ?>';
+// alert(x);
+if(isNaN(x)){
+    document.getElementById('participant1').style.display = "none";
+    }
 if(!isNaN(x)){
-document.getElementById('showData1').style.display = "none";
+
 document.getElementById('showData2').style.display = "none";
 document.getElementById('showData3').style.display = "none";}
+
+
 </script>
