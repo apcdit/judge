@@ -19,12 +19,15 @@ $title = $_SESSION['title'];
 $userID = $_SESSION['userID'];
 $competition_id1 = $_SESSION['titleID'];
 
-$stmt123 = $conn->prepare("SELECT zongjie_ticket FROM competition WHERE competition_id=? AND judge_id=? and side=0"); 
+$stmt123 = $conn->prepare("SELECT zongjie_ticket,bestParticipant FROM competition WHERE competition_id=? AND judge_id=? and side=0"); 
 $stmt123->execute([$_SESSION['titleID'],$_SESSION['userID']]);
 
 $result = $stmt123->setFetchMode(PDO::FETCH_ASSOC);
 // //  var_dump($stmt->fetchAll());
 $data=$stmt123->fetchAll();
+// var_dump($data);
+$showData=$data[0]['bestParticipant'];
+
 $negative=$data[0]['zongjie_ticket'];
 if(sizeof($data)<1){
     header('Location:mark3.php');
@@ -55,7 +58,7 @@ try {
                 // var_dump($vals);
                 
                 $bestParticipant='';
-                echo "<div style='text-align:center;width:300px;margin:50px auto;'>";
+                echo "<div id='showData1' style='text-align:center;width:300px;margin:50px auto;'>";
                 echo "<h3>投票票数</h3>";
                  for($i=0;$i<count($vals);$i++)
                  {
@@ -114,12 +117,12 @@ try{
             $i++;
            
         }
-        echo "<div class='row' style='text-align:center;width:300px;margin:auto auto;'><div class='col-sm-6'>";
-        echo "总分";
-        echo "<br>反方一辩".($negative1);
-        echo "<br>反方二辩".($negative2);
-        echo "<br>反方三辩".($negative3);
-        echo "<br>反方四辩".($negative4);
+        echo "<div class='row' id='showData2' style='text-align:center;width:300px;margin:auto auto;'><div class='col-sm-6'>";
+        echo "<span><b>反方辩手分数</b></span>";
+        echo "<br>反方一辩"."  ".($negative1);
+        echo "<br>反方二辩"."  ".($negative2);
+        echo "<br>反方三辩"."  ".($negative3);
+        echo "<br>反方四辩"."  ".($negative4);
         echo "</div>";
         }
         $stmt1 = $conn->prepare("SELECT * FROM `competition` WHERE competition_id='$competition_id1' and side=1");
@@ -143,11 +146,11 @@ try{
                 $j++;
             }
             echo "<div class='col-sm-6'>";
-            echo "总分";
-            echo "<br>正方一辩".($affirmative1);
-            echo "<br>正方二辩".($affirmative2);
-            echo "<br>正方三辩".($affirmative3);
-            echo "<br>正方四辩".($affirmative4);
+            echo "<span><b>正方辩手分数</b></span>";
+            echo "<br>正方一辩"."  ".($affirmative1);
+            echo "<br>正方二辩"."  ".($affirmative2);
+            echo "<br>正方三辩"."  ".($affirmative3);
+            echo "<br>正方四辩"."  ".($affirmative4);
             echo "</div></div>";
         }
         
@@ -214,7 +217,7 @@ try{
                 if($participant_score[$j][$keys[$j]]==$ranking[$i]){array_push($bestParticipant,key($participant_score[$j])); }
             }
         }
-        echo "<div style='width:300px;margin:30px auto;text-align:center;'><h3>最佳辩手候选人</h3>";
+        echo "<div id='showData3' style='width:300px;margin:30px auto;text-align:center;'><h3>最佳辩手候选人</h3>";
         echo $bestParticipant[0]."<br>";
         echo $bestParticipant[1]."<br>";
         if(sizeof($bestParticipant)>2){
@@ -242,17 +245,17 @@ catch(PDOException $e)
 ?>
 <div class="container">
     <form method="POST" action="/php/bestParticipant.php" style="width:300px;margin:auto auto;text-align:center;">
-    <h1>最佳辩手</h1>
+    <h1>最佳辩手投票</h1>
         <select name="bestParticipant" id="participant1" class="form-control group" required
-        <?php
-                if($bestParticipantResult!="0"){
-                    echo "disabled" ; }
+            <?php
+                    if($showData!="0"){
+                        echo "disabled" ; }
             ?>
         >
         <?php
-        if($bestParticipantResult!="0")
+        if($showData!="0")
             {
-                echo "<option>".$bestParticipantResult."</option>";
+                echo "<option>".$showData."</option>";
             }
             else
             {
@@ -263,14 +266,45 @@ catch(PDOException $e)
         ?>
         </select>
         <button type="submit" 
-        <?php
-                if($bestParticipantResult!="0"){
-                    echo "disabled" ; }
-            ?>
+            <?php
+                    if($showData!="0"){
+                        echo "disabled" ; }
+                ?>
         >提交</button>
     </form>
     <form method="POST" action="/php/delete.php">
     <button>删除我的资料</button>
     </form>
 </div>
+<div>
+    <?php 
+    
+        $stmt123 = $conn->prepare("SELECT bestParticipant FROM competition WHERE competition_id=?  and side=0"); 
+        if($stmt123->execute([$_SESSION['titleID']])){
+        
+        $result = $stmt123->setFetchMode(PDO::FETCH_ASSOC);
+        // //  var_dump($stmt->fetchAll());
+        $data=$stmt123->fetchAll();
+        }
+        // var_dump($data);
+        $finalResult=[];
+        for($i=0;$i<sizeof($data);$i++)
+        {
+            array_push($finalResult,$data[$i]['bestParticipant']);
+        }
+        // var_dump($finalResult);
+        $ticket_of_each_particpant= array_count_values($finalResult);// calculate the number of occurerance       
+        // var_dump($ticket_of_each_particpant) ;
 
+   
+    
+    ?>
+</div>
+
+<script>
+var x=<?php echo $showData;?>;
+if(!isNaN(x)){
+document.getElementById('showData1').style.display = "none";
+document.getElementById('showData2').style.display = "none";
+document.getElementById('showData3').style.display = "none";}
+</script>

@@ -61,7 +61,7 @@ catch(PDOException $e)
 <?php include('navigation.php');?>
 <div class="container">
 <form method="POST" action="php/bestparticipantHandler.php" onsubmit="return validateForm()"> 
-        <h3>最佳辩手1<span style="color:red;">*</span></h3>
+        <h3>侯辩人1<span style="color:red;">*</span></h3>
         <select name="participant1" id="participant1" class="form-control group"  onchange="myFunction1()" required 
         <?php
             if($participant[0]['bestParticipant1']!='0' && $participant[0]['bestParticipant2']!='0' && $participant[0]['bestParticipant3']!='0')
@@ -115,7 +115,7 @@ catch(PDOException $e)
                 ?>
         </select>
         <br>
-<h3>最佳辩手2<span style="color:red;">*</span></h3>
+<h3>侯辩人2<span style="color:red;">*</span></h3>
 <select name="participant2" id="participant2" class="form-control group" required onchange="myFunction2()"
         <?php
             if(
@@ -174,7 +174,7 @@ catch(PDOException $e)
                 ?>
 </select>
 <br>
-<h3>最佳辩手3<span style="color:red;">*</span></h3>
+<h3>侯辩人3<span style="color:red;">*</span></h3>
 <select name="participant3" id="participant3" class="form-control group" required onchange="myFunction3()"
     <?php
                     if(
