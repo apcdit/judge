@@ -157,11 +157,69 @@
                             </tr>
                             <tr>
                                 <th>正方学校:</th>
-                                <td><input type="text" name="posUni"></td>
+                                <th>
+                                    <select name="posUni">
+                                        <option value="新加坡国立大学">新加坡国立大学</option>
+                                        <option value="山东大学">山东大学</option>
+                                        <option value="UCSI大学">UCSI大学</option>
+                                        <option value="昆士兰大学">昆士兰大学</option>
+                                        <option value="南京大学">南京大学</option>
+                                        <option value="多伦多大学">多伦多大学</option>
+                                        <option value="澳大利亚国立大学">澳大利亚国立大学</option>
+                                        <option value="上海交通大学">上海交通大学</option>
+                                        <option value="马来西亚北方大学">马来西亚北方大学</option>
+                                        <option value="东吴大学">东吴大学</option>
+                                        <option value="深圳大学">深圳大学</option>
+                                        <option value="马来西亚国立大学">马来西亚国立大学</option>
+                                        <option value="中国政法大学">中国政法大学</option>
+                                        <option value="马来西亚理科大学总院校">马来西亚理科大学总院校</option>
+                                        <option value="香港浸会大学">香港浸会大学</option>
+                                        <option value="香港科技大学">香港科技大学</option>
+                                        <option value="上海交通大学医学院">上海交通大学医学院</option>
+                                        <option value="新加坡南洋理工大学">新加坡南洋理工大学</option>
+                                        <option value="中国人民大学">中国人民大学</option>
+                                        <option value="新南威尔士大学">新南威尔士大学</option>
+                                        <option value="香港中文大学">香港中文大学</option>
+                                        <option value="世新大学">世新大学</option>
+                                        <option value="西南财经大学">西南财经大学</option>
+                                        <option value="澳门科技大学">澳门科技大学</option>
+                                        <option value="Test">Test</option>
+                                    </select>
+                                </th>
+                                <!-- <td><input type="text" name="posUni"></td> -->
                             </tr>
                             <tr>
                                 <th>反方学校:</th>
-                                <td><input type="text" name="negUni"></td>
+                                <th>
+                                    <select name="negUni">
+                                        <option value="新加坡国立大学">新加坡国立大学</option>
+                                        <option value="山东大学">山东大学</option>
+                                        <option value="UCSI大学">UCSI大学</option>
+                                        <option value="昆士兰大学">昆士兰大学</option>
+                                        <option value="南京大学">南京大学</option>
+                                        <option value="多伦多大学">多伦多大学</option>
+                                        <option value="澳大利亚国立大学">澳大利亚国立大学</option>
+                                        <option value="上海交通大学">上海交通大学</option>
+                                        <option value="马来西亚北方大学">马来西亚北方大学</option>
+                                        <option value="东吴大学">东吴大学</option>
+                                        <option value="深圳大学">深圳大学</option>
+                                        <option value="马来西亚国立大学">马来西亚国立大学</option>
+                                        <option value="中国政法大学">中国政法大学</option>
+                                        <option value="马来西亚理科大学总院校">马来西亚理科大学总院校</option>
+                                        <option value="香港浸会大学">香港浸会大学</option>
+                                        <option value="香港科技大学">香港科技大学</option>
+                                        <option value="上海交通大学医学院">上海交通大学医学院</option>
+                                        <option value="新加坡南洋理工大学">新加坡南洋理工大学</option>
+                                        <option value="中国人民大学">中国人民大学</option>
+                                        <option value="新南威尔士大学">新南威尔士大学</option>
+                                        <option value="香港中文大学">香港中文大学</option>
+                                        <option value="世新大学">世新大学</option>
+                                        <option value="西南财经大学">西南财经大学</option>
+                                        <option value="澳门科技大学">澳门科技大学</option>
+                                        <option value="Test">Test</option>
+                                    </select>
+                                </th>
+                                <!-- <td><input type="text" name="negUni"></td> -->
                             </tr>
                         </tbody>
                     </table>

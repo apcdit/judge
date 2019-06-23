@@ -88,8 +88,8 @@ $result = $sql->fetchAll(PDO::FETCH_ASSOC);
         <div id="title">
             <h1><?php echo $competition_id.". ".$title[0]; ?></h1>
         </div>
-        <img id="logo_pos" src="<?php echo $image_pos; ?>" height= 12% width=auto alt="">
-        <img id="logo_neg" src="<?php echo $image_neg; ?>" height= 12% width=auto alt="">
+        <img id="logo_pos" src="<?php echo $image_pos; ?>" style="height:35%; width:auto;" alt="">
+        <img id="logo_neg" src="<?php echo $image_neg; ?>" style="height:35%; width:auto;" alt="">
         <!-- <h3 id="ticket" style="font-weight:900;"><?php echo $competition_id ?></h3> -->
         <table border="0" id="tab" align="center">
             <tbody>
@@ -117,7 +117,7 @@ $result = $sql->fetchAll(PDO::FETCH_ASSOC);
                     <th><h5 class="ticket_name">总结票</h5></th>
                     <th><h4><?php echo $zongjie_neg; ?></h4></th>
                 </tr>
-                <tr style="height:1.7vh;"><th></th></tr>
+                <tr style="height:3.5vh;"><th></th></tr>
                 <tr id="marks">
                     <th><h4 style="color:#982b24;"><strong><i><?php echo $impression_pos+$mark_pos+$zongjie_pos; ?></i></strong></h4></th>
                     <th><h5 class="ticket_name">总票数</h5></th>
@@ -189,8 +189,8 @@ $result = $sql->fetchAll(PDO::FETCH_ASSOC);
         /* margin-top: 20%;
         margin-left: 34%; */
         position: fixed;
-        left: 15%;
-        top: 20%;
+        left: 8%;
+        top: 8%;
         width: 17%;
         height: auto;
     }
@@ -198,8 +198,8 @@ $result = $sql->fetchAll(PDO::FETCH_ASSOC);
         /* margin-top: 20%;
         margin-left: 18%; */
         position: fixed;
-        left: 70%;
-        top: 20%;
+        left: 57%;
+        top: 8%;
         width: 17%;
         height: auto;
     }
