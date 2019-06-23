@@ -117,6 +117,7 @@ try{
             $negative4=$negative4+$score1[$i]['chenci']+$score1[$i]['yuyan_4'];
             $impression_ticket_neg=$score1[$i]['impression_ticket'];
             $zongjie_ticket_neg=$score1[$i]['zongjie_ticket'];
+            $fenshu_neg=$score1[$i]['mark_ticket'];
             $i++;
             
            
@@ -149,6 +150,7 @@ try{
                 $affirmative4=$affirmative4+$score[$j]['chenci']+$score[$j]['yuyan_4'];
                 $impression_ticket_pos=$score[$j]['impression_ticket'];
                 $zongjie_ticket_pos=$score[$j]['zongjie_ticket'];
+                $fenshu_pos=$score[$j]['mark_ticket'];
                 $j++;
                 
             }
@@ -262,8 +264,11 @@ catch(PDOException $e)
     else{$zongjie="反方";}
     if($impression_ticket_neg==0){$impression="正方";}
     else{$impression="反方";}
-    echo "<b>印象票</b>: ".$impression;
-    echo "<br><b>总结票</b>：".$zongjie;
+    if($fenshu_pos>$fenshu_neg){$fenshu="正方";}
+    else{$fenshu="反方";}
+    echo "<b>分数票</b>: ".$fenshu;
+    echo "<br><b>印象票</b>: ".$impression;
+    echo "<br><b>总结票</b>: ".$zongjie;
 
 ?>
 
@@ -300,7 +305,7 @@ catch(PDOException $e)
         >提交</button>
     </form>
     <form method="POST" action="/php/delete.php">
-    <button style="display:none;">删除我的资料</button>
+    <button style="display:none;    ">删除我的资料</button>
     </form>
 </div>
 <div>
