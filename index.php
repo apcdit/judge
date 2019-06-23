@@ -105,7 +105,7 @@ catch(PDOException $e)
             
             ?>
         >
-        <strong><h1 class="text-center">打分表格</h1></strong>
+        <strong><h1 class="text-center">分数票</h1></strong>
             <hr>
             <strong><h2 class="text-center">题目: <?php echo $title ?></h2></strong>
             <a href="php/logout_process.php">LOGOUT</a>
