@@ -305,7 +305,7 @@ catch(PDOException $e)
         >提交</button>
     </form>
     <form method="POST" action="/php/delete.php">
-    <button style="display:none;    ">删除我的资料</button>
+    <button>删除我的资料</button>
     </form>
 </div>
 <div>
