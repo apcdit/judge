@@ -18,7 +18,7 @@
                     <div class="container">
                         <!-- title -->
                         <div class="text-center">
-                            <h1>评审</h1>                        
+                            <h1>电子投票系统</h1>                        
                         </div>
                         <hr>
                         <!-- login form -->
