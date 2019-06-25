@@ -2,7 +2,7 @@
 include('header.php'); 
 session_start();
 include('navigation.php');
-
+$title = $_SESSION['title'];
 
 
 
@@ -58,6 +58,7 @@ try {
                 // var_dump($vals);
                 
                 $bestParticipant='';
+                echo "<h2 style='text-align:center;'>题目：".$title."</h2>";
                 echo "<div id='showData1' style='text-align:center;width:300px;margin:50px auto;display:none;'>";
                 echo "<h3>投票票数</h3>";
                  for($i=0;$i<count($vals);$i++)
@@ -108,28 +109,34 @@ try{
             $negative3=0;
             $negative4=0;
             while($row1 = $stmt->fetch(PDO::FETCH_ASSOC))
-            {
-                
-            array_push($score1,$row1);
-            $negative1=$negative1+$score1[$i]['lilun']+$score1[$i]['zhixun_1']+$score1[$i]['yuyan_1'];
-            $negative2=$negative2+$score1[$i]['bolun']+$score1[$i]['gongbian']+$score1[$i]['yuyan_2'];
-            $negative3=$negative3+$score1[$i]['zhixun_3']+$score1[$i]['xiaojie']+$score1[$i]['yuyan_3'];
-            $negative4=$negative4+$score1[$i]['chenci']+$score1[$i]['yuyan_4'];
-            $impression_ticket_neg=$score1[$i]['impression_ticket'];
-            $zongjie_ticket_neg=$score1[$i]['zongjie_ticket'];
-            $fenshu_neg=$score1[$i]['mark_ticket'];
-            $i++;
-            
-           
+            {                
+                array_push($score1,$row1);
+                $negative1=$negative1+$score1[$i]['lilun']+$score1[$i]['zhixun_1']+$score1[$i]['yuyan_1'];
+                $negative2=$negative2+$score1[$i]['bolun']+$score1[$i]['gongbian']+$score1[$i]['yuyan_2'];
+                $negative3=$negative3+$score1[$i]['zhixun_3']+$score1[$i]['xiaojie']+$score1[$i]['yuyan_3'];
+                $negative4=$negative4+$score1[$i]['chenci']+$score1[$i]['yuyan_4'];
+                $impression_ticket_neg=$score1[$i]['impression_ticket'];
+                $zongjie_ticket_neg=$score1[$i]['zongjie_ticket'];
+                $fenshu_neg=$score1[$i]['mark_ticket'];
+                $ziyou_bianlun_neg=$score1[$i]['ziyou_1']+$score1[$i]['ziyou_2']+$score1[$i]['ziyou_3']+$score1[$i]['ziyou_4'];
+                $total_mark_neg=$score1[$i]['total_mark'];
+                $tuanti_neg=$score1[$i]['tuanti'];
+                $i++;    
         }
+            
         echo "<div class='row' id='showData2' style='text-align:center;width:300px;margin:50px auto;'><div class='col-sm-6'>";
         echo "<span><b>反方辩手分数</b></span>";
         echo "<br>反方一辩"."  ".($negative1);
         echo "<br>反方二辩"."  ".($negative2);
         echo "<br>反方三辩"."  ".($negative3);
         echo "<br>反方四辩"."  ".($negative4);
+        echo "<br>自由辩论"." ".($ziyou_bianlun_neg);
+        echo "<br>团体分"." ".($tuanti_neg);
+        echo "<br>总分"." ".($total_mark_neg);
+        
         echo "</div>";
         }
+
         $stmt1 = $conn->prepare("SELECT * FROM `competition` WHERE competition_id='$competition_id1' and side=1 and judge_id=$userID");
         // use exec() because no results are returned
         
@@ -151,6 +158,9 @@ try{
                 $impression_ticket_pos=$score[$j]['impression_ticket'];
                 $zongjie_ticket_pos=$score[$j]['zongjie_ticket'];
                 $fenshu_pos=$score[$j]['mark_ticket'];
+                $ziyou_bianlun_pos=$score[$j]['ziyou_1']+$score[$j]['ziyou_2']+$score[$j]['ziyou_3']+$score[$j]['ziyou_4'];
+                $total_mark_pos=$score[$j]['total_mark'];
+                $tuanti_pos=$score[$j]['tuanti'];
                 $j++;
                 
             }
@@ -160,6 +170,9 @@ try{
             echo "<br>正方二辩"."  ".($affirmative2);
             echo "<br>正方三辩"."  ".($affirmative3);
             echo "<br>正方四辩"."  ".($affirmative4);
+            echo "<br>自由辩论"."  ".($ziyou_bianlun_pos);
+            echo "<br>团体分"." ".($tuanti_pos);
+            echo "<br>总分"." ".($total_mark_pos);
             echo "</div></div>";
         }
         
