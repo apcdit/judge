@@ -53,6 +53,9 @@ $marks_neg_1 = $lilun_neg+ $zhixun_neg_1+$yuyan_neg_1+$ziyou_neg_1+$bolun_neg+$g
 +$yuyan_neg_2+$ziyou_neg_2+$zhixun_neg_2+$xiaojie_neg+$yuyan_neg_3+$ziyou_neg_3+$chenci_neg
 +$yuyan_neg_4+$ziyou_neg_4+$tuanti_neg;
 
+if($marks_pos_1==0 or $marks_neg_1==0){header('Location:../index.php');}
+else{
+
 $fen_shu_ticket_pos=0;
 $fen_shu_ticket_neg=0;
 //rules of fenshu system-------------------------------------------------------------------
@@ -143,7 +146,7 @@ catch(PDOException $e)
                 }
            
            
-
+}
  
 
     
