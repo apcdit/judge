@@ -3,6 +3,9 @@
 
   $competitionID;
 
+  // foreach($_POST['competitionID'] as $item){
+  //   echo $item;
+  // }
   try{
     if(!empty($_POST['competitionID'])){
       $competitionID = $_POST['competitionID'];
