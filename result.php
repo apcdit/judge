@@ -228,13 +228,12 @@
         // $.each(first,function(key,value){
         //     empty.push([key,value]);
         // });
-
-        if(length(same_mark_judge) != 0){
-            var output2 = "<tr style='text-align:center;font-size:25px;font-weight:500;'><td>评审</td><td>团体+自由</td><td>团体</td><tr style='text-align:center;font-size:20px;'>";
-            $.each(same_mark_judge, function(key,value){
-                output2 += `<td >${judge_all[key]['name']}</td><td>正: ${value['pos']['tuanti_ziyou']}, 反: ${value['neg']['tuanti_ziyou']}</td><td>正: ${value['pos']['tuanti']}, 反: ${value['neg']['tuanti']}</td>`;
-            });
-        }
+        console.log(same_mark_judge);
+        var output2 = "<tr style='text-align:center;font-size:25px;font-weight:500;'><td>评审</td><td>团体+自由</td><td>团体</td><tr style='text-align:center;font-size:20px;'>";
+        $.each(same_mark_judge, function(key,value){
+            output2 += `<td >${judge_all[key]['name']}</td><td>正: ${value['pos']['tuanti_ziyou']}, 反: ${value['neg']['tuanti_ziyou']}</td><td>正: ${value['pos']['tuanti']}, 反: ${value['neg']['tuanti']}</td>`;
+        });
+        
             
         var output3 = "";
         
