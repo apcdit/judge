@@ -148,12 +148,8 @@
         // console.log(arrayResults);
         var mark_judge_pos = JSON.stringify(data[4],null,4);
         var mark_judge_neg = JSON.stringify(data[5],null,4);
-        console.log(arrayResults);
-        // console.log(mark_judge_pos);
-        // console.log(mark_judge_neg);
 
         var judge_all = data[6];
-        console.log(judge_all);
         arrayPos = arrayResults.filter(function(value){
             return value['side'] == 1;
         });
@@ -182,12 +178,6 @@
             });
         });
 
-
-
-        console.log(same_mark_judge);
-
-        // console.log(arrayPos);
-        // console.log(arrayNeg);
         var impression_pos = 0;
         var impression_pos_judges = [];
         var mark_pos = 0;
@@ -232,45 +222,55 @@
         var output = "";
         
         $.each(bestParticipant, function(key,value){
-            output += `<tr style="font-size:40px;"><td style="text-align:center">${key}</td><td style="text-align:center">${value[0]}</td><td style="text-align:center">${value[1]}</td></tr>`;
+            output += `<tr style="font-size:25px;"><td colspan="3" style="text-align:center">${key}</td></tr>`;//<td style="text-align:center">${value[0]}</td><td style="text-align:center">${value[1]}</td></tr>`;
         });
         // var empty = [];
         // $.each(first,function(key,value){
         //     empty.push([key,value]);
         // });
-        var output2 = "<tr><td>评审</td><td>团体+自由</td><td>团体</td><tr>";
+        var output2 = "<tr style='text-align:center;font-size:25px;font-weight:500;'><td>评审</td><td>团体+自由</td><td>团体</td><tr style='text-align:center;font-size:20px;'>";
         $.each(same_mark_judge, function(key,value){
-            output2 += `<td>${judge_all[key]['name']}</td><td>正: ${value['pos']['tuanti_ziyou']}, 反: ${value['neg']['tuanti_ziyou']}</td><td>正: ${value['pos']['tuanti']}, 反: ${value['neg']['tuanti']}</td>`;
+            output2 += `<td >${judge_all[key]['name']}</td><td>正: ${value['pos']['tuanti_ziyou']}, 反: ${value['neg']['tuanti_ziyou']}</td><td>正: ${value['pos']['tuanti']}, 反: ${value['neg']['tuanti']}</td>`;
         });
             
         var output3 = "";
         
         mark_judge_all = {}
             // console.log(data[5]);
-
+        var i = 1;
         $.each(data[4], function(key,value){
             let name = key;
             mark_judge_all[name] = {};
             mark_judge_all[name]['pos'] = value;
             mark_judge_all[name]['neg'] = data[5][name];
-            output3 += `<p>${key} => 正：${value}， 反：${data[5][name]}</p><br>`
+            if(value == data[5][name]){
+                output3 += `<p style="color:green;">${i}. ${key} => 正：${value}， 反：${data[5][name]}</p><br>`;
+            }else{
+                output3 += `<p>${i}. ${key} => 正：${value}， 反：${data[5][name]}</p><br>`;
+            }
+            i++;
         });
 
 
         var content = `<table style="margin:0 auto;width:80%;" border="1"><tbody>
-           <tr style="font-size:40px;font-weight:900;"><td></td><td>正</td><td>反</td></tr>
-           <tr style="text-align:center;font-size: 40px;"><td rowspan="2">印象票</td><td>${impression_pos}</td><td>${impression_neg}</td></tr>
-           <tr><td>${impression_pos_judges}</td><td>${impression_neg_judges}</td></tr>
-
-           <tr><td colspan="3" style="text-align:center"><strong style="color:darkred;font-size:25px;">最佳三位辩手</strong></td></tr>${output}
-
-           <tr style="text-align:center;font-size: 40px;"><td rowspan="2">分数票</td><td>${mark_pos}</td><td>${mark_neg}</td></tr>
-           <tr><td colspan="2">${output3}</td></tr>
-            ${output2}</tr>
+           <tr style="font-size:35px;font-weight:900;color:darkred;"><td colspan="3">印象票</td></tr>
+           <tr style="text-align:center;font-size:25px;"><td rowspan="1" style="font-weight:500;">正</td><td>${impression_pos}</td><td>${impression_pos_judges}</tr>
+           <tr style="text-align:center;font-size:25px;"><td style="font-size:25px;font-weight:500;">反</td><td>${impression_neg}</td><td>${impression_neg_judges}</td></tr>
+            <tr>
+            <tr><td colspan="3" style="text-align:center"><strong style="color:darkred;font-size:35px;">最佳三位辩手</strong></td></tr>${output}
+            <tr>
+           <tr style="font-size:35px;font-weight:900;color:darkred;"><td colspan="3">分数票</td></tr>
+           <tr style="text-align:center;font-size:25px;"><td>正</td><td>${mark_pos}</td><td rowspan="2">${output3}</td>
+           <tr style="text-align:center;font-size:25px;"><td>反</td><td>${mark_neg}</td>
+           </tr>
+           <tr>${output2}</tr>
            
-           <tr style="text-align:center;font-size: 40px;"><td rowspan="2">总结票</td><td>${zongjie_pos}</td><td>${zongjie_neg}</td></tr>
-           <tr><td>${zongjie_pos_judges}</td><td>${zongjie_neg_judges}</td></tr>
+           <tr>
+           <tr style="font-size:35px;font-weight:900;color:darkred;"><td colspan="3">总结票</td></tr>
+           <tr style="text-align:center;font-size:25px;"><td>正</td><td>${zongjie_pos}</td><td>${zongjie_pos_judges}</td></tr>
+           <tr style="text-align:center;font-size:25px;"><td>反</td><td>${zongjie_neg}</td><td>${zongjie_neg_judges}</td></tr>
            
+           <tr>
            <tr><td colspan="3"><strong style="color:darkred;font-size:25px;">最佳辩手</strong></td></tr>
            <tr><td colspan="3"><strong style="font-size:25px;">${first[0]['bestParticipant']}</strong></td></tr>
         </tbody>
