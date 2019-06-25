@@ -161,8 +161,8 @@ if(count($bestParticipant) > $numBest){
 
     <body>
     <div class="">
-        <img id="logo_pos" src="<?php echo $image_pos; ?>" height= 12% width=auto alt="">
-        <img id="logo_neg" src="<?php echo $image_neg; ?>" height= 12% width=auto alt="">
+        <img id="logo_pos" src="<?php echo $image_pos; ?>" style="height:35%; width:auto;" alt="">
+        <img id="logo_neg" src="<?php echo $image_neg; ?>" style="height:35%; width:auto;" alt="">
         <h3 id="ticket" style="font-weight:900;">最佳辩手</h3>
         <table border="0" id="tab">
             <tbody>
@@ -207,8 +207,8 @@ if(count($bestParticipant) > $numBest){
         /* margin-top: 20%;
         margin-left: 34%; */
         position: fixed;
-        left: 32%;
-        top: 43%;
+        left: 22.3%;
+        top: 31%;
         width: 17%;
         height: auto;
     }
@@ -216,8 +216,8 @@ if(count($bestParticipant) > $numBest){
         /* margin-top: 20%;
         margin-left: 18%; */
         position: fixed;
-        left: 68%;
-        top: 43%;
+        left: 60.3%;
+        top: 31%;
         width: 17%;
         height: auto;
     }
