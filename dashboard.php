@@ -231,7 +231,7 @@
                             $judges = $stmt->fetchAll();
 
                             foreach($judges as $judge){
-                                echo '<input type="checkbox" style="margin:10px;" name="judgesID[]" value='.$judge['id'].'> '.$judge['name'].'  </input>';
+                                echo '<input type="checkbox" style="margin:10px;" name="judgesID[]" value='.'"'.$judge['id'].'"'.'> '.$judge['name'].'  </input>';
                             }
 
                         ?>
