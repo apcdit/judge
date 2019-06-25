@@ -203,20 +203,17 @@ if(count($bestParticipant) > $numBest){
              STXihei, "华文细黑", 
              serif;
     }
+
     #logo_pos{
-        /* margin-top: 20%;
-        margin-left: 34%; */
         position: fixed;
-        left: 22.3%;
+        left: 25.7%;
         top: 31%;
         width: 17%;
         height: auto;
     }
     #logo_neg{
-        /* margin-top: 20%;
-        margin-left: 18%; */
         position: fixed;
-        left: 60.3%;
+        left: 63.8%;
         top: 31%;
         width: 17%;
         height: auto;
@@ -225,10 +222,119 @@ if(count($bestParticipant) > $numBest){
     #tab{
         position: fixed;
         top: 58%;
-        left: 30%;
+        left: 36%;
         table-layout: fixed
     }
 
+    
+    /* @media screen and (min-width: 1900px) and (max-width: 2000px){ */
+    @media screen and (width: 1920px) and (height:1080px){
+        /* body{
+            background: red;
+        } */
+        #logo_pos{
+            position: fixed;
+            left: 22.3%;
+            top: 31%;
+            width: 17%;
+            height: auto;
+        }
+        #logo_neg{
+            position: fixed;
+            left: 60.3%;
+            top: 31%;
+            width: 17%;
+            height: auto;
+        }
+        #tab{
+            position: fixed;
+            top: 58%;
+            left: 30%;
+            table-layout: fixed
+        }
+    }
+
+    @media screen and (width: 1440px) and (height:900px){
+        /* body{
+            background: red;
+        } */
+        #logo_pos{
+            position: fixed;
+            left: 25.3%;
+            top: 31%;
+            width: 17%;
+            height: auto;
+        }
+        #logo_neg{
+            position: fixed;
+            left: 66.3%;
+            top: 31%;
+            width: 17%;
+            height: auto;
+        }
+        #tab{
+            position: fixed;
+            top: 58%;
+            left: 37%;
+            table-layout: fixed
+        }
+    }
+
+    @media screen and (width: 1280px) and (height:720px){
+        /* body{
+            background: red;
+        } */
+        #logo_pos{
+            position: fixed;
+            left: 22.3%;
+            top: 31%;
+            width: 17%;
+            height: auto;
+        }
+        #logo_neg{
+            position: fixed;
+            left: 60.3%;
+            top: 31%;
+            width: 17%;
+            height: auto;
+        }
+        #tab{
+            position: fixed;
+            top: 58%;
+            left: 30%;
+            table-layout: fixed
+        }
+    }
+
+    @media screen and (width: 1280px) and (height: 800px){
+        /* body{
+            background: yellow;
+        } */
+        #logo_pos{
+            position: fixed;
+            left: 25.7%;
+            top: 31%;
+            width: 17%;
+            height: auto;
+        }
+        #logo_neg{
+            position: fixed;
+            left: 63.8%;
+            top: 31%;
+            width: 17%;
+            height: auto;
+        }
+
+        #tab{
+            position: fixed;
+            top: 58%;
+            left: 36%;
+            table-layout: fixed
+        }
+    }
+
+    
+    
     #tab tr th{
         width: 19vw;
     }

@@ -98,8 +98,8 @@ $result = $sql->fetchAll(PDO::FETCH_ASSOC);
                     <th></th>
                     <th><h4><br><?php echo $uni_neg; ?><h4></th>
                 </tr>
-                <tr style="height:1vw"><th></th></tr>
-                <tr style="height:1vw"><th></th></tr>
+                <tr class="fillTR"><th></th></tr>
+                <tr class="fillTR"><th></th></tr>
                 <tr><th></th></tr>
                 <tr><th></th></tr> 
                 <tr id="marks">
@@ -117,7 +117,7 @@ $result = $sql->fetchAll(PDO::FETCH_ASSOC);
                     <th><h5 class="ticket_name">总结票</h5></th>
                     <th><h4><?php echo $zongjie_neg; ?></h4></th>
                 </tr>
-                <tr style="height:3.5vh;"><th></th></tr>
+                <tr style="height:3vh;"><th></th></tr>
                 <tr id="marks">
                     <th><h4 style="color:#982b24;"><strong><i><?php echo $impression_pos+$mark_pos+$zongjie_pos; ?></i></strong></h4></th>
                     <th><h5 class="ticket_name">总票数</h5></th>
@@ -129,9 +129,9 @@ $result = $sql->fetchAll(PDO::FETCH_ASSOC);
         <h1 id="best"><strong>
             <?php  
                                 if($result[0]['bestParticipant'][0] == "正")
-                                    echo ($uni_pos." ".$result[0]['bestParticipant']); 
+                                    echo ($result[0]['bestParticipant']); 
                                 else
-                                    echo ($uni_neg." ".$result[0]['bestParticipant']);
+                                    echo ($result[0]['bestParticipant']);
                                     ?></strong>
         </h1>
         </div>
@@ -158,11 +158,14 @@ $result = $sql->fetchAll(PDO::FETCH_ASSOC);
     body{
         background: url("../images/summary_background.jpg"); no-repeat center center fixed; 
         background-size: cover;
+        background-position: center;
         font-family: "Times New Roman", 
              "Microsoft YaHei", "微软雅黑", 
              STXihei, "华文细黑", 
              serif;
     }
+
+
     #title{
         text-align: center;
         margin-top: 4.75%;
@@ -175,12 +178,13 @@ $result = $sql->fetchAll(PDO::FETCH_ASSOC);
     #foo{
         position: fixed;
         bottom: 2.2%;
-        right: 2%;
+        right: 0.5%;
     }
 
     #best{
         bottom: 14.5%;
-        left: 36%;
+        left: 44%;
+        /* text-align: center; */
         position:fixed;
         font-size: 2.5vw;
     }
@@ -189,7 +193,7 @@ $result = $sql->fetchAll(PDO::FETCH_ASSOC);
         /* margin-top: 20%;
         margin-left: 34%; */
         position: fixed;
-        left: 8%;
+        left: 3%;
         top: 8%;
         width: 17%;
         height: auto;
@@ -207,12 +211,12 @@ $result = $sql->fetchAll(PDO::FETCH_ASSOC);
     #tab{
         position: fixed;
         top: 30%;
-        left: 15%;
+        left: 11%;
         table-layout: fixed
     }
 
     #tab tr th{
-        width: 23vw;
+        width: 26vw;
     }
     h4{
         font-size: 2vw;
@@ -228,15 +232,221 @@ $result = $sql->fetchAll(PDO::FETCH_ASSOC);
        left: 2%;
        font-size: 3vw;
    } 
-    
+
    #marks h4{
        font-size: 3vw;
    }
 
    .ticket_name{
-       font-size: 2.2vw;
+       font-size: 3vw;
        text-align: center;
        width: 23.8vw;
        /* font-weight: 800; */
    }
+
+   @media screen and (width: 1280px) and (height:720px){
+    #foo{
+        position: fixed;
+        bottom: 2.2%;
+        right: 2%;
+    }
+
+    #best{
+        bottom: 14.5%;
+        left: 45%;
+        /* text-align: center; */
+        position:fixed;
+        font-size: 2.5vw;
+    }
+
+    #logo_pos{
+        /* margin-top: 20%;
+        margin-left: 34%; */
+        position: fixed;
+        left: 2.5%;
+        top: 8%;
+        width: 17%;
+        height: auto;
+    }
+    #logo_neg{
+        /* margin-top: 20%;
+        margin-left: 18%; */
+        position: fixed;
+        left: 58%;
+        top: 8%;
+        width: 17%;
+        height: auto;
+    }
+
+    #tab{
+        position: fixed;
+        top: 32%;
+        left: 15%;
+        table-layout: fixed
+    }
+
+    #tab tr th{
+        width: 23vw;
+    }
+
+    .fillTR{
+        height:0.2vw;
+    }
+
+   }
+
+   @media screen and (width: 1280px) and (height:800px){
+    #foo{
+        position: fixed;
+        bottom: 2.2%;
+        right: 2%;
+    }
+
+    #best{
+        bottom: 14.5%;
+        left: 44%;
+        /* text-align: center; */
+        position:fixed;
+        font-size: 2.5vw;
+    }
+
+    #logo_pos{
+        /* margin-top: 20%;
+        margin-left: 34%; */
+        position: fixed;
+        left: 2.5%;
+        top: 8%;
+        width: 17%;
+        height: auto;
+    }
+    #logo_neg{
+        /* margin-top: 20%;
+        margin-left: 18%; */
+        position: fixed;
+        left: 58%;
+        top: 8%;
+        width: 17%;
+        height: auto;
+    }
+
+    #tab{
+        position: fixed;
+        top: 32%;
+        left: 11%;
+        table-layout: fixed
+    }
+
+    #tab tr th{
+        width: 26vw;
+    }
+
+    .fillTR{
+        height:1.5vw;
+    }
+
+   }
+
+   @media screen and (width: 1440px) and (height:900px){
+    #foo{
+        position: fixed;
+        bottom: 2.2%;
+        right: 2%;
+    }
+
+    #best{
+        bottom: 14.5%;
+        left: 44%;
+        /* text-align: center; */
+        position:fixed;
+        font-size: 2.5vw;
+    }
+
+    #logo_pos{
+        /* margin-top: 20%;
+        margin-left: 34%; */
+        position: fixed;
+        left: 2.5%;
+        top: 8%;
+        width: 17%;
+        height: auto;
+    }
+    #logo_neg{
+        /* margin-top: 20%;
+        margin-left: 18%; */
+        position: fixed;
+        left: 58%;
+        top: 8%;
+        width: 17%;
+        height: auto;
+    }
+
+    #tab{
+        position: fixed;
+        top: 32%;
+        left: 11%;
+        table-layout: fixed
+    }
+
+    #tab tr th{
+        width: 26vw;
+    }
+
+    .fillTR{
+        height:1.5vw;
+    }
+
+   }
+
+   @media screen and (width: 1920px) and (height:1080px){
+    #foo{
+        position: fixed;
+        bottom: 2.2%;
+        right: 2%;
+    }
+
+    #best{
+        bottom: 14.5%;
+        left: 45%;
+        /* text-align: center; */
+        position:fixed;
+        font-size: 2.5vw;
+    }
+
+    #logo_pos{
+        /* margin-top: 20%;
+        margin-left: 34%; */
+        position: fixed;
+        left: 6%;
+        top: 8%;
+        width: 17%;
+        height: auto;
+    }
+    #logo_neg{
+        /* margin-top: 20%;
+        margin-left: 18%; */
+        position: fixed;
+        left: 58%;
+        top: 8%;
+        width: 17%;
+        height: auto;
+    }
+
+    #tab{
+        position: fixed;
+        top: 30%;
+        left: 15%;
+        table-layout: fixed
+    }
+
+    #tab tr th{
+        width: 23vw;
+    }
+
+    .fillTR{
+        height:1.3vw;
+    }
+
+   }
+    
+ 
 </style>
