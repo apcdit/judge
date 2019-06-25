@@ -250,7 +250,7 @@
                         $titles = $sql->fetchAll();
                         if($titles != []){
                             foreach($titles as $title){
-                                echo '<input type="checkbox" name="competitionID[]" value='.$title['competition_id'].'> '.$title['competition_id'].'. '.$title['title'].'</input><br>';
+                                echo '<input type="checkbox" name="competitionID[]" value='.'"'.$title['competition_id'].'"'.'> '.$title['competition_id'].'. '.$title['title'].'</input><br>';
                             }
                         }else{
                             echo 'No more debate entries in database.';
