@@ -10,6 +10,7 @@
 
     $judges = array();
 
+    $result = array(array());
     foreach($competitions as $c){
         if(!array_key_exists($c['judge_id'],$judges)){
             $judge_id = $c['judge_id'];
@@ -433,5 +434,12 @@ if(count($bestParticipant) > $numBest){
     $sql->execute([$competition_id]);
     $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-    echo json_encode(array($competitions,$top3,$judges,$result,$impression_mark_total_pos,$impression_mark_total_neg));
+    $sql = $conn->prepare("SELECT * FROM judges");
+    $sql->execute([]);
+    $judge = $sql->fetchAll(PDO::FETCH_ASSOC);
+    $judge_all = array();
+    foreach($judge as $key=>$value){
+        $judge_all[$value['id']] = $value;
+    }
+    echo json_encode(array($competitions,$top3,$judges,$result,$impression_mark_total_pos,$impression_mark_total_neg,$judge_all));
 ?>
