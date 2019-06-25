@@ -156,7 +156,7 @@ if(count($bestParticipant) > $numBest){
 
 <html>
     <head>
-        <title>最佳辩手结果</title>
+        <title>最佳三位候选人结果</title>
     </head>
 
     <body>
