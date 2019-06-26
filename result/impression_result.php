@@ -63,9 +63,9 @@ $title_neg = $round['title_neg'];
                     <th><h4><i><?php echo $title_neg; ?></i><h4></th>
                 </tr>
                 <tr id="marks">
-                    <th><h4><?php impression_decide($result, $impression_pos, $impression_neg); echo $impression_pos; ?></h4></th>
+                    <th class="marks_bg"><h4><?php impression_decide($result, $impression_pos, $impression_neg); echo $impression_pos; ?></h4></th>
                     <th></th>
-                    <th><h4><?php echo $impression_neg; ?></h4></th>
+                    <th class="marks_bg"><h4><?php echo $impression_neg; ?></h4></th>
                 </tr>
             </tbody>
         </table>
@@ -141,14 +141,14 @@ $title_neg = $round['title_neg'];
         } */
         #logo_pos{
             position: fixed;
-            left: 25.3%;
+            left: 27.3%;
             top: 31%;
             width: 17%;
             height: auto;
         }
         #logo_neg{
             position: fixed;
-            left: 66.3%;
+            left: 65.8%;
             top: 31%;
             width: 17%;
             height: auto;
@@ -233,7 +233,7 @@ $title_neg = $round['title_neg'];
        font-size: 3vw;
    } 
     
-   #marks h4{
+   .marks_bg{
        font-size: 3vw;
        background-color: darkred;
        color: white;

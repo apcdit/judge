@@ -289,7 +289,7 @@ catch(PDOException $e)
 
 
 <div class="container">
-    <form method="POST" action="/php/bestParticipant.php" style="width:300px;margin:50px auto;text-align:center;">
+    <form method="POST" action="php/bestParticipant.php" style="width:300px;margin:50px auto;text-align:center;">
     <span><b>最佳辩手</b></span>
         <select name="bestParticipant" id="participant1" class="form-control group" required 
             <?php

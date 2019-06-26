@@ -441,5 +441,22 @@ if(count($bestParticipant) > $numBest){
     foreach($judge as $key=>$value){
         $judge_all[$value['id']] = $value;
     }
-    echo json_encode(array($competitions,$top3,$judges,$result,$impression_mark_total_pos,$impression_mark_total_neg,$judge_all));
+
+    $result_status = [];
+    $sql = $conn->prepare("SELECT judge_id_1, judge_id_2, judge_id_3, judge_id_4, judge_id_5, judge_id_6, judge_id_7, judge_id_8, judge_id_9 FROM titles WHERE competition_id=?");
+    $sql->execute([$competition_id]);
+    $judge_ids = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach($judge_ids[0] as $id){
+        if($id == null || $id == 0) break;
+        $stmt = $conn->prepare("SELECT mark_ticket, impression_ticket, zongjie_ticket, bestParticipant1, bestParticipant2, bestParticipant3, bestParticipant FROM competition WHERE competition_id=? and judge_id=?");
+        $stmt->execute([$competition_id,$id]);
+        $status = $stmt->fetchAll();
+        $result_status[$id]['mark_status'] = $status[0]['mark_ticket'] + $status[1]['mark_ticket'];
+        $result_status[$id]['impression_status'] = $status[0]['impression_ticket'] + $status[1]['impression_ticket'];
+        $result_status[$id]['zongjie_status'] = $status[0]['zongjie_ticket'] + $status[1]['zongjie_ticket'];
+        $result_status[$id]['best3_status'] = $status[0]['bestParticipant1'].$status[0]['bestParticipant2'].$status[0]['bestParticipant3'].$status[1]['bestParticipant1'].$status[1]['bestParticipant2'].$status[1]['bestParticipant3'];
+        $result_status[$id]['best'] = $status[0]['bestParticipant'].$status[1]['bestParticipant'];
+    }
+    echo json_encode(array($competitions,$top3,$judges,$result,$impression_mark_total_pos,$impression_mark_total_neg,$judge_all,$result_status));
 ?>

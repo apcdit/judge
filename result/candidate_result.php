@@ -260,14 +260,14 @@ if(count($bestParticipant) > $numBest){
         } */
         #logo_pos{
             position: fixed;
-            left: 25.3%;
+            left: 27.3%;
             top: 31%;
             width: 17%;
             height: auto;
         }
         #logo_neg{
             position: fixed;
-            left: 66.3%;
+            left: 65.8%;
             top: 31%;
             width: 17%;
             height: auto;
@@ -353,7 +353,7 @@ if(count($bestParticipant) > $numBest){
        font-size: 3vw;
    } 
     
-   #marks h4{
+   .marks_bg{
        font-size: 3vw;
        background-color: darkred;
        color: white;

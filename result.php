@@ -34,7 +34,7 @@
             <select name="title" id="competition_id" class="form-control group">
             <?php 
                 // Fetch Judge
-                    $sql = $conn->prepare("SELECT * FROM titles");
+                    $sql = $conn->prepare("SELECT * FROM titles WHERE available=1");
                     $products = array();
                     $count = 0;
                     $stmt = $conn->prepare("SELECT uni_pos, uni_neg FROM rounds WHERE competition_id=?");
@@ -102,14 +102,14 @@
 
                 render = `<h3>${title['title']}</h3>`;
                 
-                $.each(names, function(key,value){
-                    if(problematic.includes(key)){
-                        render += `<h5 style="color:red;">${key}. ${value['name']}</h5>`;
-                        // error = true;                        
-                    }else{
-                        render += `<h5 style="color:green;">${key}. ${value['name']}</h5>`;
-                    }
-                });
+                // $.each(names, function(key,value){
+                //     if(problematic.includes(key)){
+                //         render += `<h5 style="color:red;">${key}. ${value['name']}</h5>`;
+                //         // error = true;                        
+                //     }else{
+                //         render += `<h5 style="color:green;">${key}. ${value['name']}</h5>`;
+                //     }
+                // });
                 if(true) {
                     render += `<a class="btn btn-primary" href="result/impression_result.php?competition_id=${competition_id}" id="generate" style="background-color:darkred;" target="_blank">印象票</a><br>`;
                     render += `<a class="btn btn-primary" href="result/candidates_result.php?competition_id=${competition_id}" id="generate" style="background-color:darkred;" target="_blank">最佳辩手(1)</a>`;
@@ -143,13 +143,30 @@
     }
     
     function processResult(data){
+        $('#result_summary').empty();
+        $('#result_summary').css('display','none');
         var arrayResults = data[0];
         var judgeResult = data[2];
-        // console.log(arrayResults);
         var mark_judge_pos = JSON.stringify(data[4],null,4);
         var mark_judge_neg = JSON.stringify(data[5],null,4);
 
         var judge_all = data[6];
+
+        var result_status = data[7];
+        console.log(result_status);
+        console.log(judge_all);
+        var output4 = "<table border=1 style='margin:0 auto;width:80%;'><tbody><tr><td>评审</td><td>分数票</td><td>印象票</td><td>总结票</td><td>三位候选人</td><td>最佳辩手</td></tr>";
+        $.each(result_status, function(index,value){
+            let mark = value['mark_status'] === 1 ? '<i class="fa fa-check" aria-hidden="true"></i>': '';
+            let impression = value['impression_status'] === 1? '<i class="fa fa-check" aria-hidden="true"></i>': '';
+            let zongjie = value['zongjie_status'] === 1 ? '<i class="fa fa-check" aria-hidden="true"></i>': '';
+            let best3 = (value['best3_status'] !== "000000" && value['best3_status'] !=="")? '<i class="fa fa-check" aria-hidden="true"></i>': '';
+            let best = (value['best'] !== "00" && value['best'] !== "" )? '<i class="fa fa-check" aria-hidden="true"></i>': '';
+
+            output4 += `<tr><td>${judge_all[index]['name']}</td><td>${mark}</td><td>${impression}</td><td>${zongjie}</td><td>${best3}</td><td>${best}</td></tr>`;
+        });
+
+        output4 += "</tbody></table><br>";
         arrayPos = arrayResults.filter(function(value){
             return value['side'] == 1;
         });
@@ -228,10 +245,10 @@
         // $.each(first,function(key,value){
         //     empty.push([key,value]);
         // });
-        console.log(same_mark_judge);
-        var output2 = "<tr style='text-align:center;font-size:25px;font-weight:500;'><td>评审</td><td>团体+自由</td><td>团体</td><tr style='text-align:center;font-size:20px;'>";
+        
+        var output2 = "<tr style='text-align:center;font-size:25px;font-weight:500;'><td>评审</td><td>团体+自由</td><td>团体</td>";
         $.each(same_mark_judge, function(key,value){
-            output2 += `<td >${judge_all[key]['name']}</td><td>正: ${value['pos']['tuanti_ziyou']}, 反: ${value['neg']['tuanti_ziyou']}</td><td>正: ${value['pos']['tuanti']}, 反: ${value['neg']['tuanti']}</td>`;
+            output2 += `<tr style='text-align:center;font-size:20px;'><td >${judge_all[key]['name']}</td><td>正: ${value['pos']['tuanti_ziyou']}, 反: ${value['neg']['tuanti_ziyou']}</td><td>正: ${value['pos']['tuanti']}, 反: ${value['neg']['tuanti']}</td></tr>`;
         });
         
             
@@ -254,7 +271,7 @@
         });
 
 
-        var content = `<table style="margin:0 auto;width:80%;" border="1"><tbody>
+        var content = `${output4}<table style="margin:0 auto;width:80%;" border="1"><tbody>
            <tr style="font-size:35px;font-weight:900;color:darkred;"><td colspan="3">印象票</td></tr>
            <tr style="text-align:center;font-size:25px;"><td rowspan="1" style="font-weight:500;">正</td><td>${impression_pos}</td><td>${impression_pos_judges}</tr>
            <tr style="text-align:center;font-size:25px;"><td style="font-size:25px;font-weight:500;">反</td><td>${impression_neg}</td><td>${impression_neg_judges}</td></tr>
@@ -299,6 +316,7 @@
         height:75px;
         text-align:center;
     }
+
     /* Style the counter cards */
     .card {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
