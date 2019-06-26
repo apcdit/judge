@@ -272,7 +272,7 @@
 
         var output5 = "";
         $.each(first, function(index,value){
-            output5 += `<tr><td colspan="2"><strong style="font-size:25px;">${index}</strong></td><td>${value}</td></tr>`;
+            output5 += `<tr><td colspan="1"><strong style="font-size:25px;">${index}</strong></td><td>${value[0]}</td><td>${value[1]}</tr>`;
         });
 
         var content = `${output4}<table style="margin:0 auto;width:80%;" border="1"><tbody>
