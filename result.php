@@ -157,7 +157,7 @@
         // console.log(judge_all);
         var output4 = "<table border=1 style='margin:0 auto;width:80%;'><tbody><tr><td>评审</td><td><a href='#mark_section'>分数票</a></td><td><a href='#impression_section'>印象票</a></td><td><a href='#zongjie_section'>总结票</a></td><td><a href='#best3_section'>三位候选人</a></td><td><a href='#best_section'>最佳辩手</a></td></tr>";
         $.each(result_status, function(index,value){
-            let mark = value['mark_status'] === 1 ? '<i class="fa fa-check" aria-hidden="true"></i>': '';
+            let mark = value['mark_status'] >= 0 ? '<i class="fa fa-check" aria-hidden="true"></i>': '';
             let impression = value['impression_status'] === 1? '<i class="fa fa-check" aria-hidden="true"></i>': '';
             let zongjie = value['zongjie_status'] === 1 ? '<i class="fa fa-check" aria-hidden="true"></i>': '';
             let best3 = (value['best3_status'] !== "000000" && value['best3_status'] !=="")? '<i class="fa fa-check" aria-hidden="true"></i>': '';
