@@ -175,7 +175,8 @@
         });
 
         var same_mark_judge = {};
-
+        //     console.log(arrayNeg);
+        // console.log(arrayPos);
         $.each(arrayPos, function(i,v1){
             let judge_id_pos = arrayPos[i]['judge_id'];
             $.each(arrayNeg, function(j,v2){
@@ -185,10 +186,10 @@
                         same_mark_judge[judge_id_pos] = {};
                         same_mark_judge[judge_id_pos]['neg'] = {};
                         same_mark_judge[judge_id_pos]['pos'] = {};
-                        same_mark_judge[judge_id_pos]['neg']['tuanti_ziyou'] = parseInt(arrayNeg[i]['tuanti']) + parseInt(arrayNeg[i]['ziyou_1']) + parseInt(arrayNeg[i]['ziyou_2']) + parseInt(arrayNeg[i]['ziyou_3']) + parseInt(arrayNeg[i]['ziyou_4']);
-                        same_mark_judge[judge_id_pos]['neg']['tuanti'] = parseInt(arrayNeg[i]['tuanti']);
-                        same_mark_judge[judge_id_pos]['pos']['tuanti'] = parseInt(arrayPos[j]['tuanti']);
-                        same_mark_judge[judge_id_pos]['pos']['tuanti_ziyou'] =  parseInt(arrayPos[j]['tuanti']) + parseInt(arrayPos[j]['ziyou_1']) + parseInt(arrayPos[j]['ziyou_2']) + parseInt(arrayPos[j]['ziyou_3']) + parseInt(arrayPos[j]['ziyou_4']);
+                        same_mark_judge[judge_id_pos]['neg']['tuanti_ziyou'] = parseInt(arrayNeg[j]['tuanti']) + parseInt(arrayNeg[j]['ziyou_1']) + parseInt(arrayNeg[j]['ziyou_2']) + parseInt(arrayNeg[j]['ziyou_3']) + parseInt(arrayNeg[j]['ziyou_4']);
+                        same_mark_judge[judge_id_pos]['neg']['tuanti'] = parseInt(arrayNeg[j]['tuanti']);
+                        same_mark_judge[judge_id_pos]['pos']['tuanti'] = parseInt(arrayPos[i]['tuanti']);
+                        same_mark_judge[judge_id_pos]['pos']['tuanti_ziyou'] =  parseInt(arrayPos[i]['tuanti']) + parseInt(arrayPos[i]['ziyou_1']) + parseInt(arrayPos[i]['ziyou_2']) + parseInt(arrayPos[i]['ziyou_3']) + parseInt(arrayPos[i]['ziyou_4']);
                         return false;
                     }
                 }
@@ -247,6 +248,7 @@
         // });
         
         var output2 = "<tr style='text-align:center;font-size:25px;font-weight:500;'><td>评审</td><td>团体+自由</td><td>团体</td>";
+        console.log(same_mark_judge);
         $.each(same_mark_judge, function(key,value){
             output2 += `<tr style='text-align:center;font-size:20px;'><td >${judge_all[key]['name']}</td><td>正: ${value['pos']['tuanti_ziyou']}, 反: ${value['neg']['tuanti_ziyou']}</td><td>正: ${value['pos']['tuanti']}, 反: ${value['neg']['tuanti']}</td></tr>`;
         });
