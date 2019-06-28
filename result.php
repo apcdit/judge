@@ -153,9 +153,9 @@
         var judge_all = data[6];
 
         var result_status = data[7];
-        console.log(result_status);
-        console.log(judge_all);
-        var output4 = "<table border=1 style='margin:0 auto;width:80%;'><tbody><tr><td>评审</td><td>分数票</td><td>印象票</td><td>总结票</td><td>三位候选人</td><td>最佳辩手</td></tr>";
+        console.log(data[3]);
+        // console.log(judge_all);
+        var output4 = "<table border=1 style='margin:0 auto;width:80%;'><tbody><tr><td>评审</td><td><a href='#mark_section'>分数票</a></td><td><a href='#impression_section'>印象票</a></td><td><a href='#zongjie_section'>总结票</a></td><td><a href='#best3_section'>三位候选人</a></td><td><a href='#best_section'>最佳辩手</a></td></tr>";
         $.each(result_status, function(index,value){
             let mark = value['mark_status'] === 1 ? '<i class="fa fa-check" aria-hidden="true"></i>': '';
             let impression = value['impression_status'] === 1? '<i class="fa fa-check" aria-hidden="true"></i>': '';
@@ -239,7 +239,7 @@
         var output = "";
         
         $.each(bestParticipant, function(key,value){
-            output += `<tr style="font-size:25px;"><td colspan="3" style="text-align:center">${key}</td></tr>`;//<td style="text-align:center">${value[0]}</td><td style="text-align:center">${value[1]}</td></tr>`;
+            output += `<tr style="font-size:25px;"><td colspan="1" style="text-align:center">${key}</td><td style="text-align:center">${value[0]}</td><td style="text-align:center">${value[1]}</td></tr>`;
         });
         // var empty = [];
         // $.each(first,function(key,value){
@@ -270,28 +270,32 @@
             i++;
         });
 
+        var output5 = "";
+        $.each(first, function(index,value){
+            output5 += `<tr><td colspan="1"><strong style="font-size:25px;">${index}</strong></td><td>${value[0]}</td><td>${value[1]}</tr>`;
+        });
 
         var content = `${output4}<table style="margin:0 auto;width:80%;" border="1"><tbody>
-           <tr style="font-size:35px;font-weight:900;color:darkred;"><td colspan="3">印象票</td></tr>
+           <tr style="font-size:35px;font-weight:900;color:darkred;"><td colspan="3" id='mark_section'>印象票</td></tr>
            <tr style="text-align:center;font-size:25px;"><td rowspan="1" style="font-weight:500;">正</td><td>${impression_pos}</td><td>${impression_pos_judges}</tr>
            <tr style="text-align:center;font-size:25px;"><td style="font-size:25px;font-weight:500;">反</td><td>${impression_neg}</td><td>${impression_neg_judges}</td></tr>
             <tr>
-            <tr><td colspan="3" style="text-align:center"><strong style="color:darkred;font-size:35px;">最佳三位辩手</strong></td></tr>${output}
+            <tr><td colspan="3" style="text-align:center"><strong style="color:darkred;font-size:35px;" id='best3_section'>最佳三位辩手</strong></td></tr>${output}
             <tr>
-           <tr style="font-size:35px;font-weight:900;color:darkred;"><td colspan="3">分数票</td></tr>
+           <tr style="font-size:35px;font-weight:900;color:darkred;"><td colspan="3" id='impression_section'>分数票</td></tr>
            <tr style="text-align:center;font-size:25px;"><td>正</td><td>${mark_pos}</td><td rowspan="2">${output3}</td>
            <tr style="text-align:center;font-size:25px;"><td>反</td><td>${mark_neg}</td>
            </tr>
            <tr>${output2}</tr>
            
            <tr>
-           <tr style="font-size:35px;font-weight:900;color:darkred;"><td colspan="3">总结票</td></tr>
+           <tr style="font-size:35px;font-weight:900;color:darkred;"><td colspan="3" id='zongjie_section'>总结票</td></tr>
            <tr style="text-align:center;font-size:25px;"><td>正</td><td>${zongjie_pos}</td><td>${zongjie_pos_judges}</td></tr>
            <tr style="text-align:center;font-size:25px;"><td>反</td><td>${zongjie_neg}</td><td>${zongjie_neg_judges}</td></tr>
            
            <tr>
-           <tr><td colspan="3"><strong style="color:darkred;font-size:25px;">最佳辩手</strong></td></tr>
-           <tr><td colspan="3"><strong style="font-size:25px;">${first[0]['bestParticipant']}</strong></td></tr>
+           <tr><td colspan="3"><strong style="color:darkred;font-size:25px;" id='best_section'>最佳辩手</strong></td></tr>
+          ${output5}
         </tbody>
         </table>`;
 
