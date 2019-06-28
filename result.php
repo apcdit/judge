@@ -157,7 +157,7 @@
         // console.log(judge_all);
         var output4 = "<table border=1 style='margin:0 auto;width:80%;'><tbody><tr><td>评审</td><td><a href='#mark_section'>分数票</a></td><td><a href='#impression_section'>印象票</a></td><td><a href='#zongjie_section'>总结票</a></td><td><a href='#best3_section'>三位候选人</a></td><td><a href='#best_section'>最佳辩手</a></td></tr>";
         $.each(result_status, function(index,value){
-            let mark = value['mark_status'] === 1 ? '<i class="fa fa-check" aria-hidden="true"></i>': '';
+            let mark = value['mark_status'] !== 0 ? '<i class="fa fa-check" aria-hidden="true"></i>': '';
             let impression = value['impression_status'] === 1? '<i class="fa fa-check" aria-hidden="true"></i>': '';
             let zongjie = value['zongjie_status'] === 1 ? '<i class="fa fa-check" aria-hidden="true"></i>': '';
             let best3 = (value['best3_status'] !== "000000" && value['best3_status'] !=="")? '<i class="fa fa-check" aria-hidden="true"></i>': '';
@@ -175,7 +175,8 @@
         });
 
         var same_mark_judge = {};
-
+        //     console.log(arrayNeg);
+        // console.log(arrayPos);
         $.each(arrayPos, function(i,v1){
             let judge_id_pos = arrayPos[i]['judge_id'];
             $.each(arrayNeg, function(j,v2){
@@ -185,10 +186,10 @@
                         same_mark_judge[judge_id_pos] = {};
                         same_mark_judge[judge_id_pos]['neg'] = {};
                         same_mark_judge[judge_id_pos]['pos'] = {};
-                        same_mark_judge[judge_id_pos]['neg']['tuanti_ziyou'] = parseInt(arrayNeg[i]['tuanti']) + parseInt(arrayNeg[i]['ziyou_1']) + parseInt(arrayNeg[i]['ziyou_2']) + parseInt(arrayNeg[i]['ziyou_3']) + parseInt(arrayNeg[i]['ziyou_4']);
-                        same_mark_judge[judge_id_pos]['neg']['tuanti'] = parseInt(arrayNeg[i]['tuanti']);
-                        same_mark_judge[judge_id_pos]['pos']['tuanti'] = parseInt(arrayPos[j]['tuanti']);
-                        same_mark_judge[judge_id_pos]['pos']['tuanti_ziyou'] =  parseInt(arrayPos[j]['tuanti']) + parseInt(arrayPos[j]['ziyou_1']) + parseInt(arrayPos[j]['ziyou_2']) + parseInt(arrayPos[j]['ziyou_3']) + parseInt(arrayPos[j]['ziyou_4']);
+                        same_mark_judge[judge_id_pos]['neg']['tuanti_ziyou'] = parseInt(arrayNeg[j]['tuanti']) + parseInt(arrayNeg[j]['ziyou_1']) + parseInt(arrayNeg[j]['ziyou_2']) + parseInt(arrayNeg[j]['ziyou_3']) + parseInt(arrayNeg[j]['ziyou_4']);
+                        same_mark_judge[judge_id_pos]['neg']['tuanti'] = parseInt(arrayNeg[j]['tuanti']);
+                        same_mark_judge[judge_id_pos]['pos']['tuanti'] = parseInt(arrayPos[i]['tuanti']);
+                        same_mark_judge[judge_id_pos]['pos']['tuanti_ziyou'] =  parseInt(arrayPos[i]['tuanti']) + parseInt(arrayPos[i]['ziyou_1']) + parseInt(arrayPos[i]['ziyou_2']) + parseInt(arrayPos[i]['ziyou_3']) + parseInt(arrayPos[i]['ziyou_4']);
                         return false;
                     }
                 }
@@ -247,6 +248,7 @@
         // });
         
         var output2 = "<tr style='text-align:center;font-size:25px;font-weight:500;'><td>评审</td><td>团体+自由</td><td>团体</td>";
+        console.log(same_mark_judge);
         $.each(same_mark_judge, function(key,value){
             output2 += `<tr style='text-align:center;font-size:20px;'><td >${judge_all[key]['name']}</td><td>正: ${value['pos']['tuanti_ziyou']}, 反: ${value['neg']['tuanti_ziyou']}</td><td>正: ${value['pos']['tuanti']}, 反: ${value['neg']['tuanti']}</td></tr>`;
         });
@@ -276,13 +278,13 @@
         });
 
         var content = `${output4}<table style="margin:0 auto;width:80%;" border="1"><tbody>
-           <tr style="font-size:35px;font-weight:900;color:darkred;"><td colspan="3" id='mark_section'>印象票</td></tr>
+           <tr style="font-size:35px;font-weight:900;color:darkred;"><td colspan="3" id='impression_section'>印象票</td></tr>
            <tr style="text-align:center;font-size:25px;"><td rowspan="1" style="font-weight:500;">正</td><td>${impression_pos}</td><td>${impression_pos_judges}</tr>
            <tr style="text-align:center;font-size:25px;"><td style="font-size:25px;font-weight:500;">反</td><td>${impression_neg}</td><td>${impression_neg_judges}</td></tr>
             <tr>
             <tr><td colspan="3" style="text-align:center"><strong style="color:darkred;font-size:35px;" id='best3_section'>最佳三位辩手</strong></td></tr>${output}
             <tr>
-           <tr style="font-size:35px;font-weight:900;color:darkred;"><td colspan="3" id='impression_section'>分数票</td></tr>
+           <tr style="font-size:35px;font-weight:900;color:darkred;"><td colspan="3" id='mark_section'>分数票</td></tr>
            <tr style="text-align:center;font-size:25px;"><td>正</td><td>${mark_pos}</td><td rowspan="2">${output3}</td>
            <tr style="text-align:center;font-size:25px;"><td>反</td><td>${mark_neg}</td>
            </tr>
@@ -296,6 +298,13 @@
            <tr>
            <tr><td colspan="3"><strong style="color:darkred;font-size:25px;" id='best_section'>最佳辩手</strong></td></tr>
           ${output5}
+
+          <tr>
+          <tr style="font-size:25px;font-weight:500;"><td></td><td>正</td><td>反</td></tr>
+          <tr style="font-size:25px;font-weight:500;"><td style="font-size:25px;font-weight:500;">分数票</td><td>${mark_pos}</td><td>${mark_neg}</td></tr>
+          <tr style="font-size:25px;font-weight:500;"><td style="font-size:25px;font-weight:500;">印象票</td><td>${impression_pos}</td><td>${impression_neg}</td></tr>
+          <tr style="font-size:25px;font-weight:500;"><td style="font-size:25px;font-weight:500;">总结票</td><td>${zongjie_pos}</td><td>${zongjie_neg}</td></tr>
+          <tr style="font-size:25px;font-weight:500;"><td style="font-size:25px;font-weight:500;">Total</td><td>${mark_pos+impression_pos+zongjie_pos}</td><td>${mark_neg+impression_neg+zongjie_neg}</td></tr>
         </tbody>
         </table>`;
 

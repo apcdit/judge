@@ -17,7 +17,16 @@
           $judgesID[$i] = $judgeID;
           $i++;
       }
-      // print_r($competitionID);
+      
+      $stmt = $conn->prepare("SELECT * FROM titles WHERE competition_id=?");
+      $stmt->execute([$competitionID]);
+      
+      // echo count($stmt->fetchAll());
+      // return false;
+      if(count($stmt->fetchAll()) >= 1){
+        echo ("<script>alert('Title already in database!'); window.location = '../dashboard.php';</script> ");       
+        return false;
+      }
       $stmt = $conn->prepare("INSERT INTO titles (competition_id, title, available, judge_id_1, judge_id_2, judge_id_3, judge_id_4, judge_id_5, judge_id_6, judge_id_7, judge_id_8, judge_id_9) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
       $stmt->execute([$competitionID, $title, 0, $judgesID[0], $judgesID[1], $judgesID[2], $judgesID[3], $judgesID[4], $judgesID[5], $judgesID[6], $judgesID[7], $judgesID[8]]);
       

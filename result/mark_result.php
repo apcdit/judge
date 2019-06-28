@@ -110,13 +110,13 @@ $title_neg = $round['title_neg'];
 
     
     /* @media screen and (min-width: 1900px) and (max-width: 2000px){ */
-    @media screen and (width: 1920px) and (height:1080px){
+        @media screen and (width: 1920px) and (height:1080px){
         /* body{
             background: red;
         } */
         #logo_pos{
             position: fixed;
-            left: 22.3%;
+            left: 21.7%;
             top: 31%;
             width: 17%;
             height: auto;
@@ -214,7 +214,6 @@ $title_neg = $round['title_neg'];
             table-layout: fixed
         }
     }
-
 
     #tab tr th{
         width: 19vw;
