@@ -16,6 +16,7 @@
     <li><a href="voting.php">最佳三位候选辩手</a></li>
     <li><a href="mark3.php">总结票</a></li>
     <li><a href="votingResult.php">最佳辩手</a></li>
+    <li><a href="bestParticipantAlgo.php">最佳辩手2</a></li>
    
     <li> <a href="php/logout_process.php">登出</a></li>
     <li>
