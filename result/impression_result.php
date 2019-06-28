@@ -115,7 +115,7 @@ $title_neg = $round['title_neg'];
         } */
         #logo_pos{
             position: fixed;
-            left: 22.3%;
+            left: 21.7%;
             top: 31%;
             width: 17%;
             height: auto;

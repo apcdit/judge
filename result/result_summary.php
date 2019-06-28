@@ -498,7 +498,7 @@ if(count($bestParticipant) > $numBest){
         /* margin-top: 20%;
         margin-left: 34%; */
         position: fixed;
-        left: 2.5%;
+        left: 8.8%;
         top: 8%;
         width: 17%;
         height: auto;
@@ -507,7 +507,7 @@ if(count($bestParticipant) > $numBest){
         /* margin-top: 20%;
         margin-left: 18%; */
         position: fixed;
-        left: 58%;
+        left: 57.2%;
         top: 8%;
         width: 17%;
         height: auto;
@@ -549,7 +549,7 @@ if(count($bestParticipant) > $numBest){
         /* margin-top: 20%;
         margin-left: 34%; */
         position: fixed;
-        left: 2.5%;
+        left: 4%;
         top: 8%;
         width: 17%;
         height: auto;
@@ -600,7 +600,7 @@ if(count($bestParticipant) > $numBest){
         /* margin-top: 20%;
         margin-left: 34%; */
         position: fixed;
-        left: 2.5%;
+        left: 4.8%;
         top: 8%;
         width: 17%;
         height: auto;
@@ -609,7 +609,7 @@ if(count($bestParticipant) > $numBest){
         /* margin-top: 20%;
         margin-left: 18%; */
         position: fixed;
-        left: 58%;
+        left: 57.7%;
         top: 8%;
         width: 17%;
         height: auto;
@@ -651,7 +651,7 @@ if(count($bestParticipant) > $numBest){
         /* margin-top: 20%;
         margin-left: 34%; */
         position: fixed;
-        left: 6%;
+        left: 8.7%;
         top: 8%;
         width: 17%;
         height: auto;
@@ -660,7 +660,7 @@ if(count($bestParticipant) > $numBest){
         /* margin-top: 20%;
         margin-left: 18%; */
         position: fixed;
-        left: 58%;
+        left: 56.7%;
         top: 8%;
         width: 17%;
         height: auto;

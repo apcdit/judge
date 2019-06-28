@@ -278,13 +278,13 @@
         });
 
         var content = `${output4}<table style="margin:0 auto;width:80%;" border="1"><tbody>
-           <tr style="font-size:35px;font-weight:900;color:darkred;"><td colspan="3" id='mark_section'>印象票</td></tr>
+           <tr style="font-size:35px;font-weight:900;color:darkred;"><td colspan="3" id='impression_section'>印象票</td></tr>
            <tr style="text-align:center;font-size:25px;"><td rowspan="1" style="font-weight:500;">正</td><td>${impression_pos}</td><td>${impression_pos_judges}</tr>
            <tr style="text-align:center;font-size:25px;"><td style="font-size:25px;font-weight:500;">反</td><td>${impression_neg}</td><td>${impression_neg_judges}</td></tr>
             <tr>
             <tr><td colspan="3" style="text-align:center"><strong style="color:darkred;font-size:35px;" id='best3_section'>最佳三位辩手</strong></td></tr>${output}
             <tr>
-           <tr style="font-size:35px;font-weight:900;color:darkred;"><td colspan="3" id='impression_section'>分数票</td></tr>
+           <tr style="font-size:35px;font-weight:900;color:darkred;"><td colspan="3" id='mark_section'>分数票</td></tr>
            <tr style="text-align:center;font-size:25px;"><td>正</td><td>${mark_pos}</td><td rowspan="2">${output3}</td>
            <tr style="text-align:center;font-size:25px;"><td>反</td><td>${mark_neg}</td>
            </tr>
@@ -298,6 +298,13 @@
            <tr>
            <tr><td colspan="3"><strong style="color:darkred;font-size:25px;" id='best_section'>最佳辩手</strong></td></tr>
           ${output5}
+
+          <tr>
+          <tr style="font-size:25px;font-weight:500;"><td></td><td>正</td><td>反</td></tr>
+          <tr style="font-size:25px;font-weight:500;"><td style="font-size:25px;font-weight:500;">分数票</td><td>${mark_pos}</td><td>${mark_neg}</td></tr>
+          <tr style="font-size:25px;font-weight:500;"><td style="font-size:25px;font-weight:500;">印象票</td><td>${impression_pos}</td><td>${impression_neg}</td></tr>
+          <tr style="font-size:25px;font-weight:500;"><td style="font-size:25px;font-weight:500;">总结票</td><td>${zongjie_pos}</td><td>${zongjie_neg}</td></tr>
+          <tr style="font-size:25px;font-weight:500;"><td style="font-size:25px;font-weight:500;">Total</td><td>${mark_pos+impression_pos+zongjie_pos}</td><td>${mark_neg+impression_neg+zongjie_neg}</td></tr>
         </tbody>
         </table>`;
 
