@@ -509,10 +509,10 @@ if(count($bestParticipant) > $numBest){
 
     foreach($judge_ids[0] as $id){
         if($id == null || $id == 0) break;
-        $stmt = $conn->prepare("SELECT mark_ticket, impression_ticket, zongjie_ticket, bestParticipant1, bestParticipant2, bestParticipant3, bestParticipant FROM competition WHERE competition_id=? and judge_id=?");
+        $stmt = $conn->prepare("SELECT total_mark, mark_ticket, impression_ticket, zongjie_ticket, bestParticipant1, bestParticipant2, bestParticipant3, bestParticipant FROM competition WHERE competition_id=? and judge_id=?");
         $stmt->execute([$competition_id,$id]);
         $status = $stmt->fetchAll();
-        $result_status[$id]['mark_status'] = $status[0]['mark_ticket'] + $status[1]['mark_ticket'];
+        $result_status[$id]['mark_status'] = $status[0]['mark_ticket'] + $status[1]['mark_ticket']+$status[0]['total_mark'] + $status[1]['total_mark'];
         $result_status[$id]['impression_status'] = $status[0]['impression_ticket'] + $status[1]['impression_ticket'];
         $result_status[$id]['zongjie_status'] = $status[0]['zongjie_ticket'] + $status[1]['zongjie_ticket'];
         $result_status[$id]['best3_status'] = $status[0]['bestParticipant1'].$status[0]['bestParticipant2'].$status[0]['bestParticipant3'].$status[1]['bestParticipant1'].$status[1]['bestParticipant2'].$status[1]['bestParticipant3'];
