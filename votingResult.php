@@ -100,7 +100,7 @@ try{
         // use exec() because no results are returned
         
 
-        $stmt = $conn->prepare("SELECT * FROM `competition` WHERE competition_id='$competition_id1' and side=0 and judge_id=$userID");
+        $stmt = $conn->prepare("SELECT * FROM `competition` WHERE competition_id='$competition_id1' and side=0 ");
         if($stmt->execute()){
             $score1=[];
             $i=0;
@@ -137,7 +137,7 @@ try{
         echo "</div>";
         }
 
-        $stmt1 = $conn->prepare("SELECT * FROM `competition` WHERE competition_id='$competition_id1' and side=1 and judge_id=$userID");
+        $stmt1 = $conn->prepare("SELECT * FROM `competition` WHERE competition_id='$competition_id1' and side=1 ");
         // use exec() because no results are returned
         
         if($stmt1->execute()){
