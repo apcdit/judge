@@ -124,7 +124,7 @@ try{
                 $i++;    
         }
             
-        echo "<div class='row' id='showData2' style='text-align:center;width:300px;margin:50px auto;'><div class='col-sm-6'>";
+        echo "<div class='row' id='showData2' style='text-align:center;width:300px;margin:50px auto;display:none;'><div class='col-sm-6' style='display:none;'>";
         echo "<span><b>反方辩手分数</b></span>";
         echo "<br>反方一辩"."  ".($negative1);
         echo "<br>反方二辩"."  ".($negative2);
@@ -266,7 +266,7 @@ catch(PDOException $e)
 
 ?>
 
-<div class="container" style="width:300px;margin:50px auto;text-align:center;" id="showData3">
+<!-- <div class="container" style="width:300px;margin:50px auto;text-align:center;" id="showData3" style="display:none;" >
 
 <?php 
     // echo $zongjie_ticket_neg;
@@ -285,11 +285,13 @@ catch(PDOException $e)
 
 ?>
 
-</div>
-
+</div> -->
+<div  class="container" id="showData4" style="display:none;">
+      <h3 style="text-align:center;color:darkred;margin-top:30px;">电子投票环节已经结束，感谢评审</h3>
+    </div>
 
 <div class="container">
-    <form method="POST" action="php/bestParticipant.php" style="width:300px;margin:50px auto;text-align:center;">
+    <form method="POST" action="php/bestParticipant.php" style="width:300px;margin:50px auto;text-align:center;" id="showData5">
     <span><b>最佳辩手</b></span>
         <select name="bestParticipant" id="participant1" class="form-control group" required 
             <?php
@@ -317,6 +319,7 @@ catch(PDOException $e)
                 ?>
         >提交</button>
     </form>
+   
     <form method="POST" action="/php/delete.php">
     <button>删除我的资料</button>
     </form>
@@ -346,16 +349,23 @@ catch(PDOException $e)
     ?>
 </div>
 
+
 <script>
 var x='<?php echo $showData; ?>';
 // alert(x);
 if(isNaN(x)){
     document.getElementById('participant1').style.display = "none";
+    document.getElementById('showData4').style.display = "block";
+    document.getElementById('showData5').style.display = "none";
+    
     }
 if(!isNaN(x)){
 
 document.getElementById('showData2').style.display = "none";
-document.getElementById('showData3').style.display = "none";}
+document.getElementById('showData3').style.display = "none";
+
+}
+
 
 
 </script>
