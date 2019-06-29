@@ -22,7 +22,7 @@ try{
         var_dump($result);
        if(($result[0]=="0" && $result[1]=="1")||($result[0]=="1" && $result[1]=="0"))
        {
-        header('Location:../votingResult.php');
+        header('Location:../bestParticipantAlgo.php');
        } 
        else{
         try {
@@ -47,7 +47,7 @@ try{
             {
                 $sql1 = "UPDATE competition SET mark_ticket=1,zongjie_ticket=1 WHERE judge_id=$userID AND side=$side AND competition_id='$competition_id1'";
                 $conn->exec($sql1);
-                header('Location:../votingResult.php');
+                header('Location:../bestParticipantAlgo.php');
             }
                
         
@@ -58,7 +58,7 @@ try{
                     // use exec() because no results are returned
                     $conn->exec($sql);
                     //  echo "New record created successfully";
-                    header('Location:../votingResult.php');
+                    header('Location:../bestParticipantAlgo.php');
                 }   
             }
         catch(PDOException $e)
