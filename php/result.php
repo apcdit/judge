@@ -86,6 +86,7 @@ if(count($bestParticipant) > $numBest){
     $positive1 = $positive2 = $positive3 = $positive4 = 0;
     $negative1 = $negative2 = $negative3 = $negative4 = 0;
 
+    $qwerty = $min_keys;
     foreach($min_keys as $key){
         switch($key){
             case "正方一辩":
@@ -137,11 +138,13 @@ if(count($bestParticipant) > $numBest){
     foreach($total_marks as $key => $ma){
         if($ma == 0) unset($total_marks[$key]);
     }
+
+    $pppp = count($total_marks);
     arsort($total_marks);
 
     $k = 0;
     $current = count($bestParticipant) - count($min_keys);
-    $diff = $numBest - $current;
+    $diff = $pppp - $current;
     $best = array();
 
     foreach($bestParticipant as $key => $p){
@@ -534,5 +537,5 @@ if(count($bestParticipant) > $numBest){
     $count = array_count_values($occur); //get the ticket count of each voted participant
 
 
-    echo json_encode(array($competitions,$top3,$judges,$result,$impression_mark_total_pos,$impression_mark_total_neg,$judge_all,$result_status, $count));
+    echo json_encode(array($competitions,$top3,$judges,$result,$impression_mark_total_pos,$impression_mark_total_neg,$judge_all,$result_status, $count,$qwerty));
 ?>

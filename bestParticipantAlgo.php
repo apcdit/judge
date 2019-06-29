@@ -210,7 +210,7 @@ catch(PDOException $e)
         
     }
     // echo "<br>TopThreeRanking:";print_r($topThreeRanking);
-    // echo "<br>participant_score:";print_r($participant_score);
+    // echo "<br>participant_score:";print_r($participant_score);x
 
     $counter=0;
     $bestParticipantResult=[];

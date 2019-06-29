@@ -153,7 +153,7 @@
         var judge_all = data[6];
 
         var result_status = data[7];
-        console.log(data[3]);
+        // console.log(data[3]);
         // console.log(judge_all);
         var output4 = "<table border=1 style='margin:0 auto;width:80%;'><tbody><tr><td>评审</td><td><a href='#mark_section'>分数票</a></td><td><a href='#impression_section'>印象票</a></td><td><a href='#zongjie_section'>总结票</a></td><td><a href='#best3_section'>三位候选人</a></td><td><a href='#best_section'>最佳辩手</a></td></tr>";
         $.each(result_status, function(index,value){
@@ -239,6 +239,7 @@
         first = data[3];
         var output = "";
         
+        console.log(data[9]);
         $.each(bestParticipant, function(key,value){
             output += `<tr style="font-size:25px;"><td colspan="1" style="text-align:center">${key}</td><td style="text-align:center">${value[0]}</td><td style="text-align:center">${value[1]}</td></tr>`;
         });
@@ -248,7 +249,7 @@
         // });
         
         var output2 = "<tr style='text-align:center;font-size:25px;font-weight:500;'><td>评审</td><td>团体+自由</td><td>团体</td>";
-        console.log(same_mark_judge);
+        // console.log(same_mark_judge);
         $.each(same_mark_judge, function(key,value){
             output2 += `<tr style='text-align:center;font-size:20px;'><td >${judge_all[key]['name']}</td><td>正: ${value['pos']['tuanti_ziyou']}, 反: ${value['neg']['tuanti_ziyou']}</td><td>正: ${value['pos']['tuanti']}, 反: ${value['neg']['tuanti']}</td></tr>`;
         });
