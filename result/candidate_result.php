@@ -251,26 +251,33 @@ catch(PDOException $e)
                     $outputMid = "";
                     $outputEnd = "";
                     $output = "";
+                    $final = "";
                     // print_r($bestParticipantResult);
                     // echo count($bestParticipantResult);
                     // 
                     foreach($bestParticipantResult as $key => $value){
                         if($key%3 == 0){
                             $outputMid = "<td class='marks_bg'>".$value."</td>";
-                            if(($key+1) == count($bestParticipantResult)){
-                                $outputMid = "<tr><td></td>".$outputMid."<td></td></tr>";
+                            if(($key+1 == count($bestParticipantResult))){
+                                $outputMid = "<td></td>".$outputMid."<td></td>";
                             }
                             $output = $output.$outputMid;
                         }else if($key%3 == 1){
-                            $outputFront = "<tr><td class='marks_bg'>".$value."</td>";
-                            $output = $outputFront.$output;
+                            $outputFront = "<td class='marks_bg'>".$value."</td>";
+                            $output = $output.$outputFront;
                         }else{
-                            $outputEnd = "<td class='marks_bg'>".$value."</td></tr>";
+                            $outputEnd = "<td class='marks_bg'>".$value."</td>";
                             $output = $output.$outputEnd;
+                        }
+
+                        if(($key+1)%3 == 0 || ($key+1) == count($bestParticipantResult)){
+                            $output = "<tr>".$output."</tr>";
+                            $final = $final.$output;
+                            $output = "";
                         }
                     }
                     // echo htmlspecialchars($output);
-                    echo $output;
+                    echo $final;
                 ?>
             </tbody>
         </table>
