@@ -240,7 +240,7 @@ catch(PDOException $e)
       <h3 style="text-align:center;color:darkred;margin-top:30px;">电子投票环节已经结束，感谢评审</h3>
     </div>
 <div class="container">
-<form method="POST" action="bestParticipant.php" style="width:300px;margin:50px auto;text-align:center;" id="showData5">
+<form method="POST" action="/php/bestParticipant.php" style="width:300px;margin:50px auto;text-align:center;" id="showData5">
     <span><b>最佳辩手</b></span>
         <select name="bestParticipant" id="participant1" class="form-control group" required 
             <?php
