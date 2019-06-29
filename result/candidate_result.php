@@ -21,137 +21,199 @@ $title_neg = $round['title_neg'];
 
 
 
-/*
-    BEST PARTICIPANT
-*/
-$sql = $conn->prepare("SELECT bestParticipant1, bestParticipant2, bestParticipant3 FROM competition WHERE competition_id=? and side=0");
-$sql->execute([$competition_id]);
-$result = $sql->fetchAll(PDO::FETCH_ASSOC);
-
-$occurence = array();
-foreach($result as $r){
-    foreach($r as $participant){
-        if(!empty($participant))
-            array_push($occurence, $participant);
-    }
-}
-
-$count = array_count_values($occurence); //get the ticket count of each voted participant
-arsort($count); //sort according to the value
-
-function calResult($num,$count, &$minVote){
-    $bestParticipant = array();
-    $counter = 0;
-    foreach($count as $key => $value){
-        if($counter == $num-1){
-            $minVote = $value;
+try{
+    $stmt = $conn->prepare("SELECT * FROM `competition` WHERE competition_id='$competition_id' and side=0");
+    if($stmt->execute())
+    {
+        $bestParticipantList=[];
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC))
+        {
+            array_push($bestParticipantList,$row['bestParticipant1'],$row['bestParticipant2'],$row['bestParticipant3']);
+            
+            // var_dump($row);
         }
-        if($value < $minVote){
-            break;
-        } 
-        $bestParticipant[$key] = $value;
-        $counter++;
     }
-    return $bestParticipant;
-}
+    // print_r($bestParticipantList);
+    $number_of_ticket_each_participant = array_count_values($bestParticipantList);
+    $keys = array_keys($number_of_ticket_each_participant); // get the key
+    // print_r( $number_of_ticket_each_participant);
 
-$minVote = -9999;
-$numBest = 3;
-$bestParticipant = calResult($numBest, $count, $minVote);
+    // ad---------------------------------------
+        
+    // asd---------------
+  
 
-// print_r($bestParticipant);
-if(count($bestParticipant) > $numBest){
-    $min_keys = array_keys($bestParticipant, min($bestParticipant));
-    //正方
-    $stmt = $conn->prepare("SELECT * FROM competition WHERE competition_id=? and side=1");
-    $stmt->execute([$competition_id]);
-    $pointsPos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Score of negative side----------------------------------------------------------------------------------------------------------
+    $stmt1 = $conn->prepare("SELECT * FROM `competition` WHERE competition_id='$competition_id' and side=0 ");
+    if($stmt1->execute())
+    {
+        $score1=[];
+        $i=0;
+        $negative1=0;
+        $negative2=0;
+        $negative3=0;
+        $negative4=0;
+        while($row1 = $stmt1->fetch(PDO::FETCH_ASSOC))
+        {                
+            array_push($score1,$row1);
+            $negative1=$negative1+$score1[$i]['lilun']+$score1[$i]['zhixun_1']+$score1[$i]['yuyan_1'];
+            $negative2=$negative2+$score1[$i]['bolun']+$score1[$i]['gongbian']+$score1[$i]['yuyan_2'];
+            $negative3=$negative3+$score1[$i]['zhixun_3']+$score1[$i]['xiaojie']+$score1[$i]['yuyan_3'];
+            $negative4=$negative4+$score1[$i]['chenci']+$score1[$i]['yuyan_4'];
+            $impression_ticket_neg=$score1[$i]['impression_ticket'];
+            $zongjie_ticket_neg=$score1[$i]['zongjie_ticket'];
+            $fenshu_neg=$score1[$i]['mark_ticket'];
+            $ziyou_bianlun_neg=$score1[$i]['ziyou_1']+$score1[$i]['ziyou_2']+$score1[$i]['ziyou_3']+$score1[$i]['ziyou_4'];
+            $total_mark_neg=$score1[$i]['total_mark'];
+            $tuanti_neg=$score1[$i]['tuanti'];
+            $i++;    
+        }
+    }
+    $_SESSION["反方一辩"]=$negative1;
+    $_SESSION["反方二辩"]=$negative2;
+    $_SESSION["反方三辩"]=$negative3;
+    $_SESSION["反方四辩"]=$negative4;
+    // echo "<br>negative1:".$_SESSION["反方一辩"];
+    // echo "<br>negative2:".$_SESSION["反方二辩"];
+    // echo "<br>negative3:".$_SESSION["反方三辩"];
+    // echo "<br>negative4:".$_SESSION["反方四辩"];
+
+// -------------------end of negative side--------------------------------------------------------------------------------------------------------------------
+// score of positive side----------------------------------------------------------------------------------------------------------
+    $stmt2 = $conn->prepare("SELECT * FROM `competition` WHERE competition_id='$competition_id' and side=1 ");
+    if($stmt2->execute())
+    {
+        $score=[];
+        $affirmative1=0;
+        $affirmative2=0;
+        $affirmative3=0;
+        $affirmative4=0;
+        $j=0;
+        while($row2 = $stmt2->fetch(PDO::FETCH_ASSOC))
+        {
+            array_push($score,$row2);
+            
+            $affirmative1=$affirmative1+$score[$j]['lilun']+$score[$j]['zhixun_1']+$score[$j]['yuyan_1'];
+            $affirmative2=$affirmative2+$score[$j]['bolun']+$score[$j]['gongbian']+$score[$j]['yuyan_2'];
+            $affirmative3=$affirmative3+$score[$j]['zhixun_3']+$score[$j]['xiaojie']+$score[$j]['yuyan_3'];
+            $affirmative4=$affirmative4+$score[$j]['chenci']+$score[$j]['yuyan_4'];
+            $impression_ticket_pos=$score[$j]['impression_ticket'];
+            $zongjie_ticket_pos=$score[$j]['zongjie_ticket'];
+            $fenshu_pos=$score[$j]['mark_ticket'];
+            $ziyou_bianlun_pos=$score[$j]['ziyou_1']+$score[$j]['ziyou_2']+$score[$j]['ziyou_3']+$score[$j]['ziyou_4'];
+            $total_mark_pos=$score[$j]['total_mark'];
+            $tuanti_pos=$score[$j]['tuanti'];
+            $j++;
+            
+        }
+    }
+    $_SESSION["正方一辩"]=$affirmative1;
+    $_SESSION["正方二辩"]=$affirmative2;
+    $_SESSION["正方三辩"]=$affirmative3;
+    $_SESSION["正方四辩"]=$affirmative4;
+    // echo "<br>affirmative1:".$_SESSION["正方一辩"];
+    // echo "<br>affirmative2:".$_SESSION["正方二辩"];
+    // echo "<br>affirmative3:".$_SESSION["正方三辩"];
+    // echo "<br>affirmative4:".$_SESSION["正方四辩"];
+// -------------------end of positive side--------------------------------------------------------------------------------------------------------------------
     
-    //反方
-    $stmt = $conn->prepare("SELECT * FROM competition WHERE competition_id=? and side=0");
-    $stmt->execute([$competition_id]);
-    $pointsNeg = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    $positive1 = $positive2 = $positive3 = $positive4 = 0;
-    $negative1 = $negative2 = $negative3 = $negative4 = 0;
-
-    foreach($min_keys as $key){
-        switch($key){
-            case "正方一辩":
-                foreach($pointsPos as $point){
-                    $positive1 = $positive1 + $point['lilun']+$point['zhixun_1']+$point['yuyan_1'];
-                }
-                break;
-            case "正方二辩":
-                foreach($pointsPos as $point){
-                    $positive2 = $positive2 + $point['bolun'] + $point['gongbian'] + $point['yuyan_2'];
-                }
-                break;
-            case "正方三辩":
-                foreach($pointsPos as $point){
-                    $positive3 = $positive3 + $point['zhixun_3'] + $point['xiaojie'] + $point['yuyan_3'];
-                }
-                break;
-            case "正方四辩":
-                foreach($pointsPos as $point){
-                    $positive4 = $positive4 + $point['chenci']+ $point['yuyan_4'];
-                }
-                break;
-            case "反方一辩":
-                foreach($pointsNeg as $point){
-                    $negative1 = $negative1 + $point['lilun']+$point['zhixun_1']+$point['yuyan_1'];
-                }
-                break;
-            case "反方二辩":
-                foreach($pointsNeg as $point){
-                    $negative2 = $negative2 + $point['bolun'] + $point['gongbian'] + $point['yuyan_2'];
-                }
-                break;
-            case "反方三辩":
-                foreach($pointsNeg as $point){
-                    $negative3 = $negative3 + $point['zhixun_3'] + $point['xiaojie'] + $point['yuyan_3'];
-                }
-                break;
-            case "反方四辩":
-                foreach($pointsNeg as $point){
-                    $negative4 = $negative4 + $point['chenci']+ $point['yuyan_4'];
-                }
-                break;
-        }
-    }
-
-    $total_marks = array("正方一辩" => $positive1, "正方二辩" => $positive2, "正方三辩" => $positive3, 
-    "正方四辩" => $positive4, "反方一辩" => $negative1, "反方二辩" => $negative2, "反方三辩" => $negative3, "反方四辩" => $negative4);
-
-    foreach($total_marks as $key => $ma){
-        if($ma == 0) unset($total_marks[$key]);
-    }
-    arsort($total_marks);
-
-    $k = 0;
-    $current = count($bestParticipant) - count($min_keys);
-    $diff = $numBest - $current;
-    $best = array();
-
-    foreach($bestParticipant as $key => $p){
-        if($p == $minVote){
-            unset($bestParticipant[$key]);
-        }
-    }
-
-    //get the top how many and insert
-    foreach($total_marks as $key => $mark){
-        if($k < $diff){
-            $best[$key] = $mark;
-            $k++;
-        }else
-            break;
-    }
-
-    foreach($best as $key => $q){
-        $bestParticipant[$key] = $q;
-    }
 }
+catch(PDOException $e)
+    {
+    echo $stmt . "<br>" . $e->getMessage();
+   
+    }
+//------------------------------------------------ end of getting data from database----------------------------------------------------------------------------------------------------------------------------------
+
+
+    $participant_score=[];   // use to store key=>value  ...... value = TotalVotingTicketbyParticipant*100+his competition result
+    $ranking=[]; // use to score user value of array :participant_score  for ranking
+    for($j=0;$j<sizeof($number_of_ticket_each_participant);$j++)
+    {
+        // echo $keys[$j].$number_of_ticket_each_participant[$keys[$j]];
+        if($keys[$j]=="正方一辩")
+        {
+            array_push($participant_score,(array($keys[$j] => $number_of_ticket_each_participant[$keys[$j]]*10000+$affirmative1)));
+            array_push($ranking,$number_of_ticket_each_participant[$keys[$j]]*10000+$affirmative1);
+        
+        }
+        if($keys[$j]=="正方二辩")
+        {array_push($participant_score,(array($keys[$j] => $number_of_ticket_each_participant[$keys[$j]]*10000+$affirmative2)));
+            array_push($ranking,$number_of_ticket_each_participant[$keys[$j]]*10000+$affirmative2);
+        }
+        if($keys[$j]=="正方三辩")
+        {
+            array_push($participant_score,(array($keys[$j] => $number_of_ticket_each_participant[$keys[$j]]*10000+$affirmative3)));
+            array_push($ranking,$number_of_ticket_each_participant[$keys[$j]]*10000+$affirmative3);
+            
+        }
+        if($keys[$j]=="正方四辩")
+        {
+            array_push($participant_score,(array($keys[$j] => $number_of_ticket_each_participant[$keys[$j]]*10000+$affirmative4)));
+            array_push($ranking,$number_of_ticket_each_participant[$keys[$j]]*10000+$affirmative4);
+        }
+        if($keys[$j]=="反方一辩")
+        {
+            array_push($participant_score,(array($keys[$j] => $number_of_ticket_each_participant[$keys[$j]]*10000+$negative1)));
+            array_push($ranking,$number_of_ticket_each_participant[$keys[$j]]*10000+$negative1);
+        }
+        if($keys[$j]=="反方二辩")
+        {
+            array_push($participant_score,(array($keys[$j] => $number_of_ticket_each_participant[$keys[$j]]*10000+$negative2)));
+            array_push($ranking,$number_of_ticket_each_participant[$keys[$j]]*10000+$negative2);
+        }
+        if($keys[$j]=="反方三辩")
+        {
+            array_push($participant_score,(array($keys[$j] => $number_of_ticket_each_participant[$keys[$j]]*10000+$negative3)));
+            array_push($ranking,$number_of_ticket_each_participant[$keys[$j]]*10000+$negative3);
+        }
+        if($keys[$j]=="反方四辩")
+        {
+            array_push($participant_score,(array($keys[$j] => $number_of_ticket_each_participant[$keys[$j]]*10000+$negative4)));
+            array_push($ranking,$number_of_ticket_each_participant[$keys[$j]]*10000+$negative4);
+        }
+    }
+    rsort($ranking);
+
+    // echo "<br>ranking:";print_r($ranking);
+    $topThreeRanking=[];
+    $counter=0;
+    $topThreeRanking[0]=$ranking[0];
+    // echo"<br>topthreeranking".print_r($topThreeRanking);
+    for($i=0;$i<count($ranking);$i++)
+    {
+        if($counter==2){break;}
+        if($ranking[$i]==$topThreeRanking[$counter]){continue;}
+        else{array_push($topThreeRanking,$ranking[$i]);$counter++;}
+        
+    }
+    // echo "<br>TopThreeRanking:";print_r($topThreeRanking);
+    // echo "<br>participant_score:";print_r($participant_score);x
+
+    $counter=0;
+    $bestParticipantResult=[];
+    
+  for($i=0;$i<count($topThreeRanking);$i++)
+  {
+      for($j=0;$j<sizeof($participant_score);$j++)
+      {
+        if($participant_score[$j][$keys[$j]]==$topThreeRanking[$i])
+        
+        {
+            // echo "Score: ".$topThreeRanking[$i];
+            array_push($bestParticipantResult,key($participant_score[$j]));
+         }
+        
+      }
+      if(($i==0||$i==1)&&count($bestParticipantResult)>=3){break;}
+     
+  }
+    // echo "<br>participant_result:";print_r($bestParticipantResult);
+    // $_SESSION["最佳辩手候选人"]=$bestParticipantResult;
+    //  print_r( $_SESSION["最佳辩手候选人"]);
+    // print_r($bestParticipantResult);
+    // header('Location:../votingResult.php');
 ?>
 
 <html>
@@ -177,13 +239,38 @@ if(count($bestParticipant) > $numBest){
                     <th><h4><i><?php echo $title_neg; ?></i><h4></th>
                 </tr>
                 <?php
-                    foreach($bestParticipant as $key=>$bestP){
-                        echo '<tr>';
-                        echo '<th></th>';
-                        echo '<th class="marks_bg"><h4>'.$key.'</h4></th>';
-                        echo '<th></th>';
-                        echo '</tr>';
+                    // print_r($bestParticipantResult);
+                    // echo "<tr>";
+                    // foreach($bestParticipantResult as $key => $value){
+                    //     if($key%3 == 0){
+                    //         echo "</tr><tr>";
+                    //     }
+                    //     echo "<td class='marks_bg'>".$value."</td>";
+                    // }
+                    $outputFront = "";
+                    $outputMid = "";
+                    $outputEnd = "";
+                    $output = "";
+                    // print_r($bestParticipantResult);
+                    // echo count($bestParticipantResult);
+                    // 
+                    foreach($bestParticipantResult as $key => $value){
+                        if($key%3 == 0){
+                            $outputMid = "<td class='marks_bg'>".$value."</td>";
+                            if(($key+1) == count($bestParticipantResult)){
+                                $outputMid = "<tr><td></td>".$outputMid."<td></td></tr>";
+                            }
+                            $output = $output.$outputMid;
+                        }else if($key%3 == 1){
+                            $outputFront = "<tr><td class='marks_bg'>".$value."</td>";
+                            $output = $outputFront.$output;
+                        }else{
+                            $outputEnd = "<td class='marks_bg'>".$value."</td></tr>";
+                            $output = $output.$outputEnd;
+                        }
                     }
+                    // echo htmlspecialchars($output);
+                    echo $output;
                 ?>
             </tbody>
         </table>
@@ -358,5 +445,6 @@ if(count($bestParticipant) > $numBest){
        background-color: darkred;
        color: white;
        opacity: 0.8;
+       text-align: center;
    }
 </style>
