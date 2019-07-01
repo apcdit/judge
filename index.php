@@ -13,7 +13,7 @@ $title = $_SESSION['title'];
 $userID = $_SESSION['userID'];
 $competition_id1 = $_SESSION['titleID'];
 
-echo $titleID;
+// echo $titleID;
 function generateMarks($max){
     for($i = 0; $i <= $max; $i++){
         echo '<option value="'.$i.'">'.$i.'</option>';
@@ -112,7 +112,7 @@ catch(PDOException $e)
         <strong><h1 class="text-center">分数票</h1></strong>
             <hr>
             <strong><h2 class="text-center">题目: <?php echo $title ?></h2></strong>
-            <a href="php/logout_process.php">LOGOUT</a>
+            <!-- <a href="php/logout_process.php">LOGOUT</a> -->
             
             <form  id="my_form" action="php/insertMarkHandler.php" method="POST">
             <div class="card">
@@ -355,6 +355,7 @@ catch(PDOException $e)
                 
                 <!-- <tr><td colspan="5"><span>反方: </span><span id="marks_neg" >0</span><br></td></tr> -->
             </table>
+            <input type="hidden" name="title" value="<?php echo $titleID?>">
             <button id="submit" type="button" class="btn btn-submit btn-block" data-toggle="modal" data-target="#exampleModal" style="margin-bottom:50px;">总结分数</button>
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -429,6 +430,10 @@ catch(PDOException $e)
             
         });
     })
+    document.cookie= "titleId=<?php echo $_SESSION['titleID']?>;path=/";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    
     
 </script>
 
