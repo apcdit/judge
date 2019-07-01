@@ -1,15 +1,19 @@
-<?php include('header.php'); 
+<?php 
 
 session_start();
+include('header.php'); 
 include('inc/connect.php');
 if(!isset($_SESSION['userID'])){
     header("Location: login.php");
+    exit();
 }
 
 $titleID = $_SESSION['titleID'];
 $title = $_SESSION['title'];
 $userID = $_SESSION['userID'];
 $competition_id1 = $_SESSION['titleID'];
+
+echo $titleID;
 function generateMarks($max){
     for($i = 0; $i <= $max; $i++){
         echo '<option value="'.$i.'">'.$i.'</option>';

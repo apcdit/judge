@@ -225,7 +225,7 @@ catch(PDOException $e)
     <div class="">
         <img id="logo_pos" src="<?php echo $image_pos; ?>" style="height:35%; width:auto;" alt="">
         <img id="logo_neg" src="<?php echo $image_neg; ?>" style="height:35%; width:auto;" alt="">
-        <h3 id="ticket" style="font-weight:900;">最佳辩手</h3>
+        <h3 id="ticket" style="font-weight:900;">最佳辩手候选人</h3>
         <table border="0" id="tab">
             <tbody>
                 <tr>
