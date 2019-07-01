@@ -1,6 +1,8 @@
 <?php
 
- session_start();
+ session_start([
+    'cookie_lifetime' => 7200,
+]);
  
  
 include('../header.php'); 
@@ -10,6 +12,7 @@ include('../inc/connect.php');
 
 
 $competition_id = $_REQUEST['title'];
+// if(isset($competition_id)){echo "hey";}
 $side_pos =1;
 $judge_id = $_SESSION['userID'] ;
 $lilun_pos = $_REQUEST["lilun_pos"];

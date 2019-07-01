@@ -1,5 +1,7 @@
 <?php
-	session_start();
+	session_start([
+    'cookie_lifetime' => 7200,
+]);
 	
 	if(isset($_SESSION['userID'])) {
 		session_destroy();

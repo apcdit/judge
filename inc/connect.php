@@ -18,4 +18,6 @@
 	catch(PDOException $e){
 		echo "Connection failed: " . $e->getMessage();
 	}
+	ini_set('session.cookie_lifetime', 86400);
+	ini_set('session.gc_maxlifetime', 86400);
 ?>

@@ -1,6 +1,8 @@
 <?php 
 
-session_start();
+session_start([
+    'cookie_lifetime' => 7200,
+]);
 include('header.php'); 
 include('inc/connect.php');
 if(!isset($_SESSION['userID'])){
@@ -430,10 +432,7 @@ catch(PDOException $e)
             
         });
     })
-    document.cookie= "titleId=<?php echo $_SESSION['titleID']?>;path=/";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    
+   
     
 </script>
 
