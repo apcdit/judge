@@ -443,7 +443,7 @@ catch(PDOException $e)
        color: white;
        width: 0.5vw;
        position: fixed;
-       top: 62%;
+       top: 50%;
        left: 2%;
        font-size: 3vw;
    } 

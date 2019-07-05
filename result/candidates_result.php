@@ -296,7 +296,7 @@ if(count($bestParticipant) > $numBest){
                         echo '<th></th>';
                         // print_r($result);
                         foreach($result as $r => $value){
-                            echo '<th class="marks_bg"><h4>'.$r.'</h4></th>';
+                            echo '<th class="marks_bg">'.$r.'</th>';
                         }
                         echo '<th></th>';
                         echo '</tr>';
@@ -472,5 +472,6 @@ if(count($bestParticipant) > $numBest){
        background-color: darkred;
        color: white;
        opacity: 0.8;
+       text-align: center;
    }
 </style>
