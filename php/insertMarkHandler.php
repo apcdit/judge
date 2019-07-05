@@ -126,7 +126,6 @@ try {
            
             // echo "New record created successfully";
             header("Location: ../mark2.php");
-            exit;
             }
         catch(PDOException $e)
             {
