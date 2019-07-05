@@ -380,10 +380,9 @@ if(count($bestParticipant) > $numBest){
                     echo "复赛";
                 else if($competition_id[0] == "J")
                     echo "半决赛";
-                else if($competition_id[0] == "季")
-                    echo "季殿赛";
-                else if($competition_id[0] == "总")
-                    echo "总决赛";
+                else 
+                    echo $competition_id;
+
             ?></h1>
        </div> 
     </body>
