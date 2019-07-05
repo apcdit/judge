@@ -106,8 +106,8 @@ try {
     $data=$stmt->fetchAll();
     if(sizeof($data)>1){
         header('Location:../mark2.php');
-    exit;
-
+    // exit;
+        exit();
     }
     else{
         try {
@@ -125,7 +125,7 @@ try {
             // use exec() because no results are returned
            
             // echo "New record created successfully";
-            header("Location: ../mark2.php");
+            // header("Location: ../mark2.php");
             }
         catch(PDOException $e)
             {

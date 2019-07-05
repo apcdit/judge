@@ -241,7 +241,7 @@
         first = data[3];
         var output = "";
         
-        console.log(data[9]);
+        console.log(data[10]);
         $.each(bestParticipant, function(key,value){
             output += `<tr style="font-size:25px;"><td colspan="1" style="text-align:center">${key}</td><td style="text-align:center">${value[0]}</td><td style="text-align:center">${value[1]}</td></tr>`;
         });

@@ -6,6 +6,7 @@
     include('inc/connect.php');
     if(!isset($_SESSION['userID'])){
         header("Location: login.php");
+        exit();
     }
     $competition_id1 = $_SESSION['titleID'];
     $userID= $_SESSION['userID'] ;
@@ -45,6 +46,7 @@
         $negative=$data[0]['zongjie_ticket'];
         if(sizeof($data)<1){
             header('Location:index.php');
+            exit();
         }
         
         $stmt1 = $conn->prepare("SELECT zongjie_ticket FROM competition WHERE competition_id=? AND judge_id=? and side=1"); 

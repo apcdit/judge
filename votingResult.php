@@ -33,6 +33,7 @@ $showData=$data[0]['bestParticipant'];
 $negative=$data[0]['zongjie_ticket'];
 if(sizeof($data)<1){
     header('Location:mark3.php');
+    exit();
 }
 
 try {
@@ -88,12 +89,14 @@ try{
                 // echo(($row_participant["bestParticipant1"])=="0");
                 if(($row_participant["bestParticipant1"]=="0")&&($row_participant["bestParticipant2"]=="0")&&($row_participant["bestParticipant3"]=="0")){
                     header("Location:voting.php");
+                    exit();
                 }
                 array_push($result_impressionTicket,$row_participant["zongjie_ticket"]);
 
         }
         if($result_impressionTicket[0]==$result_impressionTicket[1]){
             header("Location:mark3.php");
+            exit();
 
         }
 

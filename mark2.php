@@ -6,6 +6,7 @@
     include('inc/connect.php');
     if(!isset($_SESSION['userID'])){
         header("Location: login.php");
+        exit();
     }
 
  
@@ -21,6 +22,7 @@
         $data=$stmt->fetchAll();
         if(sizeof($data)<1){
             header('Location:index.php');
+            exit();
         }
         $negative=$data[0]['impression_ticket'];
         

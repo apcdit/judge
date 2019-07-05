@@ -7,6 +7,7 @@ session_start([
 include('inc/connect.php');
 if(!isset($_SESSION['userID'])){
     header("Location: login.php");
+    exit();
 }
 $competition_id1 = $_SESSION['titleID'];
 $userID= $_SESSION['userID'] ;
@@ -23,6 +24,7 @@ try {
     $data=$stmt123->fetchAll();
     if(sizeof($data)<1){
         header('Location:index.php');
+        exit();
     }
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -36,6 +38,7 @@ try {
             if(($result[0]==0)&&($result[1]==0))
             {
                 header("Location:mark2.php");
+                exit();
             }
         }
         // var_dump($result);

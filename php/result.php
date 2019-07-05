@@ -70,7 +70,6 @@ function calResult($num,$count, &$minVote){
 $minVote = -9999;
 $numBest = 3;
 $bestParticipant = calResult($numBest, $count, $minVote);
-
 if(count($bestParticipant) > $numBest){
     $min_keys = array_keys($bestParticipant, min($bestParticipant));
     //正方
@@ -139,29 +138,39 @@ if(count($bestParticipant) > $numBest){
         if($ma == 0) unset($total_marks[$key]);
     }
 
-    $pppp = count($total_marks);
+    
+    // $pppp = count($total_marks);
     arsort($total_marks);
 
-    $k = 0;
+    // $k = 0;
     $current = count($bestParticipant) - count($min_keys);
-    $diff = $pppp - $current;
+    // $diff = $pppp - $current;
     $best = array();
 
+    //remove those with minimum equal votes
     foreach($bestParticipant as $key => $p){
         if($p == $minVote){
             unset($bestParticipant[$key]);
         }
     }
 
-    
+    $aaa = $total_marks;
+    $max = -99999;
     //get the top how many and insert
     foreach($total_marks as $key => $mark){
-        if($k < $diff){
+        if($mark >= $max){
+            $max = $mark;
             $best[$key] = $mark;
-            $k++;
-        }else
+        }else{
             break;
+        }
+        // if($k < $diff){
+           
+        //     $k++;
+        // }else
+        //     break;
     }
+
 
         foreach($bestParticipant as $key => $q){
             $p = 0;
@@ -293,7 +302,6 @@ arsort($count); //sort according to the value
 $minVote = -9999;
 $numBest = 3;
 $bestParticipant = calResult($numBest, $count, $minVote);
-
 if(count($bestParticipant) > $numBest){
     $min_keys = array_keys($bestParticipant, min($bestParticipant));
     //正方
@@ -537,5 +545,5 @@ if(count($bestParticipant) > $numBest){
     $count = array_count_values($occur); //get the ticket count of each voted participant
 
 
-    echo json_encode(array($competitions,$top3,$judges,$result,$impression_mark_total_pos,$impression_mark_total_neg,$judge_all,$result_status, $count,$qwerty));
+    echo json_encode(array($competitions,$top3,$judges,$result,$impression_mark_total_pos,$impression_mark_total_neg,$judge_all,$result_status, $count,$qwerty,$aaa));
 ?>

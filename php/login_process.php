@@ -11,7 +11,7 @@
 
     if(count($judge) != 1){
         header("Location: ../login.php");
-        return false;
+        exit;
     }
     
     $_SESSION['userID'] = $_POST['judge']; //store the user id

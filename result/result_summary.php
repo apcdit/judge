@@ -4,6 +4,7 @@ require('../inc/connect.php');
 
 if(!isset($_GET['competition_id']) || empty($_GET['competition_id'])){
     header("Location: ../result.php");
+    exit();
 }
 $competition_id = $_GET['competition_id']; 
 
