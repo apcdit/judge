@@ -5,11 +5,14 @@ session_start([
 ]);
 include('header.php'); 
 include('inc/connect.php');
-if(!isset($_SESSION['userID'])){
+if(!isset($_SESSION['userID']) || !isset($_SESSION['titleID'])){
     header("Location: login.php");
     exit();
 }
 
+
+echo $_COOKIE['userID'];
+echo $_COOKIE['titleID'];
 $titleID = $_SESSION['titleID'];
 $title = $_SESSION['title'];
 $userID = $_SESSION['userID'];
