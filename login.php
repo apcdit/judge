@@ -1,7 +1,14 @@
 <?php
+
+    // echo phpinfo();
+
     session_start([
     'cookie_lifetime' => 7200,
 ]);
+
+// $maxlifetime = ini_get("session.gc_maxlifetime");
+// echo $maxlifetime;
+
     include('header.php');
     include('inc/connect.php');
 
