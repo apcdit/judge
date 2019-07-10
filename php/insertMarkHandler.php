@@ -9,7 +9,7 @@ include('../inc/connect.php');
 
 
 
-$competition_id = $_REQUEST['title'];
+$competition_id = $_COOKIE['titleID'];
 // if(isset($competition_id)){echo "hey";}
 $side_pos =1;
 $judge_id = $_COOKIE['userID'] ;
