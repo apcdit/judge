@@ -8,9 +8,10 @@
 		session_unset();
 		unset($_COOKIE['userID']);
 		unset($_COOKIE['titleID']);
-		setcookie("userID", $_POST['judge'], time()-14400,'/');
-		setcookie("titleID", $_POST['title'], time()-14400, '/');
-        setcookie("title", $title['title'], time()-14400, '/');
+		unset($_COOKIE['title']);
+		setcookie("userID", "", time()-14400,'/');
+		setcookie("titleID", "", time()-14400, '/');
+        setcookie("title", "", time()-14400, '/');
 		
 		header("Location: ../login.php");
 	} else {
