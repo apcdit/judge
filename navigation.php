@@ -1,6 +1,6 @@
 <?php
   
-  $judge_name = $_SESSION['judge_name'];
+  $judge_name = $_COOKIE['judge_name'];
 ?>
 
 <nav aria-label="Page navigation" style="text-align: center;">

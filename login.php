@@ -2,9 +2,7 @@
 
     // echo phpinfo();
 
-    session_start([
-    'cookie_lifetime' => 7200,
-]);
+    session_start();
 
 // $maxlifetime = ini_get("session.gc_maxlifetime");
 // echo $maxlifetime;
@@ -12,7 +10,7 @@
     include('header.php');
     include('inc/connect.php');
 
-    if(isset($_SESSION['userID'])){
+    if(isset($_COOKIE['userID'])){
         header("Location: index.php");
     }
 ?>

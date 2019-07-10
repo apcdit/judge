@@ -1,20 +1,20 @@
 <?php
+session_start();
 include('header.php'); 
-session_start([
-    'cookie_lifetime' => 7200,
-]);
-include('navigation.php');
-if(!isset($_SESSION['userID'])){
-    header("Location: login.php");
-}
 include('inc/connect.php');
-$titleID = $_SESSION['titleID'];
-$title = $_SESSION['title'];
-$userID = $_SESSION['userID'];
-$competition_id1 = $_SESSION['titleID'];
+include('navigation.php');
+if(!isset($_COOKIE['userID']) || !isset($_COOKIE['titleID'])){
+    header("Location: login.php");
+    exit;
+}
+
+$titleID = $_COOKIE['titleID'];
+$title = $_COOKIE['title'];
+$userID = $_COOKIE['userID'];
+$competition_id1 = $_COOKIE['titleID'];
 
 $stmt123 = $conn->prepare("SELECT zongjie_ticket,bestParticipant FROM competition WHERE competition_id=? AND judge_id=? and side=0"); 
-$stmt123->execute([$_SESSION['titleID'],$_SESSION['userID']]);
+$stmt123->execute([$competition_id1,$userID]);
 
 $result = $stmt123->setFetchMode(PDO::FETCH_ASSOC);
 // //  var_dump($stmt->fetchAll());
@@ -93,10 +93,10 @@ try{
             $i++;    
         }
     }
-    $_SESSION["反方一辩"]=$negative1;
-    $_SESSION["反方二辩"]=$negative2;
-    $_SESSION["反方三辩"]=$negative3;
-    $_SESSION["反方四辩"]=$negative4;
+    // $_SESSION["反方一辩"]=$negative1;
+    // $_SESSION["反方二辩"]=$negative2;
+    // $_SESSION["反方三辩"]=$negative3;
+    // $_SESSION["反方四辩"]=$negative4;
     // echo "<br>negative1:".$_SESSION["反方一辩"];
     // echo "<br>negative2:".$_SESSION["反方二辩"];
     // echo "<br>negative3:".$_SESSION["反方三辩"];
@@ -131,10 +131,10 @@ try{
             
         }
     }
-    $_SESSION["正方一辩"]=$affirmative1;
-    $_SESSION["正方二辩"]=$affirmative2;
-    $_SESSION["正方三辩"]=$affirmative3;
-    $_SESSION["正方四辩"]=$affirmative4;
+    // $_SESSION["正方一辩"]=$affirmative1;
+    // $_SESSION["正方二辩"]=$affirmative2;
+    // $_SESSION["正方三辩"]=$affirmative3;
+    // $_SESSION["正方四辩"]=$affirmative4;
     // echo "<br>affirmative1:".$_SESSION["正方一辩"];
     // echo "<br>affirmative2:".$_SESSION["正方二辩"];
     // echo "<br>affirmative3:".$_SESSION["正方三辩"];

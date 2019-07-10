@@ -1,26 +1,22 @@
 <?php 
 
-session_start([
-    'cookie_lifetime' => 7200,
-]);
+session_start();
 include('header.php'); 
 include('inc/connect.php');
-if(!isset($_SESSION['userID']) || !isset($_SESSION['titleID'])){
+if(!isset($_COOKIE['userID']) || !isset($_COOKIE['titleID'])){
     header("Location: login.php");
     exit();
 }
 
 
-echo $_COOKIE['userID'];
-echo $_COOKIE['titleID'];
-$titleID = $_SESSION['titleID'];
-$title = $_SESSION['title'];
-$userID = $_SESSION['userID'];
-$competition_id1 = $_SESSION['titleID'];
+$titleID = $_COOKIE['titleID'];
+$title = $_COOKIE['title'];
+$userID = $_COOKIE['userID'];
+$competition_id1 = $_COOKIE['titleID'];
 
 // echo $titleID;
 function generateMarks($max){
-    for($i = 0; $i <= $max; $i++){
+    for($i = $max; $i >= 0; $i--){
         echo '<option value="'.$i.'">'.$i.'</option>';
     }
 }

@@ -1,9 +1,7 @@
 <?php
     include('../inc/connect.php');
 
-    session_start([
-    'cookie_lifetime' => 7200,
-]);
+    session_start();
     
     $stmt = $conn->prepare("SELECT * FROM judges WHERE id=? and password=?");
     $stmt->execute([$_POST['judge'], $_POST['password']]);
@@ -20,6 +18,7 @@
     
     setcookie("userID", $_POST['judge'], time()+14400,'/');
     setcookie("titleID", $_POST['title'], time()+14400, '/');
+    setcookie("judge_name", $judge[0]['name'], time()+14400, '/');
 
     $sql = $conn->prepare("SELECT * FROM titles WHERE competition_id =?");
 
@@ -27,6 +26,7 @@
         $title = $sql->fetch();
         $_SESSION['title'] = $title['title']; //fetch the title using competition id
         setcookie("title", $title['title'], time()+14400, '/');
+
     }
 
     if(isset($_SESSION['userID']) || isset($_COOKIE['userID'])){

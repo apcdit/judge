@@ -1,19 +1,18 @@
 <?php include('header.php'); 
 
-    session_start([
-    'cookie_lifetime' => 7200,
-]);
+    session_start();
     include('inc/connect.php');
-    if(!isset($_SESSION['userID'])){
+    if(!isset($_COOKIE['userID']) || !isset($_COOKIE['titleID'])){
         header("Location: login.php");
         exit();
     }
 
- 
+    $competitionID = $_COOKIE['titleID'];
+    $userID = $_COOKIE['userID'];
     
     try {
         $stmt = $conn->prepare("SELECT impression_ticket FROM competition WHERE competition_id=? AND judge_id=? and side=0"); 
-        $stmt->execute([$_SESSION['titleID'], $_SESSION['userID']]);
+        $stmt->execute([$competitionID, $userID]);
               
         
         // // set the resulting array to associative
@@ -27,7 +26,7 @@
         $negative=$data[0]['impression_ticket'];
         
         $stmt1 = $conn->prepare("SELECT impression_ticket FROM competition WHERE competition_id=? AND judge_id=? and side=1"); 
-        $stmt1->execute([$_SESSION['titleID'], $_SESSION['userID']]);
+        $stmt1->execute([$competitionID, $userID]);
         
               
         

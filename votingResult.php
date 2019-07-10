@@ -1,28 +1,25 @@
 <?php
+
+session_start();
+
 include('header.php'); 
-session_start([
-    'cookie_lifetime' => 7200,
-]);
-include('navigation.php');
-$title = $_SESSION['title'];
-
-
-
-
-if(!isset($_SESSION['userID'])){
-    header("Location: login.php");
-}
 include('inc/connect.php');
-if(!isset($_SESSION['userID'])){
+include('navigation.php');
+
+
+
+if(!isset($_COOKIE['userID']) || !isset($_COOKIE['titleID'])){
     header("Location: login.php");
+    exit;
 }
-$titleID = $_SESSION['titleID'];
-$title = $_SESSION['title'];
-$userID = $_SESSION['userID'];
-$competition_id1 = $_SESSION['titleID'];
+
+$titleID = $_COOKIE['titleID'];
+$title = $_COOKIE['title'];
+$userID = $_COOKIE['userID'];
+$competition_id1 = $_COOKIE['titleID'];
 
 $stmt123 = $conn->prepare("SELECT zongjie_ticket,bestParticipant FROM competition WHERE competition_id=? AND judge_id=? and side=0"); 
-$stmt123->execute([$_SESSION['titleID'],$_SESSION['userID']]);
+$stmt123->execute([$competition_id1,$userID]);
 
 $result = $stmt123->setFetchMode(PDO::FETCH_ASSOC);
 // //  var_dump($stmt->fetchAll());
@@ -333,7 +330,7 @@ catch(PDOException $e)
     <?php 
     
         $stmt123 = $conn->prepare("SELECT bestParticipant FROM competition WHERE competition_id=?  and side=0"); 
-        if($stmt123->execute([$_SESSION['titleID']])){
+        if($stmt123->execute([$competition_id1])){
         
         $result = $stmt123->setFetchMode(PDO::FETCH_ASSOC);
         // //  var_dump($stmt->fetchAll());

@@ -1,15 +1,14 @@
-<?php include('header.php'); 
+<?php 
 
-    session_start([
-    'cookie_lifetime' => 7200,
-]);
+    session_start();
+    include('header.php'); 
     include('inc/connect.php');
-    if(!isset($_SESSION['userID'])){
+    if(!isset($_COOKIE['userID']) || !isset($_COOKIE['titleID'])){
         header("Location: login.php");
         exit();
     }
-    $competition_id1 = $_SESSION['titleID'];
-    $userID= $_SESSION['userID'] ;
+    $competition_id1 = $_COOKIE['titleID'];
+    $userID= $_COOKIE['userID'] ;
  
     
     try {
@@ -38,7 +37,7 @@
         }
 
         $stmt = $conn->prepare("SELECT zongjie_ticket FROM competition WHERE competition_id=? AND judge_id=? and side=0"); 
-        $stmt->execute([$_SESSION['titleID'],$_SESSION['userID']]);
+        $stmt->execute([$competition_id1,$userID]);
 
        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
         // //  var_dump($stmt->fetchAll());
@@ -50,7 +49,7 @@
         }
         
         $stmt1 = $conn->prepare("SELECT zongjie_ticket FROM competition WHERE competition_id=? AND judge_id=? and side=1"); 
-        $stmt1->execute([$_SESSION['titleID'], $_SESSION['userID']]);
+        $stmt1->execute([$competition_id1, $userID]);
         
               
         
