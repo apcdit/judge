@@ -1,9 +1,7 @@
 <?php
     include('../inc/connect.php');
 
-    session_start([
-    'cookie_lifetime' => 7200,
-]);
+    session_start();
     
     $stmt = $conn->prepare("SELECT * FROM judges WHERE id=? and password=?");
     $stmt->execute([$_POST['judge'], $_POST['password']]);

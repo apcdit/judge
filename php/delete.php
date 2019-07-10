@@ -1,11 +1,9 @@
 <?php
 include('../header.php'); 
-session_start([
-    'cookie_lifetime' => 7200,
-]);
+session_start();
 include('../inc/connect.php');
-$userID= $_SESSION['userID'] ;
-$competition_id1 = $_SESSION['titleID'];
+$userID= $_COOKIE['userID'] ;
+$competition_id1 = $_COOKIE['titleID'];
 
 
 

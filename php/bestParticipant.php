@@ -1,12 +1,10 @@
 <?php
 include('../header.php'); 
-session_start([
-    'cookie_lifetime' => 7200,
-]);
+session_start();
 include('../inc/connect.php');
-$userID= $_SESSION['userID'] ;
+$userID= $_COOKIE['userID'] ;
 $bestParticipant= $_POST['bestParticipant'];
-$competition_id1 = $_SESSION['titleID'];
+$competition_id1 = $_COOKIE['titleID'];
 
 try{
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -19,7 +17,7 @@ try{
         }
         var_dump($participant);
         if($participant[0]['bestParticipant']!="0")
-        {header('Location:../votingResult.php');}
+        {header('Location:../bestParticipantAlgo.php');}
         else{
             try {
     

@@ -1,8 +1,6 @@
 <?php 
 
-session_start([
-    'cookie_lifetime' => 7200,
-]);
+session_start();
 include('header.php'); 
 include('inc/connect.php');
 if(!isset($_SESSION['userID']) || !isset($_SESSION['titleID'])){

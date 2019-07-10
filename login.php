@@ -2,9 +2,7 @@
 
     // echo phpinfo();
 
-    session_start([
-    'cookie_lifetime' => 7200,
-]);
+    session_start();
 
 // $maxlifetime = ini_get("session.gc_maxlifetime");
 // echo $maxlifetime;

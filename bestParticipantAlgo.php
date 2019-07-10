@@ -1,8 +1,6 @@
 <?php
 include('header.php'); 
-session_start([
-    'cookie_lifetime' => 7200,
-]);
+session_start();
 include('navigation.php');
 if(!isset($_SESSION['userID'])){
     header("Location: login.php");
