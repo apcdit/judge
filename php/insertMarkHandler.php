@@ -1,8 +1,6 @@
 <?php
 
- session_start([
-    'cookie_lifetime' => 7200,
-]);
+ session_start();
  
  
 include('../header.php'); 
@@ -14,7 +12,7 @@ include('../inc/connect.php');
 $competition_id = $_REQUEST['title'];
 // if(isset($competition_id)){echo "hey";}
 $side_pos =1;
-$judge_id = $_SESSION['userID'] ;
+$judge_id = $_COOKIE['userID'] ;
 $lilun_pos = $_REQUEST["lilun_pos"];
 $zhixun_pos_1 = $_REQUEST["zhixun_pos_1"];
 $yuyan_pos_1 = $_REQUEST["yuyan_pos_1"];
@@ -97,7 +95,7 @@ else if($marks_pos_1==$marks_neg_1)
 
 try {
     $stmt = $conn->prepare("SELECT * FROM competition WHERE competition_id=? AND judge_id=? "); 
-    $stmt->execute([$_SESSION['titleID'], $_SESSION['userID']]);
+    $stmt->execute([$_COOKIE['titleID'], $_COOKIE['userID']]);
           
     
     // // set the resulting array to associative

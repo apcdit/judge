@@ -1,14 +1,12 @@
 <?php
 include('../header.php'); 
-session_start([
-    'cookie_lifetime' => 7200,
-]);
+session_start();
 include('../inc/connect.php');
-$userID= $_SESSION['userID'] ;
+$userID= $_COOKIE['userID'] ;
 $participant1= $_POST['participant1'];
 $participant2=  $_POST['participant2'];
 $participant3=  $_POST['participant3'];
-$competition_id1 = $_SESSION['titleID'];
+$competition_id1 = $_COOKIE['titleID'];
 try{
  //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  $stmt = $conn->prepare("SELECT bestParticipant1,bestParticipant2,bestParticipant3 FROM `competition` WHERE judge_id='$userID' and competition_id='$competition_id1' and side=0");
