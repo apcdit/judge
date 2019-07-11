@@ -16,8 +16,14 @@ $competition_id1 = $_COOKIE['titleID'];
 
 // echo $titleID;
 function generateMarks($max){
+    $half = intval($max/2);
     for($i = $max; $i >= 0; $i--){
-        echo '<option value="'.$i.'">'.$i.'</option>';
+        
+        if($i == $half){
+            echo '<option selected="selected" value="'.$i.'">'.$i.'</option>';
+        }else{
+            echo '<option value="'.$i.'">'.$i.'</option>';
+        }
     }
 }
 
